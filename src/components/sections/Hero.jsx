@@ -9,7 +9,7 @@ export default function Hero() {
         <div className="hero__availability">Available for internship opportunities · São Paulo</div>
         <div className="hero__actions">
           <a className="button button--solid" href="#work">Explore work ↓</a>
-          <a className="button" href="/curriculo-luca-toniolo.pdf" target="_blank" rel="noreferrer">Resume ↗</a>
+          <a className="button" href={`${import.meta.env.BASE_URL}curriculo-luca-toniolo.pdf`} target="_blank" rel="noreferrer">Resume ↗</a>
           <a className="button" href="https://www.linkedin.com/in/luca-toniolo/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
         </div>
         <div className="hero__bottom"><span>LUCA TONIOLO</span><span>3D / PROGRAMMING</span></div>

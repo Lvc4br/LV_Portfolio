@@ -1,4 +1,4 @@
-import { mkdir } from "node:fs/promises";
+import { mkdir, stat, unlink } from "node:fs/promises";
 import { Buffer } from "node:buffer";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -39,10 +39,20 @@ const previewTitle = Buffer.from(`
   </svg>
 `);
 
+const socialImagePath = path.join(root, "public", "og-image.jpg");
 await sharp(path.join(assetsDir, "atem_mini_pro.png"))
   .resize(1200, 630, { fit: "cover", position: "centre" })
   .composite([{ input: previewTitle }])
-  .webp({ quality: 88, effort: 6 })
-  .toFile(path.join(root, "public", "og-image.webp"));
+  .jpeg({ quality: 85, mozjpeg: true })
+  .toFile(socialImagePath);
 
-console.log("Created public/og-image.webp (1200 × 630)");
+const socialImageSize = (await stat(socialImagePath)).size;
+if (socialImageSize >= 300_000) {
+  throw new Error(`public/og-image.jpg is too large: ${socialImageSize} bytes`);
+}
+
+await unlink(path.join(root, "public", "og-image.webp")).catch((error) => {
+  if (error.code !== "ENOENT") throw error;
+});
+
+console.log(`Created public/og-image.jpg (1200 × 630, ${socialImageSize} bytes)`);

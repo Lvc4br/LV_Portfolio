@@ -2,7 +2,7 @@
 
 A React/Vite portfolio presenting selected 3D and programming projects.
 
-![Portfolio preview](./public/og-image.webp)
+![Portfolio preview](./public/og-image.jpg)
 
 ## Run
 
@@ -24,7 +24,7 @@ npm run optimize:images
 ```
 
 This creates metadata-free WebP versions of the portfolio images and a 1200 × 630
-social preview at `public/og-image.webp`.
+social preview at `public/og-image.jpg` (JPEG quality 85, below 300 KB).
 
 ## Project content
 
