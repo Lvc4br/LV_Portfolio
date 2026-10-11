@@ -69,17 +69,17 @@ export const projects = [
     visual: "visual--code",
   },
   {
-    id: "aureus-tcc",
+    id: "tcc-etec",
     number: "06",
-    title: "Aureus (TCC)",
+    title: "TCC Etec",
     category: "Code",
     area: "code",
     status: "Graduation project",
     featured: true,
     tools: ["React", "Node.js", "FastAPI"],
     description:
-      "An AI agent for financial management and market research. This PWA prototype was developed as a graduation project. It analyzes and categorizes user-entered financial data, generates personalized reports and insights, and gathers economic indicators and news from public APIs.",
-    visualLabel: "Graduation project",
+      "A future ETEC graduation project. Details and the development process will be shared as the project takes shape.",
+    visualLabel: "Future ETEC project",
     visual: "visual--tool",
   },
   {
