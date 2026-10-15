@@ -42,6 +42,10 @@ Open Graph and Twitter preview image URLs.
 For local builds, copy `.env.example` to `.env` and set `VITE_SITE_URL` to the desired
 HTTPS origin without a trailing slash.
 
+Vercel Web Analytics is integrated through `@vercel/analytics`. Enable Analytics in the
+project's Vercel dashboard to view production traffic; no additional environment variable
+is required. Analytics data is available after the site is deployed.
+
 Main routes:
 
 - `/` — Home
