@@ -8,10 +8,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const assetsDir = path.join(root, "src", "assets");
 const imageNames = [
   "Untitled2.png",
-  "atem_mini_pro.png",
-  "Front.png",
-  "Modal.png",
-  "pw_project (1).png",
+  path.join("atem-mini-pro", "atem_mini_pro.png"),
+  path.join("handheld-console", "Front.png"),
   "untitled.jpg",
 ];
 
@@ -19,7 +17,7 @@ await mkdir(path.join(root, "public"), { recursive: true });
 
 for (const name of imageNames) {
   const input = path.join(assetsDir, name);
-  const output = path.join(assetsDir, `${path.parse(name).name}.webp`);
+  const output = path.join(assetsDir, path.parse(name).dir, `${path.parse(name).name}.webp`);
   await sharp(input).webp({ quality: 84, effort: 6 }).toFile(output);
   console.log(`Created ${path.relative(root, output)}`);
 }
@@ -40,7 +38,7 @@ const previewTitle = Buffer.from(`
 `);
 
 const socialImagePath = path.join(root, "public", "og-image.jpg");
-await sharp(path.join(assetsDir, "atem_mini_pro.png"))
+await sharp(path.join(assetsDir, "atem-mini-pro", "atem_mini_pro.png"))
   .resize(1200, 630, { fit: "cover", position: "centre" })
   .composite([{ input: previewTitle }])
   .jpeg({ quality: 85, mozjpeg: true })

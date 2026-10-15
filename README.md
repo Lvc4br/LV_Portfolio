@@ -15,8 +15,10 @@ home page introduces my 3D × Code focus and includes selected work, skills, an
 about section, and a contact form.
 
 Visitors can browse the complete work by discipline and open individual project
-pages with each project's description, tools, status, and available imagery. The
-project list and metadata are maintained in `src/data/projects.js`.
+pages with each project's description, tools, status, and available imagery.
+Project galleries use a featured image, selectable thumbnails, and an enlarged
+keyboard-navigable viewer. The project list and metadata are maintained in
+`src/data/projects.js`, with image assets grouped into folders under `src/assets`.
 
 ### Projects currently featured
 

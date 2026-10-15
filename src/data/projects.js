@@ -1,6 +1,7 @@
-import atemImage from "../assets/atem_mini_pro.webp";
-import handheldImage from "../assets/Front.webp";
-import iceCreamImage from "../assets/pw_project (1).webp";
+import atemImage from "../assets/atem-mini-pro/atem_mini_pro.webp";
+import handheldImage from "../assets/handheld-console/Front.webp";
+import iceCreamImage from "../assets/ice-cream-panda/pw_project (1).webp";
+import iceCreamModal from "../assets/ice-cream-panda/Modal.webp";
 
 import colosseumPlan from "../assets/colosseum/01-plano-geral.webp";
 import colosseumFacade from "../assets/colosseum/02-elevacao-fachada.webp";
@@ -16,7 +17,6 @@ import colosseumThird from "../assets/colosseum/11-terceiro-andar.webp";
 import colosseumAxonometric from "../assets/colosseum/12-conjunto-axonometrico.webp";
 
 import jewelryBoard from "../assets/jewelry/constelacao-floral-board.webp";
-import jewelryReference from "../assets/jewelry/design-reference.webp";
 import jewelryMoodboardOne from "../assets/jewelry/moodboard-1.webp";
 import jewelryMoodboardTwo from "../assets/jewelry/moodboard-2.webp";
 import jewelryMoodboardThree from "../assets/jewelry/moodboard-3.webp";
@@ -167,7 +167,6 @@ export const projects = [
     imageAlt: "Constelação Floral jewelry concept board with moodboards and design references",
     gallery: [
       { src: jewelryBoard, alt: "Constelação Floral concept board" },
-      { src: jewelryReference, alt: "Jewelry design reference and form study" },
       { src: jewelryMoodboardOne, alt: "Jewelry moodboard with concept references" },
       { src: jewelryMoodboardTwo, alt: "Second jewelry moodboard with material references" },
       { src: jewelryMoodboardThree, alt: "Third jewelry moodboard with design references" },
@@ -214,6 +213,10 @@ export const projects = [
       "A responsive storefront-style landing page for a fictional ice cream brand, designed to communicate product identity, visual hierarchy, and a polished commercial experience.",
     image: iceCreamImage,
     imageAlt: "Ice Cream Panda website screenshot",
+    gallery: [
+      { src: iceCreamImage, alt: "Ice Cream Panda website screenshot" },
+      { src: iceCreamModal, alt: "Ice Cream Panda project modal design" },
+    ],
     visual: "visual--code",
     caseStudy: [
       {

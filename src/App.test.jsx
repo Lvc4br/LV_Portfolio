@@ -25,15 +25,38 @@ describe("portfolio navigation", () => {
     expect(screen.getByRole("heading", { name: /all programming work\./i })).toBeInTheDocument();
   });
 
-  it("renders all twelve Colosseum reference sheets", () => {
+  it("renders the Colosseum gallery and allows selecting an image", async () => {
+    const user = userEvent.setup();
     render(
       <MemoryRouter initialEntries={["/work/3d/colosseum"]}>
         <App />
       </MemoryRouter>
     );
 
-    expect(screen.getAllByRole("img")).toHaveLength(12);
-    expect(screen.getByAltText(/second-floor access and arrival study/i)).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /show image/i })).toHaveLength(12);
+    expect(screen.getByRole("button", { name: /show image 10: second floor architectural study/i }))
+      .toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /show image 2:/i }));
+    expect(screen.getByRole("button", { name: /enlarge image: main elevation/i })).toBeInTheDocument();
+  });
+
+  it("opens the image viewer and navigates with the keyboard", async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter initialEntries={["/work/3d/colosseum"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    await user.click(screen.getByRole("button", { name: /enlarge image:/i }));
+    expect(screen.getByRole("dialog", { name: /colosseum image viewer/i })).toBeInTheDocument();
+    await user.keyboard("{ArrowRight}");
+    expect(screen.getByRole("dialog").querySelector("img")).toHaveAttribute(
+      "alt",
+      "Main elevation and façade study of the Colosseum"
+    );
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   it("renders the jewelry concept board and supporting references", () => {
@@ -43,8 +66,19 @@ describe("portfolio navigation", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getAllByRole("img")).toHaveLength(5);
+    expect(screen.getAllByRole("button", { name: /show image/i })).toHaveLength(4);
     expect(screen.getByAltText(/constelação floral concept board/i)).toBeInTheDocument();
+  });
+
+  it("includes the modal image in the Ice Cream Panda project gallery", () => {
+    render(
+      <MemoryRouter initialEntries={["/work/code/ice-cream-panda"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("button", { name: /show image 2: ice cream panda project modal design/i }))
+      .toBeInTheDocument();
   });
 
   it("renders a 404 page for invalid routes", () => {

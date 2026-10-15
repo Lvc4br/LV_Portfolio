@@ -1,5 +1,152 @@
+import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { getProjectById, projects } from "../data/projects.js";
+
+function ProjectGallery({ title, images }) {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const mainImageButtonRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const viewerRef = useRef(null);
+  const selectedImage = images[selectedIndex];
+
+  useEffect(() => {
+    if (!isViewerOpen) return undefined;
+
+    const opener = mainImageButtonRef.current;
+    const previousBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        setIsViewerOpen(false);
+      } else if (event.key === "ArrowRight" && images.length > 1) {
+        event.preventDefault();
+        setSelectedIndex((index) => (index + 1) % images.length);
+      } else if (event.key === "ArrowLeft" && images.length > 1) {
+        event.preventDefault();
+        setSelectedIndex((index) => (index - 1 + images.length) % images.length);
+      } else if (event.key === "Tab") {
+        const buttons = viewerRef.current?.querySelectorAll("button:not(:disabled)");
+        if (!buttons?.length) return;
+
+        const firstButton = buttons[0];
+        const lastButton = buttons[buttons.length - 1];
+        if (event.shiftKey && document.activeElement === firstButton) {
+          event.preventDefault();
+          lastButton.focus();
+        } else if (!event.shiftKey && document.activeElement === lastButton) {
+          event.preventDefault();
+          firstButton.focus();
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousBodyOverflow;
+      opener?.focus();
+    };
+  }, [images.length, isViewerOpen]);
+
+  function showImage(offset) {
+    setSelectedIndex((index) => (index + offset + images.length) % images.length);
+  }
+
+  return (
+    <section className="project-detail__gallery" aria-label={`${title} image gallery`}>
+      <figure className="project-detail__image">
+        <button
+          ref={mainImageButtonRef}
+          className="project-detail__image-button"
+          type="button"
+          onClick={() => setIsViewerOpen(true)}
+          aria-label={`Enlarge image: ${selectedImage.alt}`}
+        >
+          <img src={selectedImage.src} alt={selectedImage.alt} />
+        </button>
+        {images.length > 1 && (
+          <div className="project-detail__gallery-controls">
+            <button type="button" onClick={() => showImage(-1)} aria-label="Previous image">
+              ←
+            </button>
+            <span aria-live="polite">{selectedIndex + 1} / {images.length}</span>
+            <button type="button" onClick={() => showImage(1)} aria-label="Next image">
+              →
+            </button>
+          </div>
+        )}
+        <figcaption>{selectedImage.alt}</figcaption>
+      </figure>
+
+      {images.length > 1 && (
+        <div className="project-detail__thumbnails" aria-label="Choose an image">
+          {images.map((image, index) => (
+            <button
+              key={`${title}-${image.alt}`}
+              className={index === selectedIndex ? "is-active" : ""}
+              type="button"
+              onClick={() => setSelectedIndex(index)}
+              aria-label={`Show image ${index + 1}: ${image.alt}`}
+              aria-pressed={index === selectedIndex}
+            >
+              <img src={image.src} alt="" loading="lazy" />
+            </button>
+          ))}
+        </div>
+      )}
+
+      {isViewerOpen && (
+        <div
+          ref={viewerRef}
+          className="project-detail__viewer"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${title} image viewer`}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setIsViewerOpen(false);
+          }}
+        >
+          <button
+            ref={closeButtonRef}
+            className="project-detail__viewer-close"
+            type="button"
+            onClick={() => setIsViewerOpen(false)}
+            aria-label="Close image viewer"
+          >
+            ×
+          </button>
+          {images.length > 1 && (
+            <button
+              className="project-detail__viewer-previous"
+              type="button"
+              onClick={() => showImage(-1)}
+              aria-label="Previous image"
+            >
+              ←
+            </button>
+          )}
+          <figure>
+            <img src={selectedImage.src} alt={selectedImage.alt} />
+            <figcaption>{selectedImage.alt} <span>{selectedIndex + 1} / {images.length}</span></figcaption>
+          </figure>
+          {images.length > 1 && (
+            <button
+              className="project-detail__viewer-next"
+              type="button"
+              onClick={() => showImage(1)}
+              aria-label="Next image"
+            >
+              →
+            </button>
+          )}
+        </div>
+      )}
+    </section>
+  );
+}
 
 export default function ProjectDetail({ area }) {
   const { id } = useParams();
@@ -18,6 +165,11 @@ export default function ProjectDetail({ area }) {
   const relatedProjects = projects.filter(
     (item) => item.area === area && item.id !== project.id
   );
+  const galleryImages = project.gallery?.length
+    ? project.gallery
+    : project.image
+      ? [{ src: project.image, alt: project.imageAlt }]
+      : [];
 
   return (
     <>
@@ -56,19 +208,9 @@ export default function ProjectDetail({ area }) {
             </div>
           )}
 
-          {project.gallery && project.gallery.length > 0 ? (
-            <div className="project-detail__gallery" aria-label={`${project.title} reference gallery`}>
-              {project.gallery.map((item) => (
-                <figure key={`${project.id}-${item.alt}`} className="project-detail__image">
-                  <img src={item.src} alt={item.alt} loading="lazy" />
-                </figure>
-              ))}
-            </div>
-          ) : project.image ? (
-            <figure className="project-detail__image">
-              <img src={project.image} alt={project.imageAlt} loading="lazy" />
-            </figure>
-          ) : null}
+          {galleryImages.length > 0 && (
+            <ProjectGallery title={project.title} images={galleryImages} />
+          )}
 
           {project.realityCheck && (
             <div className="project-detail__case-study">

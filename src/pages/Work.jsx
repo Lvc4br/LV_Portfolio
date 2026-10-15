@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import atemImage from "../assets/atem_mini_pro.webp";
+import atemImage from "../assets/atem-mini-pro/atem_mini_pro.webp";
 
 export default function Work() {
   return (
