@@ -763,6 +763,11 @@ ul {
   color: var(--muted);
   line-height: 1.75;
 }
+.project-detail__gallery {
+  display: grid;
+  gap: 22px;
+  margin-top: 48px;
+}
 .project-detail__image {
   display: grid;
   place-items: center;

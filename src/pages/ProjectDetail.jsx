@@ -56,11 +56,19 @@ export default function ProjectDetail({ area }) {
             </div>
           )}
 
-          {project.image && (
+          {project.gallery && project.gallery.length > 0 ? (
+            <div className="project-detail__gallery" aria-label={`${project.title} reference gallery`}>
+              {project.gallery.map((item) => (
+                <figure key={`${project.id}-${item.alt}`} className="project-detail__image">
+                  <img src={item.src} alt={item.alt} loading="lazy" />
+                </figure>
+              ))}
+            </div>
+          ) : project.image ? (
             <figure className="project-detail__image">
               <img src={project.image} alt={project.imageAlt} loading="lazy" />
             </figure>
-          )}
+          ) : null}
 
           {project.realityCheck && (
             <div className="project-detail__case-study">

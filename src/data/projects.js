@@ -1,7 +1,24 @@
 import atemImage from "../assets/atem_mini_pro.webp";
 import handheldImage from "../assets/Front.webp";
 import iceCreamImage from "../assets/pw_project (1).webp";
-import jewelryImage from "../assets/constelacao-floral.png";
+
+import colosseumPlan from "../assets/colosseum/01-plano-geral.png";
+import colosseumFacade from "../assets/colosseum/02-elevacao-fachada.png";
+import colosseumSection from "../assets/colosseum/03-corte-geral.png";
+import colosseumDetail from "../assets/colosseum/04-elevacao-corte-detalhe.png";
+import colosseumGround from "../assets/colosseum/05-nivel-solo.png";
+import colosseumGroundFloor from "../assets/colosseum/06-terreo.png";
+import colosseumLevelOne from "../assets/colosseum/07-chegada-1-andar.png";
+import colosseumFirstFloor from "../assets/colosseum/08-primeiro-andar.png";
+import colosseumSecond from "../assets/colosseum/10-segundo-andar.png";
+import colosseumThird from "../assets/colosseum/11-terceiro-andar.png";
+import colosseumAxonometric from "../assets/colosseum/12-conjunto-axonometrico.png";
+
+import jewelryBoard from "../assets/jewelry/constelacao-floral-board.png";
+import jewelryReference from "../assets/jewelry/design-reference.png";
+import jewelryMoodboardOne from "../assets/jewelry/moodboard-1.jpeg";
+import jewelryMoodboardTwo from "../assets/jewelry/moodboard-2.jpeg";
+import jewelryMoodboardThree from "../assets/jewelry/moodboard-3.jpeg";
 
 export const projectStatusOrder = {
   Complete: 1,
@@ -88,29 +105,49 @@ export const projects = [
     status: "In progress",
     tools: ["Blender", "Architecture study", "Historical references"],
     description:
-      "A historically grounded 3D reconstruction project focused on the Colosseum's volumetry, architectural logic, and the organization of circulation and seating levels. The research is based on archaeological references, a documented methodology, and a transparent reconstruction process.",
+      "A historically grounded 3D reconstruction study of the Colosseum, developed from architectural plans and archaeological references to understand its geometry, circulation system, and vertical organization. The project is treated as a research-based modeling process grounded in evidence, not as a final historical restoration.",
+    image: colosseumPlan,
+    imageAlt: "Colosseum plan-by-level study and architectural reconstruction sheets",
+    gallery: [
+      { src: colosseumPlan, alt: "General plan by levels of the Colosseum" },
+      { src: colosseumFacade, alt: "Main elevation and façade study of the Colosseum" },
+      { src: colosseumSection, alt: "General cross-section of the Colosseum" },
+      { src: colosseumDetail, alt: "Detailed elevation and cross-section of the façade" },
+      { src: colosseumGround, alt: "Ground level reconstruction study" },
+      { src: colosseumGroundFloor, alt: "Ground floor plan and circulation analysis" },
+      { src: colosseumLevelOne, alt: "First access level analysis" },
+      { src: colosseumFirstFloor, alt: "First floor reconstruction study" },
+      { src: colosseumSecond, alt: "Second floor architectural study" },
+      { src: colosseumThird, alt: "Third floor reconstruction study" },
+      { src: colosseumAxonometric, alt: "Axonometric view of the Colosseum ensemble" },
+    ],
     visualLabel: "Research in progress",
     visual: "visual--colosseum",
     caseStudy: [
       {
         title: "Project objective",
         description:
-          "Reconstruct the Colosseum digitally with a focus on historical fidelity, architectural precision, and a coherent reading of the building's original spatial logic.",
+          "Reconstruct the Colosseum digitally through a careful reading of its footprint, seating distribution, circulation paths, and vertical sequencing, using architectural reference plates and historical analysis as the basis for every major decision.",
       },
       {
         title: "Method and sources",
         description:
-          "The project is grounded in historical references, archaeological studies, and architectural analysis, with emphasis on elements such as the elliptical plan, circulation routes, vaults, and the sequence of levels across the facade.",
+          "The project is built from a set of architectural plates showing the general plan by levels, facade elevations, sectional cuts, access routes, and axonometric studies. These references were used to decode the elliptical geometry, concentric seating rings, service circulation, and layered organization of the amphitheatre.",
       },
       {
-        title: "Current stage",
+        title: "Production and interpretation",
         description:
-          "The work includes documentation, initial drawing sheets, architectural studies, and model development for the orders, circulation system, and the main structure. The project is still in progress, but the methodology is clearly defined and documented.",
+          "The 3D modeling process converts analytical drawings into a coherent spatial structure. Instead of treating the building as a purely aesthetic object, the model preserves the logic of the original composition and makes explicit which parts are supported by archival evidence and which are interpreted through historical reconstruction.",
+      },
+      {
+        title: "Evidence in the project",
+        description:
+          "The work includes several plates covering the plan by levels, facade elevation, cross-section, entry and circulation studies, first and second floor analysis, third floor organization, and the final axonometric assembly. These materials make the research process visible and show the design as a grounded architectural investigation.",
       },
       {
         title: "What this project shows",
         description:
-          "It demonstrates the ability to work with complex historical geometry, define research-based assumptions, and translate them into a technically structured 3D model without treating reconstruction as pure aesthetic interpretation.",
+          "It demonstrates the ability to work with historical geometry, interpret documented evidence, and structure a complex architectural form in 3D with a strong emphasis on method, precision, and technical reasoning.",
       },
     ],
   },
@@ -123,31 +160,43 @@ export const projects = [
     status: "In progress",
     tools: ["Blender", "Concept design", "AI-assisted briefing"],
     description:
-      "A jewelry design concept for a floral ring trilogy inspired by the evolution of love: Namoro, Noivado and Casamento. The visual briefing was built from handmade reference material, concept images, and an AI-assisted presentation process instead of a Photoshop-only workflow, keeping the design honest and structured.",
-    image: jewelryImage,
-    imageAlt: "Constelação Floral jewelry concept presentation board",
+      "A jewelry concept developed around a floral ring trilogy inspired by the progression of love: Namoro, Noivado and Casamento. The project uses moodboards, design references, and a structured concept presentation to connect emotional storytelling with material decisions, form language, and luxury-oriented composition.",
+    image: jewelryBoard,
+    imageAlt: "Constelação Floral jewelry concept board with moodboards and design references",
+    gallery: [
+      { src: jewelryBoard, alt: "Constelação Floral concept board" },
+      { src: jewelryReference, alt: "Jewelry design reference and form study" },
+      { src: jewelryMoodboardOne, alt: "Jewelry moodboard with concept references" },
+      { src: jewelryMoodboardTwo, alt: "Second jewelry moodboard with material references" },
+      { src: jewelryMoodboardThree, alt: "Third jewelry moodboard with design references" },
+    ],
     visualLabel: "Concept in progress",
     visual: "visual--jewelry",
     caseStudy: [
       {
         title: "Project objective",
         description:
-          "Develop a romantic high-jewelry concept that translates the idea of a star becoming a flower, then becoming a lasting commitment, through organic forms, narrative composition, and detailed material choices.",
+          "Translate a romantic narrative into a luxury jewelry concept where the metaphor of a star becoming a flower becomes a symbolic progression toward long-term commitment, expressed through organic forms, materials, and refined composition.",
       },
       {
         title: "Concept and visual direction",
         description:
-          "The collection is organized in three moments: Namoro, Noivado and Casamento. Each ring uses organic stems, floral details, and a star-like diamond arrangement to represent stages of emotional growth, while balancing rose gold, white gold, morganite, and diamonds in a refined luxury aesthetic.",
+          "The collection is structured in three stages: Namoro, Noivado and Casamento. Each ring combines floral stems, star-like sparkle, and sculptural balance to represent emotional growth, while materials such as rose gold, white gold, morganite, and diamonds reinforce the sense of elegance and symbolism.",
       },
       {
-        title: "Production process",
+        title: "Research and production process",
         description:
-          "The presentation was created using reference sketches, visual references, and an AI-assisted briefing workflow to structure the concept board, materials, and composition before finalizing the product narrative. The result preserves the original design logic while allowing faster iteration and clearer communication.",
+          "The concept was developed from reference images, visual moodboards, and a briefing workflow that helped organize the form language, composition, and material story before final refinement. This kept the project honest and structured: more like a design development process than a purely decorative presentation.",
+      },
+      {
+        title: "Project evidence",
+        description:
+          "The work combines the central concept board with supporting references, moodboards, and design studies that show the evolution of the collection's storytelling. The project remains in progress, but the narrative and design direction are already clearly defined.",
       },
       {
         title: "Current scope",
         description:
-          "This is a conceptual project in active development. The collection is established as an artistic and design direction, with material and jewelry details already documented, but still without the final production stage or full real-world manufacturing validation.",
+          "This is a concept-stage jewelry project, not a finalized production set. The design language is coherent and documented, but the collection still requires further material refinement, final renders, and a more complete manufacturing-oriented validation process.",
       },
     ],
   },
