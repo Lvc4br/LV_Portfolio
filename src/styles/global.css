@@ -24,13 +24,7 @@
   margin: 0; 
   padding: 0; 
 }
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none; /* Anulamento do scrollbar do Safari and Chrome */
-}
 html { 
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   scroll-behavior: smooth; 
   background: var(--bg); 
 }
@@ -53,9 +47,7 @@ button {
 }
 img { 
   display: block; 
-  max-width: 100%; 
-  position: absolute;
-  height: 100%;
+  max-width: 100%;
 }
 ul { 
   list-style: none; 
