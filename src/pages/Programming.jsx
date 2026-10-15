@@ -1,8 +1,8 @@
-import { projects } from "../data/projects.js";
+import { projects, sortProjects } from "../data/projects.js";
 import ProjectGrid from "../components/ui/ProjectGrid.jsx";
 
 export default function Programming() {
-  const work = projects.filter((project) => project.area === "code");
+  const work = sortProjects(projects.filter((project) => project.area === "code"));
 
   return (
     <>
@@ -13,8 +13,9 @@ export default function Programming() {
             <div>
               <h1 className="section-title">All programming work.</h1>
               <p className="section-copy">
-                Web projects, tools, and automation — including the design
-                decisions that shape how the finished code works for people.
+                Completed projects are shown first, followed by ongoing work and
+                future concepts. This makes the portfolio clearer for recruiters
+                and keeps the project status honest.
               </p>
             </div>
           </div>

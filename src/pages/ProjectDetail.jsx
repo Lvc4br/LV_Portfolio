@@ -62,6 +62,15 @@ export default function ProjectDetail({ area }) {
             </figure>
           )}
 
+          {project.realityCheck && (
+            <div className="project-detail__case-study">
+              <section>
+                <span className="eyebrow">Reality check</span>
+                <p>{project.realityCheck}</p>
+              </section>
+            </div>
+          )}
+
           <div className="project-detail__facts">
             {project.tools.length > 0 && (
               <section>
