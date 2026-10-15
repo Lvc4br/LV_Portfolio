@@ -21,8 +21,9 @@ project list and metadata are maintained in `src/data/projects.js`.
 ### Projects currently featured
 
 - **3D:** ATEM Mini Pro and Handheld (complete); Colosseum and Jewelry (in progress).
-- **Programming:** Games Website and Ice Cream Panda (complete); TCC Etec (planned
-  graduation project).
+- **Programming:** Ice Cream Panda (complete); a responsive pizzeria website
+  concept in progress, currently at the briefing, information architecture, and
+  low-fidelity wireframe stage; TCC Etec (planned graduation project).
 
 The portfolio also includes a downloadable résumé, a LinkedIn link, responsive
 layouts, optimized WebP project images, and a contact form powered by Getform.

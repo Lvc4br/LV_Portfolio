@@ -56,16 +56,16 @@ export const projects = [
     visual: "visual--jewelry",
   },
   {
-    id: "game-site",
+    id: "pizzeria-site",
     number: "05",
-    title: "Games Website",
-    category: "Code",
+    title: "Pizzeria Website",
+    category: "UX/UI",
     area: "code",
-    status: "Complete",
-    tools: ["Flask", "Neon"],
+    status: "In progress",
+    tools: ["Figma", "UX/UI"],
     description:
-      "A games website built with Flask and Neon, showcasing server-side development and database integration.",
-    visualLabel: "Flask + Neon",
+      "A responsive website concept for a fictional neighborhood pizzeria, created for an ETEC UX/UI project. The current stage includes the project brief, information architecture, low-fidelity desktop and mobile wireframes for six pages, and a reusable Figma component library. The planned experience supports dine-in, delivery, and pickup, with database integration reserved for a future development phase.",
+    visualLabel: "UX/UI · Figma",
     visual: "visual--code",
   },
   {

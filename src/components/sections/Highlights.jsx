@@ -6,7 +6,7 @@ export default function Highlights() {
   const highlights = [
     ...projects.filter((project) => project.area === "3d").slice(0, 2),
     projects.find((project) => project.id === "tcc-etec"),
-    projects.find((project) => project.id === "game-site"),
+    projects.find((project) => project.id === "pizzeria-site"),
   ].filter(Boolean);
 
   return (
@@ -16,7 +16,7 @@ export default function Highlights() {
           <span className="eyebrow">01 / Work</span>
           <div>
             <h2 className="section-title">Selected work that shows how I think and build.</h2>
-            <p className="section-copy">Selected 3D and programming projects, including my graduation project and a games website built with Flask and Neon.</p>
+            <p className="section-copy">Selected 3D and programming projects, including my planned graduation project and an in-progress UX/UI concept for a responsive pizzeria website.</p>
           </div>
         </div>
         <ProjectGrid projects={highlights} />

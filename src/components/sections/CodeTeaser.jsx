@@ -70,8 +70,8 @@ export default function Code() {
                     </div>
                     <div>
                         <span>03</span>
-                        <strong>Flask + Neon</strong>
-                        <p>Backend development and database integration in my games website.</p>
+                        <strong>UX/UI / Figma</strong>
+                        <p>Information architecture and low-fidelity wireframes for a responsive pizzeria website.</p>
                     </div>
                     <a className="button" href="https://github.com/Lvc4br" target="_blank" rel="noreferrer">View GitHub ↗</a>
                 </div>
