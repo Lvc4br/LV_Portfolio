@@ -8,7 +8,8 @@
   --text: #f3f3f0; 
   --muted: #9a9a96; 
   --accent1: #d71932;
-  --accent:linear-gradient(115deg in oklab,  #660708ff, #a4161aff, #ba181bff, #e5383bff);
+  --accent: #d71932;
+  --accent-gradient: linear-gradient(115deg, #660708ff, #a4161aff, #ba181bff, #e5383bff);
   /* --accent: #d71932; */
   /* --accent: #4BFFF3; */
   --accent-soft:#660708ff;
@@ -27,6 +28,17 @@
 html { 
   scroll-behavior: smooth; 
   background: var(--bg); 
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 body { 
   min-width: 320px; 
@@ -320,8 +332,8 @@ ul {
   transform:translateY(-2px); 
 }
 .button--solid { 
-  border-color:var(--accent); 
-  background:var(--accent); 
+  border-color: var(--accent);
+  background: var(--accent-gradient);
 }
 .hero__bottom { 
   display:flex; 
@@ -354,7 +366,7 @@ ul {
   max-width: 120px;
   justify-content: center;
   align-items: center;
-  background: var(--accent);
+  background: var(--accent-gradient);
   /* border: ; */
   border-radius: 12px;
   padding: 8px 12px;
@@ -506,6 +518,16 @@ ul {
   text-transform:uppercase;
   letter-spacing:.08em
 }
+
+.not-found__content {
+  display: grid;
+  gap: 24px;
+  max-width: 640px;
+}
+
+.not-found .button {
+  width: max-content;
+}
 .project-card h3{
   margin-top:7px;
   font-size:26px;
@@ -647,7 +669,7 @@ ul {
   .code__layout{grid-template-columns:1fr}
 }
 .hybrid{
-  background:var(--accent);
+  background:var(--accent-gradient);
   color:white
 }.hybrid .eyebrow{
   color:white
@@ -890,14 +912,13 @@ ul {
   color:var(--text);
   padding:12px 0;
   font:16px var(--sans);
-
-  field-sizing: content;
+  min-height: 44px;
   max-height: 240px;
-  resize:none;
+  resize: vertical;
 }
 .contact__form input:focus,
 .contact__form textarea:focus{
-  border-color:var(--accent)
+  border-color: var(--accent);
 }
 .char-count{
   display:block;

@@ -24,6 +24,16 @@ describe("portfolio navigation", () => {
 
     expect(screen.getByRole("heading", { name: /all programming work\./i })).toBeInTheDocument();
   });
+
+  it("renders a 404 page for invalid routes", () => {
+    render(
+      <MemoryRouter initialEntries={["/rota-inexistente"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: /this page doesn't exist/i })).toBeInTheDocument();
+  });
 });
 
 describe("contact form", () => {
@@ -39,5 +49,19 @@ describe("contact form", () => {
     await user.click(screen.getByRole("button", { name: /send message/i }));
 
     expect(await screen.findByRole("status")).toHaveTextContent(/your message was sent successfully/i);
+  });
+
+  it("shows an error message when the request fails", async () => {
+    const user = userEvent.setup();
+    global.fetch = vi.fn().mockRejectedValue(new Error("Network error"));
+
+    render(<Contact />);
+
+    await user.type(screen.getByLabelText(/name/i), "Luca");
+    await user.type(screen.getByLabelText(/email/i), "luca@example.com");
+    await user.type(screen.getByLabelText(/message/i), "This should fail");
+    await user.click(screen.getByRole("button", { name: /send message/i }));
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(/could not be sent/i);
   });
 });

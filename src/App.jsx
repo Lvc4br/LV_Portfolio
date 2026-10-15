@@ -7,6 +7,7 @@ import Work from "./pages/Work.jsx";
 import Gallery3D from "./pages/Gallery3D.jsx";
 import Programming from "./pages/Programming.jsx";
 import ProjectDetail from "./pages/ProjectDetail.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
   return (
@@ -27,7 +28,7 @@ export default function App() {
           />
           <Route path="/3d" element={<Navigate to="/work/3d" replace />} />
           <Route path="/programacao" element={<Navigate to="/work/code" replace />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
