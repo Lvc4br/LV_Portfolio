@@ -26,7 +26,7 @@ export const projects = [
     status: "Complete",
     tools: ["Blender"],
     description:
-      "A product-focused 3D study of the ATEM Mini Pro, built to communicate industrial form, proportion, and presentation with clarity and restraint.",
+      "A product visualization study focused on industrial form, material clarity, and disciplined composition for a real hardware object.",
     image: atemImage,
     imageAlt: "3D render of an ATEM Mini Pro video switcher",
     visual: "visual--product",
@@ -57,7 +57,7 @@ export const projects = [
     status: "Complete",
     tools: ["Blender"],
     description:
-      "A concept-driven handheld console render that explores industrial identity, material readability, and the balance between function and visual character.",
+      "A concept-driven handheld console render that explores product identity, tactile storytelling, and strong visual character in a compact form.",
     image: handheldImage,
     imageAlt: "Yellow handheld console 3D render",
     visual: "visual--product",
@@ -160,7 +160,7 @@ export const projects = [
     status: "Complete",
     tools: ["HTML", "JavaScript", "CSS"],
     description:
-      "A completed front-end concept for a fictional ice cream brand, designed as a responsive landing experience with a clear commercial identity and a strong product-first presentation.",
+      "A responsive storefront-style landing page for a fictional ice cream brand, designed to communicate product identity, visual hierarchy, and a polished commercial experience.",
     image: iceCreamImage,
     imageAlt: "Ice Cream Panda website screenshot",
     visual: "visual--code",

@@ -6,12 +6,12 @@ export default function About() {
           <span className="eyebrow">06 / About</span>
           <div>
             <h2 className="section-title">
-              From 3D exploration to digital product thinking and front-end execution.
+              I work between visual craft, digital product thinking, and front-end execution.
             </h2>
             <p className="section-copy">
-              I began working in Blender in 2018 and gradually expanded my interest beyond
-              visual creation into programming, front-end development, and the logic behind
-              interfaces that need to be clear, useful, and well structured.
+              My process starts with visual reasoning — form, hierarchy, and clarity — and then
+              moves into code to turn that thinking into usable, responsive experiences. I like
+              work that connects aesthetics with real product decisions.
             </p>
           </div>
         </div>
@@ -19,24 +19,26 @@ export default function About() {
         <div className="timeline">
           <div>
             <span>01 / 3D</span>
-            <strong>Blender and visual studies</strong>
+            <strong>Visual communication</strong>
             <p>
-              Product visualization, material exploration, lighting, and object-focused design work.
+              Blender studies, material exploration, product presentation, and design-focused
+              visual thinking.
             </p>
           </div>
           <div>
             <span>02 / WEB</span>
-            <strong>Front-end and interface logic</strong>
+            <strong>Interface and front-end</strong>
             <p>
-              HTML, CSS, JavaScript, responsive layouts, and structured web experiences.
+              HTML, CSS, JavaScript, responsive layouts, and interfaces built with structure and
+              clarity in mind.
             </p>
           </div>
           <div>
             <span>03 / NOW</span>
-            <strong>3D × Code</strong>
+            <strong>Design-to-code</strong>
             <p>
-              Combining visual thinking with technical execution to build digital work that is
-              creative, organized, and relevant to real product contexts.
+              I combine 3D thinking with interface logic to create digital work that feels intentional,
+              coherent, and useful in real contexts.
             </p>
           </div>
         </div>
