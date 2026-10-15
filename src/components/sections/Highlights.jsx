@@ -5,8 +5,8 @@ import ProjectGrid from "../ui/ProjectGrid.jsx";
 export default function Highlights() {
   const highlights = [
     ...projects.filter((project) => project.area === "3d").slice(0, 2),
-    projects.find((project) => project.id === "tcc-etec"),
     projects.find((project) => project.id === "pizzeria-site"),
+    projects.find((project) => project.id === "ice-cream-panda"),
   ].filter(Boolean);
 
   return (
@@ -16,7 +16,7 @@ export default function Highlights() {
           <span className="eyebrow">01 / Work</span>
           <div>
             <h2 className="section-title">Selected work that shows how I think and build.</h2>
-            <p className="section-copy">Selected 3D and programming projects, including my planned graduation project and an in-progress UX/UI concept for a responsive pizzeria website.</p>
+            <p className="section-copy">Selected 3D, programming, and UX/UI work, combining completed projects with a current responsive pizzeria wireframe project.</p>
           </div>
         </div>
         <ProjectGrid projects={highlights} />

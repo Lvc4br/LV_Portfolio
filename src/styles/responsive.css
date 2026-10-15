@@ -39,6 +39,10 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.work-grid--categories {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .skills-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -57,7 +61,8 @@
 }
 
 .project-detail__header > *,
-.project-detail__facts > * {
+.project-detail__facts > *,
+.project-detail__case-study > * {
   min-width: 0;
 }
 
@@ -86,7 +91,8 @@
   }
 
   .project-detail__header,
-  .project-detail__facts {
+  .project-detail__facts,
+  .project-detail__case-study {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
@@ -112,6 +118,10 @@
   }
 
   .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .work-grid--categories {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -192,6 +202,10 @@
   .work-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 36px;
+  }
+
+  .work-grid--categories {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .project-card__visual {

@@ -11,8 +11,8 @@ information.
 ## About the portfolio
 
 The site is built with React and Vite, with React Router handling its pages. The
-home page introduces my 3D × Code focus and includes selected work, 3D and
-programming highlights, skills, an about section, and a contact form.
+home page introduces my 3D × Code focus and includes selected work, programming
+and UX/UI projects, skills, an about section, and a contact form.
 
 Visitors can browse the complete work by discipline and open individual project
 pages with each project's description, tools, status, and available imagery. The
@@ -21,12 +21,14 @@ project list and metadata are maintained in `src/data/projects.js`.
 ### Projects currently featured
 
 - **3D:** ATEM Mini Pro and Handheld (complete); Colosseum and Jewelry (in progress).
-- **Programming:** Ice Cream Panda (complete); a responsive pizzeria website
-  concept (name undecided) in progress. Its current UX/UI stage includes the brief, information
-  architecture, 12 low-fidelity desktop and mobile wireframes across six pages,
-  and a reusable Figma component library. An interactive HTML preview of the
-  wireframes is available from the project detail page; TCC Etec is a planned
-  graduation project.
+- **Programming:** Ice Cream Panda (complete); TCC Etec (planned graduation
+  project).
+- **UX/UI:** A responsive pizzeria website concept (name undecided) in progress.
+  The current stage includes the brief, information architecture, 12 low-fidelity
+  desktop and mobile wireframes across six pages, and a reusable Figma component
+  library. The project is planned to continue through front-end and database-backed
+  implementation; an interactive HTML wireframe preview is available from its
+  project detail page.
 
 The portfolio also includes a downloadable résumé, a LinkedIn link, responsive
 layouts, optimized WebP project images, and a contact form powered by Getform.
@@ -93,3 +95,5 @@ additional environment variable is needed.
 | `/work/3d/:id` | 3D project details |
 | `/work/code` | Programming projects |
 | `/work/code/:id` | Programming project details |
+| `/work/ux-ui` | UX/UI projects |
+| `/work/ux-ui/:id` | UX/UI project details |

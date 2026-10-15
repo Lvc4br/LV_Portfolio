@@ -6,9 +6,16 @@ export default function ProjectDetail({ area }) {
   const project = getProjectById(id);
 
   if (!project || project.area !== area) {
-    return <Navigate to={area === "3d" ? "/work/3d" : "/work/code"} replace />;
+    const routeByArea = {
+      "3d": "/work/3d",
+      code: "/work/code",
+      "ux-ui": "/work/ux-ui",
+    };
+    return <Navigate to={routeByArea[area] ?? "/work"} replace />;
   }
 
+  const route = `/work/${area}`;
+  const areaLabel = area === "3d" ? "3D" : area === "ux-ui" ? "UX/UI" : "programming";
   const relatedProjects = projects.filter(
     (item) => item.area === area && item.id !== project.id
   );
@@ -17,8 +24,8 @@ export default function ProjectDetail({ area }) {
     <>
       <section className="section project-detail">
         <div className="container">
-          <Link className="project-detail__back" to={`/work/${area}`}>
-            ← All {area === "3d" ? "3D" : "programming"} work
+          <Link className="project-detail__back" to={route}>
+            ← All {areaLabel} work
           </Link>
           <header className="project-detail__header">
             <div>
@@ -39,6 +46,17 @@ export default function ProjectDetail({ area }) {
             </a>
           )}
 
+          {project.caseStudy && (
+            <div className="project-detail__case-study">
+              {project.caseStudy.map((item) => (
+                <section key={item.title}>
+                  <span className="eyebrow">{item.title}</span>
+                  <p>{item.description}</p>
+                </section>
+              ))}
+            </div>
+          )}
+
           {project.image && (
             <figure className="project-detail__image">
               <img src={project.image} alt={project.imageAlt} loading="lazy" />
@@ -46,12 +64,14 @@ export default function ProjectDetail({ area }) {
           )}
 
           <div className="project-detail__facts">
-            <section>
-              <span className="eyebrow">Tools</span>
-              <div className="tag-row">
-                {project.tools.map((tool) => <span key={tool}>{tool}</span>)}
-              </div>
-            </section>
+            {project.tools.length > 0 && (
+              <section>
+                <span className="eyebrow">Tools</span>
+                <div className="tag-row">
+                  {project.tools.map((tool) => <span key={tool}>{tool}</span>)}
+                </div>
+              </section>
+            )}
             <section>
               <span className="eyebrow">Status</span>
               <p>{project.status}</p>
@@ -66,7 +86,7 @@ export default function ProjectDetail({ area }) {
             <div className="section-head">
               <span className="eyebrow">More work</span>
               <div>
-                <h2 className="section-title">More {area === "3d" ? "3D" : "programming"} projects.</h2>
+                <h2 className="section-title">More {areaLabel} projects.</h2>
               </div>
             </div>
             <div className="project-detail__links">

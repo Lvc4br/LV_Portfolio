@@ -16,6 +16,7 @@ export default function Navbar() {
           <NavLink to="/work" end onClick={closeMenu}>Work</NavLink>
           <NavLink to="/work/3d" onClick={closeMenu}>3D</NavLink>
           <NavLink to="/work/code" onClick={closeMenu}>Code</NavLink>
+          <NavLink to="/work/ux-ui" onClick={closeMenu}>UX/UI</NavLink>
           <NavLink to="/" state={{ scrollTo: "about" }} onClick={closeMenu}>About</NavLink>
           <NavLink to="/" state={{ scrollTo: "contact" }} onClick={closeMenu}>Contact</NavLink>
         </nav>

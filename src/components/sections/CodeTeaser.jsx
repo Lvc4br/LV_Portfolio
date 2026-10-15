@@ -70,8 +70,8 @@ export default function Code() {
                     </div>
                     <div>
                         <span>03</span>
-                        <strong>UX/UI / Figma</strong>
-                        <p>Information architecture and low-fidelity wireframes for a responsive pizzeria website.</p>
+                        <strong>HTML / CSS / JavaScript</strong>
+                        <p>Responsive web interfaces, including a website for an ice cream shop.</p>
                     </div>
                     <a className="button" href="https://github.com/Lvc4br" target="_blank" rel="noreferrer">View GitHub ↗</a>
                 </div>

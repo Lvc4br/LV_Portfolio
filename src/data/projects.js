@@ -59,15 +59,37 @@ export const projects = [
     id: "pizzeria-site",
     number: "05",
     title: "Pizzeria Website",
-    category: "UX/UI",
-    area: "code",
+    category: "UX/UI + Web",
+    area: "ux-ui",
     status: "In progress",
     tools: ["Figma", "HTML", "CSS", "JavaScript"],
     description:
-      "A low-fidelity UX/UI concept for a fictional neighborhood pizzeria, created as an ETEC project; the brand name is still undecided. The responsive experience covers six pages: Home, Menu, Product Detail, My Order, About, and Locations & Contact. Current deliverables include the brief, information architecture, 12 desktop and mobile wireframes, and a reusable Figma component library. Explore the wireframes in the interactive preview. Dine-in reservations have a separate path from delivery and pickup orders. Database integration is planned for a later development phase.",
+      "An ETEC project to design and build a responsive website for a fictional neighborhood pizzeria; the brand name is still undecided. The project will progress from UX/UI design through front-end implementation and database-backed functionality. Its current stage covers the brief, information architecture, 12 desktop and mobile low-fidelity wireframes across six pages, and a reusable Figma component library. Explore the wireframes in the interactive preview; it is not a working ordering service. Dine-in reservations have a separate path from delivery and pickup orders.",
     prototypeFile: "pizzeria-wireframes.html",
     visualLabel: "Pizzeria · UX/UI",
     visual: "visual--code",
+    caseStudy: [
+      {
+        title: "Goal",
+        description:
+          "Help customers choose a pizza and proceed with fewer steps and less uncertainty, whether they want dine-in, delivery, or pickup.",
+      },
+      {
+        title: "UX decision",
+        description:
+          "Keep dine-in locations and reservations on a separate path from the order flow, so table bookings are not confused with delivery or pickup.",
+      },
+      {
+        title: "Current deliverables",
+        description:
+          "A project brief, information architecture, six page designs in desktop and mobile sizes (12 wireframes total), and a reusable Figma component library.",
+      },
+      {
+        title: "Scope and next step",
+        description:
+          "This is the low-fidelity stage of an end-to-end design-to-code project, not a working ordering service. Next: define the visual identity, build the responsive front end, then implement the database-backed features.",
+      },
+    ],
   },
   {
     id: "tcc-etec",
@@ -75,11 +97,10 @@ export const projects = [
     title: "TCC Etec",
     category: "Code",
     area: "code",
-    status: "Graduation project",
-    featured: true,
-    tools: ["React", "Node.js", "FastAPI"],
+    status: "Planned",
+    tools: [],
     description:
-      "A future ETEC graduation project. Details and the development process will be shared as the project takes shape.",
+      "A planned ETEC graduation project. Its scope and technology choices are not final; details will be added as the project develops.",
     visualLabel: "Future ETEC project",
     visual: "visual--tool",
   },
