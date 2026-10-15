@@ -39,10 +39,6 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.work-grid--categories {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 .skills-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -118,10 +114,6 @@
   }
 
   .skills-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .work-grid--categories {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -202,10 +194,6 @@
   .work-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 36px;
-  }
-
-  .work-grid--categories {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .project-card__visual {

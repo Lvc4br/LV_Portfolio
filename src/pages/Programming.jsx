@@ -13,8 +13,8 @@ export default function Programming() {
             <div>
               <h1 className="section-title">All programming work.</h1>
               <p className="section-copy">
-                Programming projects focused on web interfaces, automation, and
-                tools that support creative workflows.
+                Web projects, tools, and automation — including the design
+                decisions that shape how the finished code works for people.
               </p>
             </div>
           </div>

@@ -6,7 +6,6 @@ import Home from "./pages/Home.jsx";
 import Work from "./pages/Work.jsx";
 import Gallery3D from "./pages/Gallery3D.jsx";
 import Programming from "./pages/Programming.jsx";
-import UXUI from "./pages/UXUI.jsx";
 import ProjectDetail from "./pages/ProjectDetail.jsx";
 
 export default function App() {
@@ -21,11 +20,10 @@ export default function App() {
           <Route path="/work/3d/:id" element={<ProjectDetail area="3d" />} />
           <Route path="/work/code" element={<Programming />} />
           <Route path="/work/code/:id" element={<ProjectDetail area="code" />} />
-          <Route path="/work/ux-ui" element={<UXUI />} />
-          <Route path="/work/ux-ui/:id" element={<ProjectDetail area="ux-ui" />} />
+          <Route path="/work/ux-ui" element={<Navigate to="/work/code" replace />} />
           <Route
-            path="/work/code/pizzeria-site"
-            element={<Navigate to="/work/ux-ui/pizzeria-site" replace />}
+            path="/work/ux-ui/:id"
+            element={<Navigate to="/work/code/pizzeria-site" replace />}
           />
           <Route path="/3d" element={<Navigate to="/work/3d" replace />} />
           <Route path="/programacao" element={<Navigate to="/work/code" replace />} />

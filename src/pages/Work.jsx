@@ -10,13 +10,13 @@ export default function Work() {
           <div>
             <h1 className="section-title">Selected work.</h1>
             <p className="section-copy">
-              Explore 3D, programming, and UX/UI projects, including work that
-              connects visual design and technology.
+              Explore my 3D and programming work, including web projects shaped
+              by design and user experience.
             </p>
           </div>
         </div>
 
-        <div className="work-grid work-grid--categories">
+        <div className="work-grid">
           <Link className="project-card" to="/work/3d">
             <div className="project-card__visual visual--product">
               <img src={atemImage} alt="ATEM Mini Pro 3D render" loading="lazy" />
@@ -41,17 +41,6 @@ export default function Work() {
             </div>
           </Link>
 
-          <Link className="project-card" to="/work/ux-ui">
-            <div className="project-card__visual visual--code">
-              <div className="project-card__placeholder project-card__placeholder--label" aria-hidden="true">Pizzeria · UX/UI</div>
-              <span>03</span>
-              <i>UX/UI</i>
-            </div>
-            <div className="project-card__body">
-              <div><p className="mono">UX/UI</p><h3>Design Work</h3></div>
-              <span className="project-card__arrow">↗</span>
-            </div>
-          </Link>
         </div>
       </div>
     </section>

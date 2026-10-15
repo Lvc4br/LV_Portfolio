@@ -9,13 +9,12 @@ export default function ProjectDetail({ area }) {
     const routeByArea = {
       "3d": "/work/3d",
       code: "/work/code",
-      "ux-ui": "/work/ux-ui",
     };
     return <Navigate to={routeByArea[area] ?? "/work"} replace />;
   }
 
   const route = `/work/${area}`;
-  const areaLabel = area === "3d" ? "3D" : area === "ux-ui" ? "UX/UI" : "programming";
+  const areaLabel = area === "3d" ? "3D" : "programming";
   const relatedProjects = projects.filter(
     (item) => item.area === area && item.id !== project.id
   );

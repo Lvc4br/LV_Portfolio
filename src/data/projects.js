@@ -59,8 +59,8 @@ export const projects = [
     id: "pizzeria-site",
     number: "05",
     title: "Pizzeria Website",
-    category: "UX/UI + Web",
-    area: "ux-ui",
+    category: "Web / UX/UI",
+    area: "code",
     status: "In progress",
     tools: ["Figma", "HTML", "CSS", "JavaScript"],
     description:

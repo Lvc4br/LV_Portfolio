@@ -16,7 +16,7 @@ export default function Highlights() {
           <span className="eyebrow">01 / Work</span>
           <div>
             <h2 className="section-title">Selected work that shows how I think and build.</h2>
-            <p className="section-copy">Selected 3D, programming, and UX/UI work, combining completed projects with a current responsive pizzeria wireframe project.</p>
+            <p className="section-copy">Selected 3D and programming work, including a responsive pizzeria project progressing from wireframes toward implementation.</p>
           </div>
         </div>
         <ProjectGrid projects={highlights} />
