@@ -168,6 +168,11 @@ export const projects = [
           "The project uses semantic HTML, simple JavaScript interactions, and CSS styling to create a balanced layout with readability, spacing, and consistent visual rhythm.",
       },
       {
+        title: "Academic context",
+        description:
+          "This project sits within the broader academic practice developed in the ETEC Front-End and Web Programming work, where the focus is on applying HTML, CSS, JavaScript, GitHub collaboration, and structured project organization in real coursework.",
+      },
+      {
         title: "Current scope",
         description:
           "This is a complete front-end concept, but it does not include a real checkout flow, user authentication, or backend integration. The value here is the interface quality, responsive structure, and front-end thinking applied to a commercial brand concept.",
