@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { projects, sortProjects } from "../../data/projects.js";
+import { projects } from "../../data/projects.js";
 import ProjectGrid from "../ui/ProjectGrid.jsx";
 
 export default function Highlights() {
