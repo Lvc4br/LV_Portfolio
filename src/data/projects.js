@@ -62,10 +62,11 @@ export const projects = [
     category: "UX/UI",
     area: "code",
     status: "In progress",
-    tools: ["Figma", "UX/UI"],
+    tools: ["Figma", "HTML", "CSS", "JavaScript"],
     description:
-      "A responsive website concept for a fictional neighborhood pizzeria, created for an ETEC UX/UI project. The current stage includes the project brief, information architecture, low-fidelity desktop and mobile wireframes for six pages, and a reusable Figma component library. The planned experience supports dine-in, delivery, and pickup, with database integration reserved for a future development phase.",
-    visualLabel: "UX/UI · Figma",
+      "A low-fidelity UX/UI concept for a fictional neighborhood pizzeria, created as an ETEC project; the brand name is still undecided. The responsive experience covers six pages: Home, Menu, Product Detail, My Order, About, and Locations & Contact. Current deliverables include the brief, information architecture, 12 desktop and mobile wireframes, and a reusable Figma component library. Explore the wireframes in the interactive preview. Dine-in reservations have a separate path from delivery and pickup orders. Database integration is planned for a later development phase.",
+    prototypeFile: "pizzeria-wireframes.html",
+    visualLabel: "Pizzeria · UX/UI",
     visual: "visual--code",
   },
   {

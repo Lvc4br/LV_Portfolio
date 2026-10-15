@@ -22,8 +22,11 @@ project list and metadata are maintained in `src/data/projects.js`.
 
 - **3D:** ATEM Mini Pro and Handheld (complete); Colosseum and Jewelry (in progress).
 - **Programming:** Ice Cream Panda (complete); a responsive pizzeria website
-  concept in progress, currently at the briefing, information architecture, and
-  low-fidelity wireframe stage; TCC Etec (planned graduation project).
+  concept (name undecided) in progress. Its current UX/UI stage includes the brief, information
+  architecture, 12 low-fidelity desktop and mobile wireframes across six pages,
+  and a reusable Figma component library. An interactive HTML preview of the
+  wireframes is available from the project detail page; TCC Etec is a planned
+  graduation project.
 
 The portfolio also includes a downloadable résumé, a LinkedIn link, responsive
 layouts, optimized WebP project images, and a contact form powered by Getform.

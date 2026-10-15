@@ -31,7 +31,7 @@ export default function Work() {
 
           <Link className="project-card" to="/work/code">
             <div className="project-card__visual visual--code">
-              <div className="project-card__placeholder project-card__placeholder--label" aria-hidden="true">UX/UI · Figma</div>
+              <div className="project-card__placeholder project-card__placeholder--label" aria-hidden="true">Pizzeria · UX/UI</div>
               <span>02</span>
               <i>Code</i>
             </div>

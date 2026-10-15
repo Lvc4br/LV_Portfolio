@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pizzaria — wireframes low-fi</title>
+<style>
+:root{--bg:#f4f4f2;--ink:#1c1c1c;--mu:#666;--ln:#c9c9c4;--cd:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161616;--ink:#eee;--mu:#aaa;--ln:#3a3a3a;--cd:#222}}
+:root[data-theme="dark"]{--bg:#161616;--ink:#eee;--mu:#aaa;--ln:#3a3a3a;--cd:#222}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,sans-serif}
+h1{font-size:20px;margin:0;padding:14px 14px 2px}
+.sub,.note{padding:0 14px;color:var(--mu);font-size:13px}
+.note{color:var(--ink);padding-top:4px}
+.bar{display:flex;gap:6px;overflow-x:auto;padding:10px 14px}
+.bar button{flex:none;min-height:44px;padding:0 14px;border:1.5px solid var(--ln);background:var(--cd);color:var(--ink);border-radius:99px;font:inherit}
+.bar button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+#wrap{overflow-x:auto;padding:10px 14px 28px}
+#sz{position:relative;margin:0 auto}
+.f{position:absolute;top:0;left:0;width:1440px;transform-origin:0 0;background:#fff;color:#222;font:16px/1.4 system-ui,sans-serif;border:2px solid #222}
+.f.m{width:390px;font-size:14px}
+.f *{box-sizing:border-box}
+.f p{margin:0 0 16px}
+.hd{display:flex;align-items:center;gap:28px;padding:18px 72px;border-bottom:2px solid #222}
+.m .hd{padding:12px 16px;justify-content:space-between}
+.hd nav{display:flex;gap:28px;flex:1}
+.hd nav .on{border-bottom:3px solid #222;font-weight:700}
+.lg{font-size:22px;letter-spacing:1px}
+.s{padding:56px 72px}.m .s{padding:24px 16px}
+.alt{background:#eee}
+.g{display:grid;gap:24px;grid-template-columns:var(--c)}
+.m .g{grid-template-columns:var(--mc);gap:14px}
+.x{border:1.5px solid #555;background:repeating-linear-gradient(45deg,#f2f2f2 0 9px,#e2e2e2 9px 18px);display:flex;align-items:center;justify-content:center;text-align:center;color:#555;padding:8px;font-size:13px}
+.bx{border:1.5px solid #555;padding:14px;background:#fff;display:flex;flex-direction:column;gap:8px}
+.rw{display:flex;flex-direction:row;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.row{display:flex;gap:12px;align-items:center;border:1.5px solid #555;padding:10px}
+.bt{background:#222;color:#fff;padding:13px 22px;font-weight:700;text-align:center;border-radius:4px;display:inline-block}
+.bs{border:2px solid #222;padding:11px 20px;font-weight:700;text-align:center;border-radius:4px;display:inline-block}
+.t1{font-size:52px;line-height:1.05;font-weight:800;margin:6px 0 14px}.m .t1{font-size:32px}
+.t2{font-size:32px;font-weight:800;margin:0 0 20px}.m .t2{font-size:22px;margin-bottom:12px}
+.t3{font-size:20px;font-weight:700}
+.sm{font-size:13px;color:#555}
+.in{border:1.5px solid #555;border-radius:4px;height:42px;padding:10px;color:#777;font-size:13px;background:#fff}
+.fl{display:flex;flex-direction:column;gap:4px}
+.ch{flex:none;border:1.5px solid #555;border-radius:99px;padding:7px 16px}.ch.on{background:#222;color:#fff}
+.tag{display:inline-block;font-size:12px;color:#777;margin-bottom:6px}
+.ft{background:#222;color:#ddd;padding:40px 72px}.m .ft{padding:24px 16px}
+.stk{position:sticky;bottom:0;background:#fff;border-top:2px solid #222;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.sel{outline:3px solid #222}
+.st{display:inline-flex;border:1.5px solid #555}.st span{padding:6px 14px}
+</style></head><body>
+<h1>Pizzaria — wireframes low-fi</h1>
+<div class="sub">Fluxo: Home → Cardápio → Produto → Meu pedido → Finalização</div>
+<div class="bar" id="tabs"></div><div class="bar" id="mode"></div>
+<div class="note" id="note"></div>
+<div id="wrap"><div id="sz"></div></div>
+<script>
+const R=n=>typeof n=='number'?`repeat(${n},1fr)`:n;
+const G=(c,m,h)=>`<div class="g" style="--c:${R(c)};--mc:${R(m)}">${h}</div>`;
+const J=(a,f)=>a.map(f).join('');
+const X=(t,h)=>`<div class="x" style="height:${h}px">${t}</div>`;
+const B=t=>`<span class="bt">${t}</span>`,S=t=>`<span class="bs">${t}</span>`;
+const T=(t,l)=>`<div class="t${l}">${t}</div>`;
+const IN=l=>`<div class="fl"><span class="sm">${l}</span><div class="in"></div></div>`;
+const ST=q=>`<span class="st"><span>−</span><span>${q}</span><span>+</span></span>`;
+const SEC=(h,a)=>`<div class="s${a?' alt':''}">${h}</div>`;
+const STK=(l,r)=>`<div class="stk"><span class="sm">${l}</span>${B(r)}</div>`;
+const HD=(m,a)=>m?`<div class="hd"><b>≡ Menu</b><b class="lg">PIZZARIA</b><b>Pedido (2)</b></div>`:`<div class="hd"><b class="lg">PIZZARIA</b><nav>${J(['Início','Cardápio','Sobre nós','Unidades'],n=>`<span class="${n==a?'on':''}">${n}</span>`)}</nav>${B('PEDIR AGORA')}<b>Pedido (2)</b></div>`;
+const FT=m=>`<div class="ft">${G(4,2,J(['<b>PIZZARIA</b><br>Pizza boa. Mesa cheia.','<b>Navegação</b><br>Início<br>Cardápio<br>Sobre nós','<b>Unidades</b><br>Centro<br>Jardins<br>Horários','<b>Contato</b><br>WhatsApp<br>E-mail<br>Redes sociais'],x=>`<div>${x}</div>`))}<div class="sm" style="margin-top:20px;color:#aaa">© Projeto acadêmico — nome da pizzaria em definição</div></div>`;
+const PZ=['Margherita','Calabresa','Pepperoni','Quatro queijos','Vegetariana','Pizza doce'];
+const PC=(n,m)=>m?`<div class="row"><div class="x" style="width:84px;height:84px;flex:none">foto</div><div style="flex:1"><b>${n}</b><div class="sm">Descrição breve</div><b>R$ XX,XX</b></div><b>›</b></div>`:`<div class="bx"><div class="x" style="height:160px">foto</div><b class="t3">${n}</b><div class="sm">Ingredientes e descrição</div><div class="rw"><b>R$ XX,XX</b>${S('VER')}</div></div>`;
+
+const home=m=>HD(m,'Início')
++SEC(G(2,1,`<div><span class="tag">Chamada principal</span>${T('Pizza boa. Mesa cheia.',1)}<p>Sabor de verdade, para compartilhar com todo mundo.</p><div class="rw" style="justify-content:flex-start">${S('VER CARDÁPIO')}${B('PEDIR AGORA')}</div></div>${X('Foto principal da pizza<br>(futura composição gráfica expressiva)',m?200:380)}`))
++SEC(G(3,1,J([['No salão','Venha comer com a gente','VER UNIDADES'],['Delivery','Peça e receba em casa','PEDIR DELIVERY'],['Retirada','Retire no balcão','PEDIR RETIRADA']],a=>`<div class="bx"><b class="t3">${a[0]}</b><div class="sm">${a[1]}</div>${S(a[2])}</div>`)),1)
++SEC(T('As favoritas da galera',2)+G(4,1,J(PZ.slice(0,4),n=>PC(n,m)))+`<div style="margin-top:24px;text-align:center">${S('VER CARDÁPIO COMPLETO')}</div>`)
++SEC(G(2,1,`${X('Foto do salão / equipe',m?160:260)}<div><span class="tag">Nossa história</span>${T('Uma pizzaria de bairro com espírito contemporâneo',2)}<p>Texto curto sobre a marca (2–3 linhas).</p>${S('CONHEÇA A PIZZARIA')}</div>`),1)
++SEC(T('O que o pessoal diz',2)+G(3,1,J([1,2,3].slice(0,m?2:3),()=>`<div class="bx"><b>★★★★★</b><div>“Texto curto da avaliação do cliente.”</div><div class="sm">Nome · Bairro</div></div>`)))
++SEC(G(2,1,`${X('Mapa / localização',m?160:220)}<div><span class="tag">Onde estamos</span>${T('Unidade Centro',3)}<p class="sm">Endereço fictício a definir<br>Horário de funcionamento</p>${S('VER ROTA')} ${S('TODAS AS UNIDADES')}</div>`),1)
++FT(m)+(m?STK('Barra fixa','PEDIR AGORA'):'');
+
+const card=m=>HD(m,'Cardápio')
++SEC(`<div class="sm" style="margin-bottom:8px">Início / Cardápio</div>${T('Nosso cardápio',2)}<div class="in" style="margin-bottom:16px">Buscar pizza${m?'...':' ou ingrediente'}</div><div class="rw" style="justify-content:flex-start;${m?'flex-wrap:nowrap;overflow:hidden':''}">${J(['Todas','Clássicas','Especiais','Vegetarianas','Doces','Bebidas'],(n,i)=>`<span class="ch${i?'':' on'}">${n}</span>`)}</div>`)
++SEC(`<b class="t3" style="display:block;margin-bottom:16px">Pizzas</b>`+G(3,1,J(PZ,n=>PC(n,m)))+`<b class="t3" style="display:block;margin:32px 0 16px">Bebidas</b>`+G(3,1,J(['Refrigerante','Suco','Água'],n=>`<div class="bx rw"><span>${n}</span><b>R$ XX</b></div>`)),1)
++FT(m)+(m?STK('Pedido (2) · R$ XX','VER PEDIDO'):'');
+
+const prod=m=>HD(m,'Cardápio')
++SEC(`<div class="sm" style="margin-bottom:16px">${m?'‹ Voltar ao cardápio':'Início / Cardápio / Margherita'}</div>`+G(2,1,`${X('Imagem da pizza',m?240:460)}<div style="display:flex;flex-direction:column;gap:14px">${T('Margherita',2)}<div>Molho de tomate, mozzarella, manjericão e azeite.</div><div class="rw" style="justify-content:flex-start">${J(['Tomate','Mozzarella','Manjericão','Azeite'],n=>`<span class="ch">${n}</span>`)}</div><b>Escolha o tamanho</b>${J([['○ Pequena'],['● Média'],['○ Grande']],(a,i)=>`<div class="bx rw${i==1?' sel':''}"><span>${a[0]}</span><b>R$ XX</b></div>`)}<div class="rw"><b>Quantidade</b>${ST(1)}</div>${m?'':`<div class="rw"><b>Total</b><b class="t3">R$ XX</b></div>${B('ADICIONAR AO PEDIDO')}`}</div>`))
++SEC(T('Outras favoritas',2)+G(4,1,J(PZ.slice(1,m?4:5),n=>PC(n,m))),1)
++FT(m)+(m?STK('Média · 1 · R$ XX','ADICIONAR AO PEDIDO'):'');
+
+const item=(n,t,m)=>`<div class="bx rw" style="flex-wrap:nowrap"><div class="x" style="width:${m?64:96}px;height:${m?64:96}px;flex:none">foto</div><div style="flex:1"><b>Pizza ${n}</b><div class="sm">Tamanho ${t}</div><div style="margin-top:6px">${ST(1)}</div></div><div style="text-align:right"><b>R$ XX,XX</b><div class="sm" style="text-decoration:underline">Remover</div></div></div>`;
+const ped=m=>HD(m,'')
++SEC(T('Seu pedido',2)+G('1.6fr 1fr',1,`<div style="display:flex;flex-direction:column;gap:16px">${item('Margherita','grande',m)}${item('Calabresa','média',m)}<div>${S('+ ADICIONAR MAIS ITENS')}</div><b class="t3" style="margin-top:8px">Como deseja receber?</b>${G(2,2,`<div class="bx sel"><b>● Delivery</b><div class="sm">Entregamos no seu endereço</div></div><div class="bx"><b>○ Retirada</b><div class="sm">Retire no balcão</div></div>`)}<div class="bx"><b>Se Delivery</b>${G(2,1,IN('CEP')+IN('Endereço')+IN('Número / complemento')+IN('Bairro'))}</div><div class="bx"><b>Se Retirada</b>${G(2,1,IN('Unidade')+IN('Horário estimado'))}</div><div class="bx" style="background:#eee"><b>Quer comer no salão?</b><div class="sm">O salão não passa pelo carrinho: veja as unidades e reserve uma mesa.</div><div>${S('VER UNIDADES E RESERVAS')}</div></div></div><div class="bx" style="gap:12px;align-self:start"><b class="t3">Resumo</b><div class="rw"><span>Subtotal</span><b>R$ XX</b></div><div class="rw"><span>Entrega</span><b>A calcular</b></div><hr style="width:100%;border:1px solid #555"><div class="rw"><b>Total</b><b class="t3">R$ XX</b></div>${B('CONTINUAR')}<div class="sm" style="text-align:center">‹ Continuar escolhendo</div></div>`))
++SEC(`<div class="bx" style="align-items:center;text-align:center"><span class="tag">Estado alternativo</span><b>Seu pedido está vazio</b><div class="sm">Escolha uma pizza para começar.</div>${B('VER CARDÁPIO')}</div>`,1)
++FT(m)+(m?STK('Total · R$ XX','CONTINUAR'):'');
+
+const sob=m=>HD(m,'Sobre nós')
++SEC(G(2,1,`<div>${T('A gente acredita em pizza e gente reunida.',1)}<p>Nossa história, nossa paixão pela massa e o prazer de receber bem.</p>${B('CONHEÇA O CARDÁPIO')}</div>${X('Equipe preparando pizzas',m?200:360)}`))
++SEC(G(2,1,`${X('Foto: massa / forno / mesa',m?160:300)}<div><span class="tag">Nossa história</span>${T('Como tudo começou',2)}<p>Parágrafo 1 da história fictícia (2–3 linhas).</p><p>Parágrafo 2 da história fictícia (2–3 linhas).</p></div>`),1)
++SEC(T('O que faz nossa pizza especial?',2)+G(3,1,J([['Ingredientes','Breve descrição'],['Preparo cuidadoso','Breve descrição'],['Receber bem','Breve descrição']],a=>`<div class="bx">${X('ícone',60)}<b class="t3">${a[0]}</b><div class="sm">${a[1]}</div></div>`)))
++SEC(T('Um pouco do nosso dia a dia',2)+G(4,2,J(['Ambiente','Massa','Forno','Mesa'],n=>X(n,m?110:170))),1)
++SEC(`<div style="text-align:center">${T('Vem conhecer o nosso salão',2)}<div class="rw" style="justify-content:center">${B('VENHA CONHECER NOSSO SALÃO')}${S('ENCONTRE UMA UNIDADE')}</div></div>`)
++FT(m);
+
+const unit=n=>`<div class="bx"><b class="t3">${n}</b><div class="sm">Endereço fictício a definir</div><div class="sm">Seg–Qui · XX:XX–XX:XX<br>Sex–Sáb · XX:XX–XX:XX<br>Dom · XX:XX–XX:XX</div><div class="rw" style="justify-content:flex-start">${J(['Salão','Delivery','Retirada'],t=>`<span class="ch">${t}</span>`)}</div><div class="rw" style="justify-content:flex-start">${B('VER ROTA')}${S('CONTATO')}</div></div>`;
+const uni=m=>HD(m,'Unidades')
++SEC(T('Encontre sua unidade!',1)+'<p>Encontre a unidade, consulte os horários e fale com nossa equipe.</p>'+G('1.3fr 1fr',1,X('Mapa / localização',m?200:520)+`<div style="display:flex;flex-direction:column;gap:16px">${unit('Unidade Centro')}${unit('Unidade Jardins')}</div>`))
++SEC(T('Reservar mesa no salão',2)+G(4,2,IN('Unidade')+IN('Data')+IN('Horário')+IN('Nº de pessoas'))+`<div style="margin-top:16px">${B('RESERVAR MESA')}</div><div class="sm" style="margin-top:8px">A reserva é separada do pedido de delivery ou retirada.</div>`,1)
++SEC(T('Fale com a gente',2)+G(2,1,`<div class="bx">${IN('Nome')}${IN('E-mail')}${IN('Mensagem')}<div>${B('ENVIAR MENSAGEM')}</div></div><div class="bx"><b>Telefone / WhatsApp</b><div class="sm">(XX) XXXXX-XXXX</div><b>E-mail / atendimento</b><div class="sm">contato@pizzaria.exemplo</div><b>Redes sociais</b><div class="rw" style="justify-content:flex-start">${J(['Instagram','TikTok','Facebook'],n=>`<span class="ch">${n}</span>`)}</div></div>`))
++FT(m);
+
+const P=[
+['Home','Comunicar a personalidade da marca, abrir o apetite e dar acesso imediato ao pedido.','pedido visível sem rolagem excessiva; salão, delivery e retirada são opções independentes; favoritas logo após a apresentação.',home],
+['Cardápio','Facilitar a descoberta, a comparação e a seleção dos produtos.','3 colunas no desktop; linhas com mais espaço para nome e descrição no mobile; filtros legíveis e fáceis de tocar.',card],
+['Produto','Conferir a pizza e personalizar antes de adicionar ao carrinho.','tamanho e quantidade são escolhas separadas; valores ilustrativos; sem personalizações fora do escopo.',prod],
+['Meu pedido','Revisar o carrinho, escolher a modalidade e ver os valores com transparência.','delivery e retirada seguem o carrinho; o salão tem caminho próprio (unidades e reservas).',ped],
+['Sobre nós','Apresentar a personalidade da pizzaria sem virar texto institucional longo.','história fictícia coerente, sem inventar prêmios, certificações ou procedência de ingredientes.',sob],
+['Unidades','Conectar o site ao estabelecimento físico: visitas, reservas e atendimento.','endereços são placeholders; com uma única unidade, simplificar o layout para não simular uma rede.',uni]
+];
+let pg=0,md=0;
+function fit(){const w=document.getElementById('wrap'),z=document.getElementById('sz'),f=document.getElementById('fr'),fw=md?390:1440,s=Math.min(1,Math.max(md?.6:.5,(w.clientWidth-28)/fw));f.style.transform=`scale(${s})`;z.style.width=fw*s+'px';z.style.height=f.offsetHeight*s+'px'}
+function draw(){
+document.getElementById('tabs').innerHTML=J(P,(p,i)=>`<button class="${i==pg?'on':''}" onclick="pg=${i};draw()">0${i+1} ${p[0]}</button>`);
+document.getElementById('mode').innerHTML=J(['Desktop 1440','Mobile 390'],(n,i)=>`<button class="${i==md?'on':''}" onclick="md=${i};draw()">${n}</button>`);
+const p=P[pg];
+document.getElementById('note').innerHTML=`<b>Objetivo:</b> ${p[1]}<br><b>Decisões:</b> ${p[2]}`;
+document.getElementById('sz').innerHTML=`<div class="f${md?' m':''}" id="fr">${p[3](!!md)}</div>`;
+fit()}
+addEventListener('resize',fit);draw();
+</script></body></html>

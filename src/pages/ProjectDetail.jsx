@@ -28,6 +28,17 @@ export default function ProjectDetail({ area }) {
             <p className="project-detail__summary">{project.description}</p>
           </header>
 
+          {project.prototypeFile && (
+            <a
+              className="button button--solid"
+              href={`${import.meta.env.BASE_URL}${project.prototypeFile}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View interactive wireframes ↗
+            </a>
+          )}
+
           {project.image && (
             <figure className="project-detail__image">
               <img src={project.image} alt={project.imageAlt} loading="lazy" />
