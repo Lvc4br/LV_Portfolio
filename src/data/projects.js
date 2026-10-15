@@ -1,6 +1,7 @@
 import atemImage from "../assets/atem_mini_pro.webp";
 import handheldImage from "../assets/Front.webp";
 import iceCreamImage from "../assets/pw_project (1).webp";
+import jewelryImage from "../assets/constelacao-floral.png";
 
 export const projectStatusOrder = {
   Complete: 1,
@@ -85,56 +86,68 @@ export const projects = [
     category: "3D",
     area: "3d",
     status: "In progress",
-    tools: ["Blender"],
+    tools: ["Blender", "Architecture study", "Historical references"],
     description:
-      "An ongoing 3D study of the Colosseum focused on structure, historical reference, and architectural interpretation in a real-world form.",
-    visualLabel: "Work in progress",
+      "A historically grounded 3D reconstruction project focused on the Colosseum's volumetry, architectural logic, and the organization of circulation and seating levels. The research is based on archaeological references, a documented methodology, and a transparent reconstruction process.",
+    visualLabel: "Research in progress",
     visual: "visual--colosseum",
     caseStudy: [
       {
         title: "Project objective",
         description:
-          "Interpret an iconic architectural form through 3D modeling and study the relationship between volume, rhythm, and historical mass.",
+          "Reconstruct the Colosseum digitally with a focus on historical fidelity, architectural precision, and a coherent reading of the building's original spatial logic.",
+      },
+      {
+        title: "Method and sources",
+        description:
+          "The project is grounded in historical references, archaeological studies, and architectural analysis, with emphasis on elements such as the elliptical plan, circulation routes, vaults, and the sequence of levels across the facade.",
       },
       {
         title: "Current stage",
         description:
-          "The project is still under development. The focus is on refining the structure and evaluating how the model communicates its architectural logic.",
+          "The work includes documentation, initial drawing sheets, architectural studies, and model development for the orders, circulation system, and the main structure. The project is still in progress, but the methodology is clearly defined and documented.",
       },
       {
         title: "What this project shows",
         description:
-          "It demonstrates a willingness to work with complex geometry and translate historical references into a digital sculptural study.",
+          "It demonstrates the ability to work with complex historical geometry, define research-based assumptions, and translate them into a technically structured 3D model without treating reconstruction as pure aesthetic interpretation.",
       },
     ],
   },
   {
     id: "jewelry",
     number: "04",
-    title: "Jewelry",
+    title: "Constelação Floral",
     category: "3D",
     area: "3d",
     status: "In progress",
-    tools: ["Blender"],
+    tools: ["Blender", "Concept design", "AI-assisted briefing"],
     description:
-      "A jewelry-focused 3D study exploring material, object detailing, and presentation in a more refined product context.",
-    visualLabel: "Work in progress",
+      "A jewelry design concept for a floral ring trilogy inspired by the evolution of love: Namoro, Noivado and Casamento. The visual briefing was built from handmade reference material, concept images, and an AI-assisted presentation process instead of a Photoshop-only workflow, keeping the design honest and structured.",
+    image: jewelryImage,
+    imageAlt: "Constelação Floral jewelry concept presentation board",
+    visualLabel: "Concept in progress",
     visual: "visual--jewelry",
     caseStudy: [
       {
         title: "Project objective",
         description:
-          "Develop a decorative object study with attention to form, finish, and value perception in a close-up presentation context.",
+          "Develop a romantic high-jewelry concept that translates the idea of a star becoming a flower, then becoming a lasting commitment, through organic forms, narrative composition, and detailed material choices.",
       },
       {
-        title: "Current stage",
+        title: "Concept and visual direction",
         description:
-          "This project is still in progress and is being revisited in terms of object detail, composition, and final presentation quality.",
+          "The collection is organized in three moments: Namoro, Noivado and Casamento. Each ring uses organic stems, floral details, and a star-like diamond arrangement to represent stages of emotional growth, while balancing rose gold, white gold, morganite, and diamonds in a refined luxury aesthetic.",
       },
       {
-        title: "What this project shows",
+        title: "Production process",
         description:
-          "It highlights an interest in surface precision, material mood, and object presentation beyond pure hard-surface modeling.",
+          "The presentation was created using reference sketches, visual references, and an AI-assisted briefing workflow to structure the concept board, materials, and composition before finalizing the product narrative. The result preserves the original design logic while allowing faster iteration and clearer communication.",
+      },
+      {
+        title: "Current scope",
+        description:
+          "This is a conceptual project in active development. The collection is established as an artistic and design direction, with material and jewelry details already documented, but still without the final production stage or full real-world manufacturing validation.",
       },
     ],
   },
