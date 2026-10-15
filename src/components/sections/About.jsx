@@ -6,14 +6,12 @@ export default function About() {
           <span className="eyebrow">06 / About</span>
           <div>
             <h2 className="section-title">
-              From 3D studies to digital products and front-end thinking.
+              From 3D exploration to digital product thinking and front-end execution.
             </h2>
             <p className="section-copy">
-              I started exploring Blender in 2018 and soon became interested in
-              how digital creation works beyond the visual layer. Over time, I
-              expanded that interest into programming, especially web development,
-              front-end structure, and the logic behind interfaces that people can
-              actually use.
+              I began working in Blender in 2018 and gradually expanded my interest beyond
+              visual creation into programming, front-end development, and the logic behind
+              interfaces that need to be clear, useful, and well structured.
             </p>
           </div>
         </div>
@@ -21,25 +19,24 @@ export default function About() {
         <div className="timeline">
           <div>
             <span>01 / 3D</span>
-            <strong>Blender and visual experimentation</strong>
+            <strong>Blender and visual studies</strong>
             <p>
-              Modeling, materials, lighting, and product-focused visual studies.
+              Product visualization, material exploration, lighting, and object-focused design work.
             </p>
           </div>
           <div>
             <span>02 / WEB</span>
-            <strong>Programming and front-end learning</strong>
+            <strong>Front-end and interface logic</strong>
             <p>
-              JavaScript, HTML, CSS, responsive layouts, and user-focused web
-              interfaces.
+              HTML, CSS, JavaScript, responsive layouts, and structured web experiences.
             </p>
           </div>
           <div>
             <span>03 / NOW</span>
             <strong>3D × Code</strong>
             <p>
-              Combining visual thinking and programming to build digital experiences
-              that are both creative and technically organized.
+              Combining visual thinking with technical execution to build digital work that is
+              creative, organized, and relevant to real product contexts.
             </p>
           </div>
         </div>

@@ -5,7 +5,7 @@ import ProjectGrid from "../ui/ProjectGrid.jsx";
 export default function Highlights() {
   const highlights = [
     projects.find((project) => project.id === "atem-mini-pro"),
-    projects.find((project) => project.id === "handheld-console"),
+    projects.find((project) => project.id === "jewelry"),
     projects.find((project) => project.id === "ice-cream-panda"),
   ].filter(Boolean);
 
@@ -15,10 +15,10 @@ export default function Highlights() {
         <div className="section-head">
           <span className="eyebrow">01 / Work</span>
           <div>
-            <h2 className="section-title">Selected work that shows how I think and build.</h2>
+            <h2 className="section-title">Selected work that shows how I think, design, and build.</h2>
             <p className="section-copy">
-              Three strongest pieces of work, selected to emphasize completed projects,
-              strong visual thinking, and a clear balance between 3D craft and front-end execution.
+              A focused selection of the strongest projects, chosen to highlight visual thinking,
+              technical organization, and a balanced mix of 3D craft and front-end execution.
             </p>
           </div>
         </div>

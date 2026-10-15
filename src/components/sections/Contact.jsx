@@ -32,7 +32,7 @@ export default function Contact() {
       setMessage("");
       setSent(true);
     } catch {
-      setError("Your message could not be sent. Please try again.");
+      setError("The message could not be sent. Please try again or contact me via LinkedIn.");
     } finally {
       setSending(false);
     }
@@ -44,10 +44,10 @@ export default function Contact() {
         <div className="section-head">
           <span className="eyebrow">07 / Contact</span>
           <div>
-            <h2 className="section-title">Let's build something meaningful.</h2>
+            <h2 className="section-title">Let’s build something meaningful.</h2>
             <p className="section-copy">
-              For freelance work, collaborations, internships, or conversations about
-              3D, front-end development, and creative digital products.
+              I’m open to internship opportunities, front-end work, design-to-code collaborations,
+              and conversations around 3D, UX, and digital product thinking.
             </p>
           </div>
         </div>

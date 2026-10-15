@@ -8,11 +8,11 @@ export default function Hero() {
           3D <span>×</span> CODE
         </h1>
         <p className="hero__lead">
-          Developer and 3D artist focused on <strong>visual design, front-end</strong>,
-          and digital product thinking.
+          Developer and 3D artist focused on <strong>visual design, interface thinking</strong>,
+          and digital products built with clarity and intent.
         </p>
         <div className="hero__availability">
-          Available for internship opportunities · São Paulo
+          Available for internships and front-end opportunities · São Paulo
         </div>
         <div className="hero__actions">
           <a className="button button--solid" href="#work">
@@ -37,7 +37,7 @@ export default function Hero() {
         </div>
         <div className="hero__bottom">
           <span>LUCA TONIOLO</span>
-          <span>3D / PROGRAMMING</span>
+          <span>3D / FRONT-END / UX THINKING</span>
         </div>
       </div>
     </section>
