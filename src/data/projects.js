@@ -26,7 +26,7 @@ export const projects = [
     status: "Complete",
     tools: ["Blender"],
     description:
-      "A 3D study of the ATEM Mini Pro focused on product visualization, form accuracy, and presentation of a compact hardware object.",
+      "A product-focused 3D study of the ATEM Mini Pro, built to communicate industrial form, proportion, and presentation with clarity and restraint.",
     image: atemImage,
     imageAlt: "3D render of an ATEM Mini Pro video switcher",
     visual: "visual--product",
@@ -34,17 +34,17 @@ export const projects = [
       {
         title: "Project objective",
         description:
-          "Study a real device and transform its physical features into a clean 3D presentation that highlights design, proportions, and industrial character.",
+          "Translate a real hardware object into a precise 3D presentation, emphasizing silhouette, material behavior, and the visual language of a compact professional device.",
       },
       {
         title: "Modeling and production",
         description:
-          "The model focuses on accurate silhouette, material behavior, and product presentation. The goal was to communicate the object clearly without unnecessary visual noise.",
+          "The project focuses on clean geometry, controlled lighting, and disciplined product presentation. The goal was to communicate the object clearly without visual excess, highlighting the design language rather than decoration.",
       },
       {
         title: "What this project shows",
         description:
-          "This piece demonstrates control over Blender, product-based 3D thinking, and the ability to present objects in a polished commercial manner.",
+          "This work demonstrates strong Blender control, a product-design mindset, and the ability to present industrial objects in a polished, commercially convincing way.",
       },
     ],
   },
@@ -57,7 +57,7 @@ export const projects = [
     status: "Complete",
     tools: ["Blender"],
     description:
-      "A 3D handheld console concept presented as a product render, with emphasis on material, volume, and industrial form.",
+      "A concept-driven handheld console render that explores industrial identity, material readability, and the balance between function and visual character.",
     image: handheldImage,
     imageAlt: "Yellow handheld console 3D render",
     visual: "visual--product",
@@ -65,17 +65,17 @@ export const projects = [
       {
         title: "Project objective",
         description:
-          "Explore a compact device concept and present it as a believable product render, emphasizing shape language and physical design cues.",
+          "Develop a believable compact device concept and present it as a premium product render, with emphasis on silhouette, surface clarity, and spatial identity.",
       },
       {
         title: "Visual direction",
         description:
-          "The composition was built around strong contrast, defined silhouette, and material readability so the form feels intentional and premium.",
+          "The composition uses contrast, material separation, and a strong silhouette to communicate a confident product language. The final image aims to feel tactile, intentional, and commercially polished.",
       },
       {
         title: "What this project shows",
         description:
-          "This render reflects the ability to translate an idea into a visually coherent product concept using Blender, lighting, and presentation choices.",
+          "This render demonstrates the ability to transform an idea into a coherent 3D product concept using Blender, lighting, and thoughtful presentation choices.",
       },
     ],
   },
@@ -160,7 +160,7 @@ export const projects = [
     status: "Complete",
     tools: ["HTML", "JavaScript", "CSS"],
     description:
-      "A completed front-end project for a fictional ice cream shop, built as a responsive website with a clear visual identity and product-oriented layout. It is a finished front-end presentation, not a full e-commerce platform or a backend-connected system.",
+      "A completed front-end concept for a fictional ice cream brand, designed as a responsive landing experience with a clear commercial identity and a strong product-first presentation.",
     image: iceCreamImage,
     imageAlt: "Ice Cream Panda website screenshot",
     visual: "visual--code",
@@ -168,27 +168,27 @@ export const projects = [
       {
         title: "Project objective",
         description:
-          "Create a responsive landing experience for a fictional ice cream brand with strong visual identity, accessible information hierarchy, and easier decision-making for the customer.",
+          "Create a responsive storefront-style landing page with a memorable visual identity, strong hierarchy, and a smooth user journey for a fictional brand in the food and lifestyle space.",
       },
       {
         title: "What I designed and built",
         description:
-          "A structured front-end page focused on product presentation, clear sections, and simple browsing flow. The experience was designed to feel light, friendly, and mobile-friendly without overloading the user with unnecessary options.",
+          "The project focuses on product storytelling, accessible content structure, and a clean front-end layout that feels light, friendly, and easy to explore on mobile and desktop.",
       },
       {
         title: "Implementation choices",
         description:
-          "The project uses semantic HTML, simple JavaScript interactions, and CSS styling to create a balanced layout with readability, spacing, and consistent visual rhythm.",
+          "The interface is built with semantic HTML, lightweight JavaScript interactions, and CSS-driven styling to deliver a polished visual rhythm, readable content, and consistent layout behavior.",
       },
       {
         title: "Academic context",
         description:
-          "This project sits within the broader academic practice developed in the ETEC Front-End and Web Programming work, where the focus is on applying HTML, CSS, JavaScript, GitHub collaboration, and structured project organization in real coursework.",
+          "This project belongs to the academic work developed during ETEC front-end and web programming activities, where the focus was on applying HTML, CSS, JavaScript, GitHub collaboration, and structured project organization in a realistic coursework context.",
       },
       {
         title: "Current scope",
         description:
-          "This is a complete front-end concept, but it does not include a real checkout flow, user authentication, or backend integration. The value here is the interface quality, responsive structure, and front-end thinking applied to a commercial brand concept.",
+          "This is a complete front-end concept and not a full e-commerce system. It demonstrates interface quality, responsive thinking, and the ability to translate a commercial idea into a clean, consistent web experience.",
       },
     ],
   },
