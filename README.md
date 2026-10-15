@@ -1,6 +1,7 @@
 # Luca Toniolo — 3D × Code Portfolio
 
-A React/Vite portfolio presenting selected 3D and programming projects.
+This is my current and only portfolio website, built with React and Vite to present my
+selected 3D and programming projects.
 
 ![Portfolio preview](./public/og-image.jpg)
 
