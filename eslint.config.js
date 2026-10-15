@@ -9,6 +9,10 @@ export default defineConfig([
   {
     files: ["**/*.{js,jsx}"],
     extends: [js.configs.recommended, reactHooks.configs.flat.recommended, reactRefresh.configs.vite],
-    languageOptions: { ecmaVersion: 2022, globals: globals.browser, parserOptions: { ecmaFeatures: { jsx: true } } }
+    languageOptions: {
+      ecmaVersion: 2022,
+      globals: { ...globals.browser, ...globals.node, ...globals.vitest },
+      parserOptions: { ecmaFeatures: { jsx: true } }
+    }
   }
 ]);
