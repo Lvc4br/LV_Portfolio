@@ -1,7 +1,29 @@
 import atemImage from "../assets/atem-mini-pro/atem_mini_pro.webp";
-import handheldImage from "../assets/handheld-console/Front.webp";
+import atemAngleTwo from "../assets/atem-mini-pro/angle-02.webp";
+import atemAngleThree from "../assets/atem-mini-pro/angle-03.webp";
+import atemTopView from "../assets/atem-mini-pro/top-view.webp";
+import atemRearPorts from "../assets/atem-mini-pro/rear-ports.webp";
+import handheldImage from "../assets/playdate-console/Front.webp";
+import handheldBack from "../assets/playdate-console/back.webp";
+import handheldCenter from "../assets/playdate-console/center.webp";
+import handheldLeft from "../assets/playdate-console/left.webp";
+import handheldUp from "../assets/playdate-console/up.webp";
 import iceCreamImage from "../assets/ice-cream-panda/pw_project (1).webp";
 import iceCreamModal from "../assets/ice-cream-panda/Modal.webp";
+import cocaColaDark from "../assets/coca-cola/bottle-render-dark.webp";
+import cocaColaWarm from "../assets/coca-cola/bottle-render-warm.webp";
+import planetMaterial from "../assets/planet/material-study.webp";
+import planetCloseup from "../assets/planet/planet-closeup.webp";
+import planetOrbitClose from "../assets/planet/planet-orbit-close.webp";
+import planetMoonWide from "../assets/planet/planet-and-moon-wide.webp";
+import planetMoonTall from "../assets/planet/planet-and-moon-tall.webp";
+import planetarySystem from "../assets/planet/planetary-system.webp";
+import planetMoonDark from "../assets/planet/planet-and-moon-dark.webp";
+import planetWireframe from "../assets/planet/wireframe-study.webp";
+import laserCube from "../assets/laser/laser-cube-study.webp";
+import laserImpact from "../assets/laser/laser-impact-closeup.webp";
+import laserForms from "../assets/laser/laser-multiple-forms.webp";
+import laserBeam from "../assets/laser/laser-beam-detail.webp";
 
 import colosseumPlan from "../assets/colosseum/01-plano-geral.webp";
 import colosseumFacade from "../assets/colosseum/02-elevacao-fachada.webp";
@@ -47,6 +69,13 @@ export const projects = [
       "A product visualization study focused on industrial form, material clarity, and disciplined composition for a real hardware object.",
     image: atemImage,
     imageAlt: "3D render of an ATEM Mini Pro video switcher",
+    gallery: [
+      { src: atemImage, alt: "Three-quarter render of an ATEM Mini Pro video switcher" },
+      { src: atemAngleTwo, alt: "Alternative angled render of the ATEM Mini Pro" },
+      { src: atemAngleThree, alt: "Low-angle render of the ATEM Mini Pro" },
+      { src: atemTopView, alt: "Top view of the ATEM Mini Pro controls" },
+      { src: atemRearPorts, alt: "Rear ports and connections on the ATEM Mini Pro" },
+    ],
     visual: "visual--product",
     caseStudy: [
       {
@@ -69,21 +98,28 @@ export const projects = [
   {
     id: "handheld-console",
     number: "02",
-    title: "Handheld",
+    title: "Playdate Console",
     category: "3D",
     area: "3d",
     status: "Complete",
     tools: ["Blender"],
     description:
-      "A concept-driven handheld console render that explores product identity, tactile storytelling, and strong visual character in a compact form.",
+      "A compact crank-powered handheld console concept, presented through a set of product renders that highlight its yellow enclosure, controls, screen, and distinctive silhouette.",
     image: handheldImage,
-    imageAlt: "Yellow handheld console 3D render",
+    imageAlt: "Front view of a yellow crank-powered handheld console",
+    gallery: [
+      { src: handheldImage, alt: "Front view of the yellow handheld console" },
+      { src: handheldBack, alt: "Back panel of the handheld console" },
+      { src: handheldCenter, alt: "Three-quarter view of the handheld console" },
+      { src: handheldLeft, alt: "Side view of the handheld console" },
+      { src: handheldUp, alt: "Front detail of the handheld console screen and controls" },
+    ],
     visual: "visual--product",
     caseStudy: [
       {
         title: "Project objective",
         description:
-          "Develop a believable compact device concept and present it as a premium product render, with emphasis on silhouette, surface clarity, and spatial identity.",
+          "Develop a compact crank-powered handheld console concept and present it through clear product views that communicate its proportions, controls, and screen.",
       },
       {
         title: "Visual direction",
@@ -202,8 +238,106 @@ export const projects = [
     ],
   },
   {
-    id: "ice-cream-panda",
+    id: "coca-cola-bottle",
     number: "05",
+    title: "Coca-Cola Bottle",
+    category: "3D",
+    area: "3d",
+    status: "Complete",
+    tools: ["Blender"],
+    description:
+      "A product-rendering study of a classic glass soda bottle, using reflections, condensation, and controlled studio lighting to emphasize the material and silhouette.",
+    image: cocaColaDark,
+    imageAlt: "Glass Coca-Cola bottle render against a dark studio background",
+    gallery: [
+      { src: cocaColaDark, alt: "Glass bottle with condensation in a dark studio scene" },
+      { src: cocaColaWarm, alt: "Warm-lit glass bottle render with reflective droplets" },
+    ],
+    visual: "visual--product",
+    caseStudy: [
+      {
+        title: "Project objective",
+        description:
+          "Create a focused product visualization that communicates the shape and glass material of a bottled soft drink through a restrained studio composition.",
+      },
+      {
+        title: "Visual direction",
+        description:
+          "Dark backgrounds, controlled highlights, and condensation details bring attention to the bottle surface while creating two distinct lighting moods.",
+      },
+    ],
+  },
+  {
+    id: "planetary-scene",
+    number: "06",
+    title: "Planetary Scene",
+    category: "3D",
+    area: "3d",
+    status: "Complete",
+    tools: ["Blender"],
+    description:
+      "A collection of planetary scene renders exploring scale, atmospheric lighting, surface detail, and composition, accompanied by a wireframe study of the scene.",
+    image: planetarySystem,
+    imageAlt: "Planet and smaller moon composed against a dark space background",
+    gallery: [
+      { src: planetarySystem, alt: "Planetary system composition with a large planet and smaller moon" },
+      { src: planetMoonWide, alt: "Wide view of a planet and its moon in space" },
+      { src: planetMoonTall, alt: "Tall composition of a planet and moon" },
+      { src: planetMoonDark, alt: "Dark planetary composition with a backlit moon" },
+      { src: planetCloseup, alt: "Close view of a textured planet in shadow" },
+      { src: planetOrbitClose, alt: "Close planetary view with a nearby orbiting body" },
+      { src: planetMaterial, alt: "Abstract gray planetary material and sphere study" },
+      { src: planetWireframe, alt: "Orange wireframe sphere study against a black background" },
+    ],
+    visual: "visual--colosseum",
+    caseStudy: [
+      {
+        title: "Project objective",
+        description:
+          "Explore planetary forms and their relationship to light, scale, and negative space across a series of scene compositions.",
+      },
+      {
+        title: "Process and presentation",
+        description:
+          "The collection brings together finished space scenes, close-up studies, a material exploration, and a wireframe view to show both the rendered result and the underlying form.",
+      },
+    ],
+  },
+  {
+    id: "laser-study",
+    number: "07",
+    title: "Laser Interaction Study",
+    category: "3D",
+    area: "3d",
+    status: "Complete",
+    tools: ["Blender"],
+    description:
+      "A set of studio renders studying a bright laser beam as it meets and passes through simple geometric forms, with emphasis on glow, sparks, and dramatic lighting.",
+    image: laserCube,
+    imageAlt: "Glowing laser beam striking a geometric block in a studio scene",
+    gallery: [
+      { src: laserCube, alt: "Laser beam striking a geometric block" },
+      { src: laserImpact, alt: "Close-up of sparks at the laser impact point" },
+      { src: laserForms, alt: "Laser beam passing through multiple geometric forms" },
+      { src: laserBeam, alt: "Close detail of a bright laser beam" },
+    ],
+    visual: "visual--product",
+    caseStudy: [
+      {
+        title: "Project objective",
+        description:
+          "Study how a concentrated light source can become the focal point of a minimal scene through glow, sparks, and interaction with geometric surfaces.",
+      },
+      {
+        title: "Visual direction",
+        description:
+          "The images move between a wider composition and close details, balancing the bright beam against restrained studio backgrounds and simple forms.",
+      },
+    ],
+  },
+  {
+    id: "ice-cream-panda",
+    number: "08",
     title: "Ice Cream Panda",
     category: "Code",
     area: "code",
@@ -248,7 +382,7 @@ export const projects = [
   },
   {
     id: "pizzeria-site",
-    number: "06",
+    number: "09",
     title: "Pizzeria Website",
     category: "Web / UX/UI",
     area: "code",
@@ -284,7 +418,7 @@ export const projects = [
   },
   {
     id: "tcc-etec",
-    number: "07",
+    number: "10",
     title: "TCC Etec",
     category: "Code",
     area: "code",

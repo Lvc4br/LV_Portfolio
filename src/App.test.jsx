@@ -25,6 +25,41 @@ describe("portfolio navigation", () => {
     expect(screen.getByRole("heading", { name: /all programming work\./i })).toBeInTheDocument();
   });
 
+  it("renders the ATEM Mini Pro and Playdate image galleries", () => {
+    const { unmount } = render(
+      <MemoryRouter initialEntries={["/work/3d/atem-mini-pro"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getAllByRole("button", { name: /show image/i })).toHaveLength(5);
+    unmount();
+
+    render(
+      <MemoryRouter initialEntries={["/work/3d/handheld-console"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: /playdate console/i })).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /show image/i })).toHaveLength(5);
+  });
+
+  it.each([
+    ["/work/3d/coca-cola-bottle", "Coca-Cola Bottle", 2],
+    ["/work/3d/planetary-scene", "Planetary Scene", 8],
+    ["/work/3d/laser-study", "Laser Interaction Study", 4],
+  ])("renders the %s project gallery", (path, title, imageCount) => {
+    render(
+      <MemoryRouter initialEntries={[path]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: title })).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /show image/i })).toHaveLength(imageCount);
+  });
+
   it("renders the Colosseum gallery and allows selecting an image", async () => {
     const user = userEvent.setup();
     render(

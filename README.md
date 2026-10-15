@@ -22,7 +22,8 @@ keyboard-navigable viewer. The project list and metadata are maintained in
 
 ### Projects currently featured
 
-- **3D:** ATEM Mini Pro and Handheld (complete); Colosseum and Jewelry (in progress).
+- **3D:** ATEM Mini Pro, Playdate Console, Coca-Cola Bottle, Planetary Scene, and
+  Laser Interaction Study (complete); Colosseum and Jewelry (in progress).
 - **Programming:** Ice Cream Panda (complete); a responsive pizzeria website
   project (name undecided) in progress; TCC Etec (planned graduation project).
   The pizzeria project brings UX/UI design and implementation together: its
