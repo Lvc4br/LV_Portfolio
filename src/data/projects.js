@@ -2,23 +2,24 @@ import atemImage from "../assets/atem_mini_pro.webp";
 import handheldImage from "../assets/Front.webp";
 import iceCreamImage from "../assets/pw_project (1).webp";
 
-import colosseumPlan from "../assets/colosseum/01-plano-geral.png";
-import colosseumFacade from "../assets/colosseum/02-elevacao-fachada.png";
-import colosseumSection from "../assets/colosseum/03-corte-geral.png";
-import colosseumDetail from "../assets/colosseum/04-elevacao-corte-detalhe.png";
-import colosseumGround from "../assets/colosseum/05-nivel-solo.png";
-import colosseumGroundFloor from "../assets/colosseum/06-terreo.png";
-import colosseumLevelOne from "../assets/colosseum/07-chegada-1-andar.png";
-import colosseumFirstFloor from "../assets/colosseum/08-primeiro-andar.png";
-import colosseumSecond from "../assets/colosseum/10-segundo-andar.png";
-import colosseumThird from "../assets/colosseum/11-terceiro-andar.png";
-import colosseumAxonometric from "../assets/colosseum/12-conjunto-axonometrico.png";
+import colosseumPlan from "../assets/colosseum/01-plano-geral.webp";
+import colosseumFacade from "../assets/colosseum/02-elevacao-fachada.webp";
+import colosseumSection from "../assets/colosseum/03-corte-geral.webp";
+import colosseumDetail from "../assets/colosseum/04-elevacao-corte-detalhe.webp";
+import colosseumGround from "../assets/colosseum/05-nivel-solo.webp";
+import colosseumGroundFloor from "../assets/colosseum/06-terreo.webp";
+import colosseumLevelOne from "../assets/colosseum/07-chegada-1-andar.webp";
+import colosseumFirstFloor from "../assets/colosseum/08-primeiro-andar.webp";
+import colosseumLevelTwo from "../assets/colosseum/09-chegada-2-andar.webp";
+import colosseumSecond from "../assets/colosseum/10-segundo-andar.webp";
+import colosseumThird from "../assets/colosseum/11-terceiro-andar.webp";
+import colosseumAxonometric from "../assets/colosseum/12-conjunto-axonometrico.webp";
 
-import jewelryBoard from "../assets/jewelry/constelacao-floral-board.png";
-import jewelryReference from "../assets/jewelry/design-reference.png";
-import jewelryMoodboardOne from "../assets/jewelry/moodboard-1.jpeg";
-import jewelryMoodboardTwo from "../assets/jewelry/moodboard-2.jpeg";
-import jewelryMoodboardThree from "../assets/jewelry/moodboard-3.jpeg";
+import jewelryBoard from "../assets/jewelry/constelacao-floral-board.webp";
+import jewelryReference from "../assets/jewelry/design-reference.webp";
+import jewelryMoodboardOne from "../assets/jewelry/moodboard-1.webp";
+import jewelryMoodboardTwo from "../assets/jewelry/moodboard-2.webp";
+import jewelryMoodboardThree from "../assets/jewelry/moodboard-3.webp";
 
 export const projectStatusOrder = {
   Complete: 1,
@@ -117,6 +118,7 @@ export const projects = [
       { src: colosseumGroundFloor, alt: "Ground floor plan and circulation analysis" },
       { src: colosseumLevelOne, alt: "First access level analysis" },
       { src: colosseumFirstFloor, alt: "First floor reconstruction study" },
+      { src: colosseumLevelTwo, alt: "Second-floor access and arrival study" },
       { src: colosseumSecond, alt: "Second floor architectural study" },
       { src: colosseumThird, alt: "Third floor reconstruction study" },
       { src: colosseumAxonometric, alt: "Axonometric view of the Colosseum ensemble" },

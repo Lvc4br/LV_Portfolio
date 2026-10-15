@@ -25,6 +25,28 @@ describe("portfolio navigation", () => {
     expect(screen.getByRole("heading", { name: /all programming work\./i })).toBeInTheDocument();
   });
 
+  it("renders all twelve Colosseum reference sheets", () => {
+    render(
+      <MemoryRouter initialEntries={["/work/3d/colosseum"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getAllByRole("img")).toHaveLength(12);
+    expect(screen.getByAltText(/second-floor access and arrival study/i)).toBeInTheDocument();
+  });
+
+  it("renders the jewelry concept board and supporting references", () => {
+    render(
+      <MemoryRouter initialEntries={["/work/3d/jewelry"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getAllByRole("img")).toHaveLength(5);
+    expect(screen.getByAltText(/constelação floral concept board/i)).toBeInTheDocument();
+  });
+
   it("renders a 404 page for invalid routes", () => {
     render(
       <MemoryRouter initialEntries={["/rota-inexistente"]}>
