@@ -81,17 +81,17 @@ export const projects = [
       {
         title: "Project objective",
         description:
-          "Translate a real hardware object into a precise 3D presentation, emphasizing silhouette, material behavior, and the visual language of a compact professional device.",
+          "Re-create the ATEM Mini Pro as a clear product visualization. The portfolio documents the exterior form and visible controls and connections; it does not claim manufacturing tolerances or a production-ready CAD model.",
       },
       {
-        title: "Modeling and production",
+        title: "3D process and decisions",
         description:
-          "The project focuses on clean geometry, controlled lighting, and disciplined product presentation. The goal was to communicate the object clearly without visual excess, highlighting the design language rather than decoration.",
+          "The model is presented with a restrained dark housing, contrasting buttons, and soft studio lighting. Camera choices balance a three-quarter product view with direct evidence of the top controls and rear I/O, so the silhouette and functional layout remain legible.",
       },
       {
-        title: "What this project shows",
+        title: "Verifiable result",
         description:
-          "This work demonstrates strong Blender control, a product-design mindset, and the ability to present industrial objects in a polished, commercially convincing way.",
+          "The gallery contains five views: the main product angle, two alternate angles, a top view of the controls, and a rear view of the connections. Together they document both the overall form and details hidden from a single hero render.",
       },
     ],
   },
@@ -395,24 +395,24 @@ export const projects = [
     visual: "visual--code",
     caseStudy: [
       {
-        title: "Goal",
+        title: "Goal and user flow",
         description:
-          "Help customers choose a pizza and proceed with fewer steps and less uncertainty, whether they want dine-in, delivery, or pickup.",
+          "Help customers discover a pizza and understand how to order, while keeping dine-in reservations separate from delivery and pickup. The clickable prototype covers Home, Menu, Product, My Order, About, and Locations.",
       },
       {
-        title: "UX decision",
+        title: "Wireframes and responsive decisions",
         description:
-          "Keep dine-in locations and reservations on a separate path from the order flow, so table bookings are not confused with delivery or pickup.",
+          "Each of the six pages has a desktop frame at 1440 px and a mobile frame at 390 px, for 12 wireframes total. The mobile mode uses a compact menu and sticky order action; the menu keeps filters touch-scrollable, while product and order screens separate choices and totals into readable steps.",
       },
       {
-        title: "Current deliverables",
+        title: "Technical and scope decisions",
         description:
-          "A project brief, information architecture, six page designs in desktop and mobile sizes (12 wireframes total), and a reusable Figma component library.",
+          "The wireframes use shared layout patterns and a reusable component library to make page structure consistent. Prices, addresses, contact information, and order actions are explicitly placeholders: this is an interactive low-fidelity UX prototype, not a connected ordering system.",
       },
       {
-        title: "Current scope and next step",
+        title: "Verifiable deliverables and next step",
         description:
-          "This is the low-fidelity stage of an end-to-end design-to-code project, not a working ordering service. The next phase is to define the visual identity, implement a responsive front-end, and then connect the flow to a database-backed system.",
+          "The preview lets visitors switch among all six page flows and compare desktop with mobile layouts. The next measurable step is to replace placeholders with validated brand and business content, then implement and test the responsive front end before integrating real order data.",
       },
     ],
   },

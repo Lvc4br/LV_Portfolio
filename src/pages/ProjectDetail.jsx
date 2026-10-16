@@ -209,7 +209,7 @@ export default function ProjectDetail({ area }) {
           )}
 
           {galleryImages.length > 0 && (
-            <ProjectGallery title={project.title} images={galleryImages} />
+            <ProjectGallery key={project.id} title={project.title} images={galleryImages} />
           )}
 
           {project.realityCheck && (

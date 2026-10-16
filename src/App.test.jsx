@@ -75,6 +75,23 @@ describe("portfolio navigation", () => {
     expect(screen.getByRole("button", { name: /enlarge image: main elevation/i })).toBeInTheDocument();
   });
 
+  it("resets the selected image when navigating to another project", async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter initialEntries={["/work/3d/atem-mini-pro"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    await user.click(screen.getByRole("button", { name: /show image 3:/i }));
+    expect(screen.getByRole("button", { name: /enlarge image: low-angle render/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("link", { name: /colosseum/i }));
+
+    expect(screen.getByRole("button", { name: /enlarge image: general plan by levels/i })).toBeInTheDocument();
+    expect(screen.getByText("1 / 12")).toBeInTheDocument();
+  });
+
   it("opens the image viewer and navigates with the keyboard", async () => {
     const user = userEvent.setup();
     render(
@@ -154,5 +171,69 @@ describe("contact form", () => {
     await user.click(screen.getByRole("button", { name: /send message/i }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent(/could not be sent/i);
+  });
+
+  it("shows an error when the server responds with a non-success status", async () => {
+    const user = userEvent.setup();
+    global.fetch = vi.fn().mockResolvedValue({ ok: false, status: 503 });
+    render(<Contact />);
+
+    await user.type(screen.getByLabelText(/name/i), "Luca");
+    await user.type(screen.getByLabelText(/email/i), "luca@example.com");
+    await user.type(screen.getByLabelText(/message/i), "Please contact me.");
+    await user.click(screen.getByRole("button", { name: /send message/i }));
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(/could not be sent/i);
+  });
+
+  it("disables submission while the request is pending", async () => {
+    const user = userEvent.setup();
+    let resolveRequest;
+    global.fetch = vi.fn(() => new Promise((resolve) => { resolveRequest = resolve; }));
+    render(<Contact />);
+
+    await user.type(screen.getByLabelText(/name/i), "Luca");
+    await user.type(screen.getByLabelText(/email/i), "luca@example.com");
+    await user.type(screen.getByLabelText(/message/i), "Please contact me.");
+    await user.click(screen.getByRole("button", { name: /send message/i }));
+
+    expect(screen.getByRole("button", { name: /sending/i })).toBeDisabled();
+    resolveRequest({ ok: true });
+    expect(await screen.findByRole("status")).toHaveTextContent(/sent successfully/i);
+    expect(screen.getByRole("button", { name: /send message/i })).toBeEnabled();
+  });
+
+  it("uses native required and email validation before sending", async () => {
+    const user = userEvent.setup();
+    global.fetch = vi.fn();
+    render(<Contact />);
+    const form = screen.getByRole("button", { name: /send message/i }).closest("form");
+
+    await user.click(screen.getByRole("button", { name: /send message/i }));
+    expect(form).not.toBeValid();
+    expect(global.fetch).not.toHaveBeenCalled();
+
+    await user.type(screen.getByLabelText(/name/i), "Luca");
+    await user.type(screen.getByLabelText(/email/i), "not-an-email");
+    await user.type(screen.getByLabelText(/message/i), "Hello");
+    expect(form).not.toBeValid();
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it("clears the form fields after a successful submission", async () => {
+    const user = userEvent.setup();
+    global.fetch = vi.fn().mockResolvedValue({ ok: true });
+    render(<Contact />);
+
+    await user.type(screen.getByLabelText(/name/i), "Luca");
+    await user.type(screen.getByLabelText(/email/i), "luca@example.com");
+    await user.type(screen.getByLabelText(/message/i), "Please contact me.");
+    await user.click(screen.getByRole("button", { name: /send message/i }));
+
+    expect(await screen.findByRole("status")).toBeInTheDocument();
+    expect(screen.getByLabelText(/name/i)).toHaveValue("");
+    expect(screen.getByLabelText(/email/i)).toHaveValue("");
+    expect(screen.getByLabelText(/message/i)).toHaveValue("");
+    expect(screen.getByText("0 / 280")).toBeInTheDocument();
   });
 });
