@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./LoadingScreen.css";
+import "../../styles/components/LoadingScreen.css";
 
 export default function LoadingScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);
