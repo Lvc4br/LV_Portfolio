@@ -1,0 +1,9 @@
+.not-found__content {
+  display: grid;
+  gap: 24px;
+  max-width: 640px;
+}
+
+.not-found .button {
+  width: max-content;
+}
