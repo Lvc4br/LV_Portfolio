@@ -42,6 +42,7 @@ import jewelryBoard from "../assets/jewelry/constelacao-floral-board.webp";
 import jewelryMoodboardOne from "../assets/jewelry/moodboard-1.webp";
 import jewelryMoodboardTwo from "../assets/jewelry/moodboard-2.webp";
 import jewelryMoodboardThree from "../assets/jewelry/moodboard-3.webp";
+import javaCover from "../assets/java/etec-java-cover.jpg";
 
 export const projectStatusOrder = {
   Complete: 1,
@@ -437,6 +438,9 @@ export const projects = [
     area: "code",
     status: "Archive",
     tools: ["Java", "Scanner", "Conditionals"],
+    image: javaCover,
+    imageAlt: "Close-up photograph of syntax-highlighted code on a computer screen.",
+    galleryLabel: "Cover image",
     description:
       "An academic archive of Java console exercises from the ETEC technical course, covering input and output, arithmetic, and decision-making. Lists D and F are challenges solved using only if statements.",
     repositoryUrl:

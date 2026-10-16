@@ -36,6 +36,7 @@ describe("portfolio navigation", () => {
     await user.click(screen.getByRole("link", { name: /java fundamentals \(etec\)/i }));
 
     expect(screen.getByRole("heading", { name: /java fundamentals \(etec\)/i })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /syntax-highlighted code on a computer screen/i })).toBeInTheDocument();
     expect(screen.getByText("If-only challenges").parentElement).toHaveTextContent(
       /lists d and f are challenges solved using only if statements/i
     );
