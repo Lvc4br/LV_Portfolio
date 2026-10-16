@@ -47,6 +47,7 @@ export const projectStatusOrder = {
   Complete: 1,
   "In progress": 2,
   Planned: 3,
+  Archive: 4,
 };
 
 export function sortProjects(projectList) {
@@ -425,6 +426,44 @@ export const projects = [
         title: "Verifiable deliverables and next step",
         description:
           "The preview lets visitors switch among all six page flows and compare desktop with mobile layouts. The next measurable step is to replace placeholders with validated brand and business content, then implement and test the responsive front end before integrating real order data.",
+      },
+    ],
+  },
+  {
+    id: "java-fundamentals-etec",
+    number: "11",
+    title: "Java Fundamentals (ETEC)",
+    category: "Java / Console",
+    area: "code",
+    status: "Archive",
+    tools: ["Java", "Scanner", "Conditionals"],
+    description:
+      "An academic archive of Java console exercises from the ETEC technical course, covering input and output, arithmetic, and decision-making. Lists D and F are challenges solved using only if statements.",
+    repositoryUrl:
+      "https://github.com/Lvc4br/ETEC-Desenvolvimento-de-Sistemas",
+    repositoryLabel: "View Java repository",
+    visualLabel: "JAVA / FUNDAMENTALS",
+    visual: "visual--code",
+    caseStudy: [
+      {
+        title: "Repository scope",
+        description:
+          "This repository collects individual console exercises grouped by assignment lists. It is an academic learning archive rather than a single standalone application.",
+      },
+      {
+        title: "Programming foundations",
+        description:
+          "The exercises practice console input with Scanner, variables, arithmetic calculations, formatted output, and basic Java program structure.",
+      },
+      {
+        title: "If-only challenges",
+        description:
+          "Lists D and F are challenges solved using only if statements, practicing decisions based on comparisons and input values.",
+      },
+      {
+        title: "Learning progression",
+        description:
+          "Together, the exercises document progress in procedural Java and applying programming logic to small, well-defined problems during the ETEC course.",
       },
     ],
   },

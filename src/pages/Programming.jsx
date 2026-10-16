@@ -13,9 +13,9 @@ export default function Programming() {
             <div>
               <h1 className="section-title">All programming work.</h1>
               <p className="section-copy">
-                Completed projects are shown first, followed by ongoing work and
-                future concepts. This makes the portfolio clearer for recruiters
-                and keeps the project status honest.
+                Completed projects come first, followed by ongoing work, future
+                concepts, and archived learning material. This keeps academic
+                exercises distinct from standalone applications.
               </p>
             </div>
           </div>

@@ -233,7 +233,7 @@ export default function ProjectDetail({ area }) {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  View source &amp; team credits ↗
+                  {project.repositoryLabel ?? "View source & team credits"} ↗
                 </a>
               )}
             </div>

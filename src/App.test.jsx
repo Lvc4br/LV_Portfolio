@@ -25,6 +25,26 @@ describe("portfolio navigation", () => {
     expect(screen.getByRole("heading", { name: /all programming work\./i })).toBeInTheDocument();
   });
 
+  it("presents the Java exercises as an archive and identifies the if-only challenges", async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter initialEntries={["/work/code"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    await user.click(screen.getByRole("link", { name: /java fundamentals \(etec\)/i }));
+
+    expect(screen.getByRole("heading", { name: /java fundamentals \(etec\)/i })).toBeInTheDocument();
+    expect(screen.getByText("If-only challenges").parentElement).toHaveTextContent(
+      /lists d and f are challenges solved using only if statements/i
+    );
+    expect(screen.getByRole("link", { name: /view java repository/i })).toHaveAttribute(
+      "href",
+      "https://github.com/Lvc4br/ETEC-Desenvolvimento-de-Sistemas"
+    );
+  });
+
   it("renders the ATEM Mini Pro and Playdate image galleries", () => {
     const { unmount } = render(
       <MemoryRouter initialEntries={["/work/3d/atem-mini-pro"]}>
