@@ -796,18 +796,6 @@ ul {
   border: 1px solid var(--line);
   background: var(--surface);
 }
-.project-detail__image-button {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  min-height: 260px;
-  max-height: calc(75vh - 50px);
-  padding: 16px 16px 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  cursor: zoom-in;
-}
 .project-detail__image img {
   position: static;
   width: 100%;
@@ -838,8 +826,7 @@ ul {
   align-items: center;
   gap: 12px;
 }
-.project-detail__gallery-controls button,
-.project-detail__viewer > button {
+.project-detail__gallery-controls button {
   display: grid;
   place-items: center;
   width: 38px;
@@ -878,48 +865,6 @@ ul {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.project-detail__viewer {
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  justify-items: center;
-  gap: 24px;
-  padding: 72px 32px 32px;
-  background: rgb(0 0 0 / 92%);
-}
-.project-detail__viewer figure {
-  display: grid;
-  justify-items: center;
-  gap: 14px;
-  width: min(100%, 1200px);
-  height: 100%;
-  margin: 0;
-}
-.project-detail__viewer figure img {
-  width: 100%;
-  height: calc(100% - 36px);
-  object-fit: contain;
-}
-.project-detail__viewer figcaption {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  width: 100%;
-  color: var(--text);
-  font: 12px var(--mono);
-}
-.project-detail__viewer figcaption span {
-  color: var(--muted);
-}
-.project-detail__viewer > .project-detail__viewer-close {
-  position: absolute;
-  top: 20px;
-  right: 24px;
-  font-size: 28px;
 }
 .project-detail__facts {
   display: grid;

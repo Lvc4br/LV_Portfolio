@@ -93,7 +93,7 @@ describe("portfolio navigation", () => {
     expect(screen.getByRole("button", { name: /show image 10: second floor architectural study/i }))
       .toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: /show image 2:/i }));
-    expect(screen.getByRole("button", { name: /enlarge image: main elevation/i })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /main elevation/i })).toBeInTheDocument();
   });
 
   it("resets the selected image when navigating to another project", async () => {
@@ -105,15 +105,15 @@ describe("portfolio navigation", () => {
     );
 
     await user.click(screen.getByRole("button", { name: /show image 3:/i }));
-    expect(screen.getByRole("button", { name: /enlarge image: low-angle render/i })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /low-angle render/i })).toBeInTheDocument();
 
     await user.click(screen.getByRole("link", { name: /colosseum/i }));
 
-    expect(screen.getByRole("button", { name: /enlarge image: general plan by levels/i })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /general plan by levels/i })).toBeInTheDocument();
     expect(screen.getByText("1 / 12")).toBeInTheDocument();
   });
 
-  it("opens the image viewer and navigates with the keyboard", async () => {
+  it("does not zoom project images and keeps gallery navigation available", async () => {
     const user = userEvent.setup();
     render(
       <MemoryRouter initialEntries={["/work/3d/colosseum"]}>
@@ -121,15 +121,12 @@ describe("portfolio navigation", () => {
       </MemoryRouter>
     );
 
-    await user.click(screen.getByRole("button", { name: /enlarge image:/i }));
-    expect(screen.getByRole("dialog", { name: /colosseum image viewer/i })).toBeInTheDocument();
-    await user.keyboard("{ArrowRight}");
-    expect(screen.getByRole("dialog").querySelector("img")).toHaveAttribute(
-      "alt",
-      "Main elevation and façade study of the Colosseum"
-    );
-    await user.keyboard("{Escape}");
+    await user.click(screen.getByRole("img", { name: /general plan by levels/i }));
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /enlarge image:/i })).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Next image" }));
+    expect(screen.getByRole("img", { name: /main elevation/i })).toBeInTheDocument();
   });
 
   it("renders the jewelry concept board and supporting references", () => {

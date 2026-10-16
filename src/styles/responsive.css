@@ -204,37 +204,9 @@
     min-height: 180px;
   }
 
-  .project-detail__image-button {
-    min-height: 180px;
-  }
-
   .project-detail__thumbnails {
     grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
     gap: 8px;
-  }
-
-  .project-detail__viewer {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    padding: 72px 16px 24px;
-  }
-
-  .project-detail__viewer figure {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    height: calc(100% - 56px);
-  }
-
-  .project-detail__viewer > .project-detail__viewer-previous {
-    grid-column: 1;
-    grid-row: 2;
-    justify-self: end;
-  }
-
-  .project-detail__viewer > .project-detail__viewer-next {
-    grid-column: 2;
-    grid-row: 2;
-    justify-self: start;
   }
 
   .project-card h3 {
