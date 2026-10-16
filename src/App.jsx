@@ -1,6 +1,8 @@
+import { useCallback, useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/layout/Navbar.jsx";
 import Footer from "./components/layout/Footer.jsx";
+import LoadingScreen from "./components/ui/LoadingScreen.jsx";
 
 import Home from "./pages/Home.jsx";
 import Work from "./pages/Work.jsx";
@@ -10,8 +12,18 @@ import ProjectDetail from "./pages/ProjectDetail.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+
+  const finishLoading = useCallback(() => setLoading(false), []);
+
+  useEffect(() => {
+    document.body.classList.toggle("is-loading", loading);
+    return () => document.body.classList.remove("is-loading");
+  }, [loading]);
+
   return (
     <>
+      {loading && <LoadingScreen onComplete={finishLoading} />}
       <Navbar />
       <main>
         <Routes>
