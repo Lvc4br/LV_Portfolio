@@ -107,6 +107,10 @@ export const projects = [
       "A compact crank-powered handheld console concept, presented through a set of product renders that highlight its yellow enclosure, controls, screen, and distinctive silhouette.",
     image: handheldImage,
     imageAlt: "Front view of a yellow crank-powered handheld console",
+    video: {
+      src: "videos/playdate-360.mp4",
+      title: "Playdate 360-degree render",
+    },
     gallery: [
       { src: handheldImage, alt: "Front view of the yellow handheld console" },
       { src: handheldBack, alt: "Back panel of the handheld console" },
@@ -145,6 +149,9 @@ export const projects = [
       "A historically grounded 3D reconstruction study of the Colosseum, developed from architectural plans and archaeological references to understand its geometry, circulation system, and vertical organization. The project is treated as a research-based modeling process grounded in evidence, not as a final historical restoration.",
     image: colosseumPlan,
     imageAlt: "Colosseum plan-by-level study and architectural reconstruction sheets",
+    galleryLabel: "Historical reference",
+    galleryNotice:
+      "The 3D reconstruction is still in progress. This gallery contains source plates used for research; it does not show the current model.",
     gallery: [
       { src: colosseumPlan, alt: "General plan by levels of the Colosseum" },
       { src: colosseumFacade, alt: "Main elevation and façade study of the Colosseum" },
@@ -165,7 +172,7 @@ export const projects = [
       {
         title: "Project objective",
         description:
-          "Reconstruct the Colosseum digitally through a careful reading of its footprint, seating distribution, circulation paths, and vertical sequencing, using architectural reference plates and historical analysis as the basis for every major decision.",
+          "The goal is to reconstruct the Colosseum digitally through a careful reading of its footprint, seating distribution, circulation paths, and vertical sequencing, using architectural reference plates and historical analysis to guide the work.",
       },
       {
         title: "Method and sources",
@@ -175,17 +182,17 @@ export const projects = [
       {
         title: "Production and interpretation",
         description:
-          "The 3D modeling process converts analytical drawings into a coherent spatial structure. Instead of treating the building as a purely aesthetic object, the model preserves the logic of the original composition and makes explicit which parts are supported by archival evidence and which are interpreted through historical reconstruction.",
+          "The 3D reconstruction is under construction. The architectural plates guide the modeling of the elliptical form, seating rings, circulation, and vertical levels; interpretations will be identified as the model develops.",
       },
       {
         title: "Evidence in the project",
         description:
-          "The work includes several plates covering the plan by levels, facade elevation, cross-section, entry and circulation studies, first and second floor analysis, third floor organization, and the final axonometric assembly. These materials make the research process visible and show the design as a grounded architectural investigation.",
+          "The current gallery contains 12 historical reference plates covering plans, elevations, sections, circulation, and an axonometric view. They document the research stage; the axonometric image is a source reference, not a render of the model. The 3D result will be added as the reconstruction progresses.",
       },
       {
         title: "What this project shows",
         description:
-          "It demonstrates the ability to work with historical geometry, interpret documented evidence, and structure a complex architectural form in 3D with a strong emphasis on method, precision, and technical reasoning.",
+          "At this stage, the published work shows the reference gathering and architectural analysis behind the project. The modeling is still in progress, so the finished 3D structure is not presented yet.",
       },
     ],
   },
@@ -315,6 +322,10 @@ export const projects = [
       "A set of studio renders studying a bright laser beam as it meets and passes through simple geometric forms, with emphasis on glow, sparks, and dramatic lighting.",
     image: laserCube,
     imageAlt: "Glowing laser beam striking a geometric block in a studio scene",
+    video: {
+      src: "videos/laser-study.mp4",
+      title: "Laser animation render",
+    },
     gallery: [
       { src: laserCube, alt: "Laser beam striking a geometric block" },
       { src: laserImpact, alt: "Close-up of sparks at the laser impact point" },
@@ -347,6 +358,7 @@ export const projects = [
       "A responsive storefront-style landing page for a fictional ice cream brand, designed to communicate product identity, visual hierarchy, and a polished commercial experience.",
     image: iceCreamImage,
     imageAlt: "Ice Cream Panda website screenshot",
+    repositoryUrl: "https://github.com/Lvc4br/Projetos-PW-ETEC",
     gallery: [
       { src: iceCreamImage, alt: "Ice Cream Panda website screenshot" },
       { src: iceCreamModal, alt: "Ice Cream Panda project modal design" },
@@ -371,7 +383,7 @@ export const projects = [
       {
         title: "Academic context",
         description:
-          "This project belongs to the academic work developed during ETEC front-end and web programming activities, where the focus was on applying HTML, CSS, JavaScript, GitHub collaboration, and structured project organization in a realistic coursework context.",
+          "This project was developed as part of ETEC web programming coursework with Bianca and Fred. The group repository README identifies the team and links to the project files.",
       },
       {
         title: "Current scope",

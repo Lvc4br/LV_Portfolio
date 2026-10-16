@@ -742,6 +742,20 @@ ul {
 .project-detail__header .section-title {
   margin-top: 18px;
 }
+.project-detail__notice {
+  max-width: 900px;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  border-left: 2px solid var(--accent);
+  background: var(--surface);
+  color: var(--muted);
+  line-height: 1.65;
+}
+.project-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 .project-detail__summary,
 .project-detail__facts p {
   color: var(--muted);
@@ -766,6 +780,19 @@ ul {
   display: grid;
   gap: 16px;
   margin-top: 48px;
+}
+.project-detail__video {
+  display: grid;
+  gap: 14px;
+  margin-top: 40px;
+}
+.project-detail__video video {
+  display: block;
+  width: 100%;
+  max-height: 72vh;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  object-fit: contain;
 }
 .project-detail__image {
   position: relative;
@@ -798,11 +825,19 @@ ul {
   object-fit: contain;
 }
 .project-detail__image figcaption {
+  display: grid;
+  gap: 5px;
   align-self: end;
   width: 100%;
   padding: 10px 16px;
   color: var(--muted);
   font: 11px var(--mono);
+}
+.project-detail__image-label {
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 .project-detail__gallery-controls {
   position: absolute;

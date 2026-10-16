@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { getProjectById, projects } from "../data/projects.js";
 
-function ProjectGallery({ title, images }) {
+function ProjectGallery({ title, images, imageLabel }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const mainImageButtonRef = useRef(null);
@@ -78,7 +78,10 @@ function ProjectGallery({ title, images }) {
             </button>
           </div>
         )}
-        <figcaption>{selectedImage.alt}</figcaption>
+        <figcaption>
+          {imageLabel && <span className="project-detail__image-label">{imageLabel}</span>}
+          <span>{selectedImage.alt}</span>
+        </figcaption>
       </figure>
 
       {images.length > 1 && (
@@ -148,6 +151,27 @@ function ProjectGallery({ title, images }) {
   );
 }
 
+function ProjectVideo({ title, video, poster }) {
+  return (
+    <section className="project-detail__video" aria-label={`${title} video render`}>
+      <h2 className="eyebrow">{video.title}</h2>
+      <video
+        controls
+        playsInline
+        preload="metadata"
+        poster={poster}
+        aria-label={video.title}
+      >
+        <source
+          src={`${import.meta.env.BASE_URL}${video.src}`}
+          type="video/mp4"
+        />
+        Your browser does not support HTML video.
+      </video>
+    </section>
+  );
+}
+
 export default function ProjectDetail({ area }) {
   const { id } = useParams();
   const project = getProjectById(id);
@@ -186,15 +210,33 @@ export default function ProjectDetail({ area }) {
             <p className="project-detail__summary">{project.description}</p>
           </header>
 
-          {project.prototypeFile && (
-            <a
-              className="button button--solid"
-              href={`${import.meta.env.BASE_URL}${project.prototypeFile}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              View interactive wireframes ↗
-            </a>
+          {project.galleryNotice && (
+            <p className="project-detail__notice">{project.galleryNotice}</p>
+          )}
+
+          {(project.prototypeFile || project.repositoryUrl) && (
+            <div className="project-detail__actions">
+              {project.prototypeFile && (
+                <a
+                  className="button button--solid"
+                  href={`${import.meta.env.BASE_URL}${project.prototypeFile}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View interactive wireframes ↗
+                </a>
+              )}
+              {project.repositoryUrl && (
+                <a
+                  className="button"
+                  href={project.repositoryUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View source &amp; team credits ↗
+                </a>
+              )}
+            </div>
           )}
 
           {project.caseStudy && (
@@ -209,7 +251,20 @@ export default function ProjectDetail({ area }) {
           )}
 
           {galleryImages.length > 0 && (
-            <ProjectGallery key={project.id} title={project.title} images={galleryImages} />
+            <ProjectGallery
+              key={project.id}
+              title={project.title}
+              images={galleryImages}
+              imageLabel={project.galleryLabel}
+            />
+          )}
+
+          {project.video && (
+            <ProjectVideo
+              title={project.title}
+              video={project.video}
+              poster={project.image}
+            />
           )}
 
           {project.realityCheck && (
