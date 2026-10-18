@@ -68,6 +68,36 @@ function respectsDoNotTrack() {
   return signals.some((signal) => ["1", "yes"].includes(String(signal).toLowerCase()));
 }
 
+function deviceProfile() {
+  const userAgent = window.navigator?.userAgent?.toLowerCase() ?? "";
+  const platform = window.navigator?.platform?.toLowerCase() ?? "";
+
+  let deviceType = "desktop";
+  if (/ipad|tablet|kindle|silk/.test(userAgent)) deviceType = "tablet";
+  else if (/mobi|iphone|ipod|android/.test(userAgent)) deviceType = "mobile";
+
+  let browserName = "unknown";
+  if (/samsungbrowser/.test(userAgent)) browserName = "samsung internet";
+  else if (/edg\//.test(userAgent)) browserName = "edge";
+  else if (/opr\//.test(userAgent)) browserName = "opera";
+  else if (/firefox\//.test(userAgent)) browserName = "firefox";
+  else if (/crios|chrome\//.test(userAgent)) browserName = "chrome";
+  else if (/chromium\//.test(userAgent)) browserName = "chromium";
+  else if (/safari\//.test(userAgent) && !/chrome|crios|chromium/.test(userAgent)) browserName = "safari";
+  else if (userAgent) browserName = "other";
+
+  let osName = "unknown";
+  if (/iphone|ipad|ipod/.test(userAgent)) osName = "ios";
+  else if (/android/.test(userAgent)) osName = "android";
+  else if (/windows/.test(userAgent)) osName = "windows";
+  else if (/mac os|macintosh/.test(userAgent) || platform.includes("mac")) osName = "macos";
+  else if (/cros/.test(userAgent)) osName = "chromeos";
+  else if (/linux/.test(userAgent) || platform.includes("linux")) osName = "linux";
+  else if (userAgent) osName = "other";
+
+  return { device_type: deviceType, browser_name: browserName, os_name: osName };
+}
+
 export function createNexoTracker({
   endpoint,
   siteId,
@@ -86,19 +116,39 @@ export function createNexoTracker({
   const localHost = isLocalHostname(window.location.hostname);
   const active = enabled && !window.__nexoAnalyticsDisabled && !respectsDoNotTrack() && (!localHost || trackDevelopment);
   const tabSessionId = active ? sessionId() : null;
+  const profile = active ? deviceProfile() : null;
+  const doc = typeof document === "undefined" ? null : document;
   let lastPath = "";
   let destroyed = false;
+  let activeSince = null;
+  let elapsedActiveMs = 0;
 
-  function send(eventName, path) {
+  function clockNow() {
+    return globalThis.performance?.now?.() ?? Date.now();
+  }
+
+  function resumePageClock() {
+    if (activeSince === null && (!doc || !doc.hidden)) activeSince = clockNow();
+  }
+
+  function pausePageClock() {
+    if (activeSince === null) return;
+    elapsedActiveMs += Math.max(0, clockNow() - activeSince);
+    activeSince = null;
+  }
+
+  function send(eventName, path, durationMs = null) {
     if (!active || destroyed) return;
-    const safePath = normalizeAnalyticsPath(path);
-    const body = JSON.stringify({
+    const body = {
       event_id: randomId(),
       site_id: siteId,
       session_id: tabSessionId,
       event_name: eventName,
-      path: safePath,
-    });
+      path: normalizeAnalyticsPath(path),
+      ...profile,
+    };
+    if (durationMs !== null) body.duration_ms = Math.min(86_400_000, Math.max(0, Math.round(durationMs)));
+
     try {
       void fetch(endpoint, {
         method: "POST",
@@ -106,11 +156,18 @@ export function createNexoTracker({
         credentials: "omit",
         keepalive: true,
         headers: { "Content-Type": "application/json" },
-        body,
+        body: JSON.stringify(body),
       }).catch(() => {});
     } catch {
       // Analytics must never interfere with the portfolio experience.
     }
+  }
+
+  function flushPageDuration(path) {
+    pausePageClock();
+    const duration = elapsedActiveMs;
+    elapsedActiveMs = 0;
+    if (duration > 0) send("page_duration", path, duration);
   }
 
   function track(eventName, path = lastPath || currentPath()) {
@@ -126,16 +183,45 @@ export function createNexoTracker({
 
   function page(path = currentPath()) {
     const safePath = normalizeAnalyticsPath(path);
-    if (!active || safePath === lastPath) return;
+    if (!active || destroyed || safePath === lastPath) return;
+    if (lastPath) flushPageDuration(lastPath);
     lastPath = safePath;
+    elapsedActiveMs = 0;
     send("page_view", safePath);
+    resumePageClock();
+  }
+
+  function onVisibilityChange() {
+    if (doc?.hidden) pausePageClock();
+    else resumePageClock();
+  }
+
+  function onPageHide() {
+    if (lastPath) flushPageDuration(lastPath);
+  }
+
+  function onPageShow(event) {
+    if (event.persisted) {
+      lastPath = "";
+      page();
+    }
+  }
+
+  if (active) {
+    doc?.addEventListener?.("visibilitychange", onVisibilityChange);
+    window.addEventListener?.("pagehide", onPageHide);
+    window.addEventListener?.("pageshow", onPageShow);
   }
 
   return {
     track,
     page,
     destroy() {
+      if (lastPath) flushPageDuration(lastPath);
       destroyed = true;
+      doc?.removeEventListener?.("visibilitychange", onVisibilityChange);
+      window.removeEventListener?.("pagehide", onPageHide);
+      window.removeEventListener?.("pageshow", onPageShow);
     },
   };
 }

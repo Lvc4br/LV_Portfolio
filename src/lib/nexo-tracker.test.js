@@ -4,9 +4,22 @@ import { createNexoTracker } from "./nexo-tracker.js";
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const COLLECT_URL = "http://127.0.0.1:8000/api/v1/collect";
 
-function installBrowser({ hostname = "localhost", doNotTrack = null, disabled = false } = {}) {
+function installBrowser({
+  hostname = "localhost",
+  doNotTrack = null,
+  disabled = false,
+  userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/132.0.0.0 Safari/537.36",
+  platform = "Win32",
+} = {}) {
   const requests = [];
   const storage = new Map();
+  const windowListeners = new Map();
+  const documentListeners = new Map();
+  const documentMock = {
+    hidden: false,
+    addEventListener: (event, handler) => documentListeners.set(event, handler),
+    removeEventListener: (event) => documentListeners.delete(event),
+  };
   const fetchMock = vi.fn((_url, options) => {
     requests.push(JSON.parse(options.body));
     return Promise.resolve({ status: 202 });
@@ -14,17 +27,20 @@ function installBrowser({ hostname = "localhost", doNotTrack = null, disabled = 
 
   vi.stubGlobal("window", {
     location: { hostname, pathname: "/" },
-    navigator: { doNotTrack, msDoNotTrack: null },
+    navigator: { doNotTrack, msDoNotTrack: null, userAgent, platform },
     doNotTrack: null,
     __nexoAnalyticsDisabled: disabled,
+    addEventListener: (event, handler) => windowListeners.set(event, handler),
+    removeEventListener: (event) => windowListeners.delete(event),
   });
+  vi.stubGlobal("document", documentMock);
   vi.stubGlobal("sessionStorage", {
     getItem: (key) => storage.get(key) ?? null,
     setItem: (key, value) => storage.set(key, value),
   });
   vi.stubGlobal("fetch", fetchMock);
 
-  return { requests, fetchMock };
+  return { requests, fetchMock, documentMock, documentListeners, windowListeners };
 }
 
 afterEach(() => {
@@ -54,9 +70,19 @@ describe("createNexoTracker", () => {
       session_id: expect.stringMatching(UUID_PATTERN),
       event_name: "page_view",
       path: "/work/3d/atem-mini-pro",
+      device_type: "desktop",
+      browser_name: "chrome",
+      os_name: "windows",
+    });
+    expect(requests[1]).toMatchObject({
+      event_name: "project_open",
+      device_type: "desktop",
+      browser_name: "chrome",
+      os_name: "windows",
     });
     expect(requests[0].session_id).toBe(requests[1].session_id);
     expect(JSON.stringify(requests)).not.toContain("private@example.com");
+    expect(JSON.stringify(requests)).not.toContain("Mozilla/5.0");
     expect(fetchMock.mock.calls[0][1]).toMatchObject({
       method: "POST",
       mode: "cors",
@@ -64,8 +90,9 @@ describe("createNexoTracker", () => {
     });
 
     tracker.destroy();
+    const requestsAfterDestroy = fetchMock.mock.calls.length;
     tracker.track("contact_click");
-    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(fetchMock).toHaveBeenCalledTimes(requestsAfterDestroy);
   });
 
   it("keeps collection disabled when configuration is incomplete", () => {
@@ -158,5 +185,66 @@ describe("createNexoTracker", () => {
 
     expect(() => tracker.track("contact_click")).not.toThrow();
     await Promise.resolve();
+  });
+
+  it("sends active page durations with the same safe route path", () => {
+    const { requests, documentMock, documentListeners } = installBrowser({ hostname: "portfolio.example" });
+    let elapsed = 0;
+    vi.stubGlobal("performance", { now: () => elapsed });
+    const tracker = createNexoTracker({
+      endpoint: "https://nexo.example/api/v1/collect",
+      siteId: "site",
+    });
+
+    tracker.page("/work");
+    elapsed = 1_200;
+    tracker.page("/work/3d/atem-mini-pro?email=private@example.com#gallery");
+
+    const firstDuration = requests.find((event) => event.event_name === "page_duration");
+    expect(firstDuration).toMatchObject({
+      path: "/work",
+      duration_ms: 1_200,
+      device_type: "desktop",
+      browser_name: "chrome",
+      os_name: "windows",
+    });
+    expect(requests.map((event) => event.event_name)).toEqual([
+      "page_view",
+      "page_duration",
+      "page_view",
+    ]);
+    expect(JSON.stringify(requests)).not.toContain("private@example.com");
+
+    elapsed = 1_500;
+    const visibilityChange = documentListeners.get("visibilitychange");
+    documentMock.hidden = true;
+    visibilityChange();
+    elapsed = 9_000;
+    documentMock.hidden = false;
+    visibilityChange();
+    elapsed = 9_500;
+    tracker.destroy();
+
+    const durations = requests.filter((event) => event.event_name === "page_duration");
+    expect(durations.map((event) => event.duration_ms)).toEqual([1_200, 800]);
+    expect(durations[1].path).toBe("/work/3d/atem-mini-pro");
+  });
+
+  it("caps duration at one day and flushes it on pagehide", () => {
+    const { requests, windowListeners } = installBrowser({ hostname: "portfolio.example" });
+    let elapsed = 0;
+    vi.stubGlobal("performance", { now: () => elapsed });
+    const tracker = createNexoTracker({
+      endpoint: "https://nexo.example/api/v1/collect",
+      siteId: "site",
+    });
+
+    tracker.page("/work");
+    elapsed = 86_500_000;
+    windowListeners.get("pagehide")();
+
+    expect(requests.filter((event) => event.event_name === "page_duration")[0].duration_ms)
+      .toBe(86_400_000);
+    tracker.destroy();
   });
 });

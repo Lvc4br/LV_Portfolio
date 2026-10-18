@@ -146,6 +146,14 @@ either required environment variable is missing. Outside development, the
 tracker also requires an HTTPS collector URL and rejects loopback hosts.
 Request failures are ignored so the portfolio continues to work.
 
+Each event also sends only broad `device_type`, `browser_name`, and `os_name`
+categories derived in the browser; the raw user agent is not sent. The tracker
+sends a `page_duration` event when the visitor changes route or the page is
+unloaded. `duration_ms` counts visible time, pauses while the tab is hidden, is
+capped at 24 hours, and uses the same allow-listed path normalization as page
+views. The Nexo dashboard uses these duration events to calculate average,
+minimum, and maximum time on a page.
+
 For local development, run the Nexo API at http://127.0.0.1:8000 and the
 portfolio at http://localhost:4173. Set `VITE_NEXO_COLLECT_URL` to
 `http://127.0.0.1:8000/api/v1/collect` and `VITE_NEXO_SITE_ID` to
@@ -175,3 +183,13 @@ in a `VITE_` variable or this repository; the Vercel API token belongs only in
 the Nexo backend. If the portfolio changes domain or hosting, update the
 allowed origin in Nexo. Collection continues to work as long as the tracker
 points to the public Nexo API.
+
+For production collection, the Nexo API must be publicly reachable over HTTPS
+and use persistent PostgreSQL storage. The portfolio cannot send data to a
+backend running at `localhost` or `127.0.0.1` on the visitor's computer.
+
+Vercel Web Analytics is already integrated and enabled for the portfolio. If
+the Nexo backend should also query Vercel analytics data, configure
+`VERCEL_ACCESS_TOKEN` and `VERCEL_PROJECT_ID` only in the Nexo backend's own
+environment, then ensure Web Analytics is enabled in the Vercel project. These
+backend settings are separate from the portfolio's `VITE_NEXO_*` variables.
