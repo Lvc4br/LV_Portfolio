@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import tracker from "../../lib/analytics.js";
 
 export default function Footer() {
   const navigate = useNavigate();
 
   const goToContact = (event) => {
     event.preventDefault();
+    tracker.track("contact_click");
     navigate("/", { state: { scrollTo: "contact" } });
   };
 

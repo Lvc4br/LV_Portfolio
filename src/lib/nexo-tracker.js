@@ -34,10 +34,19 @@ function currentPath() {
   return window.location.pathname || "/";
 }
 
+function respectsDoNotTrack() {
+  const signals = [
+    window.navigator?.doNotTrack,
+    window.navigator?.msDoNotTrack,
+    window.doNotTrack,
+  ];
+
+  return signals.some((signal) => ["1", "yes"].includes(String(signal).toLowerCase()));
+}
+
 export function createNexoTracker({
   endpoint,
   siteId,
-  autoPageViews = true,
   enabled = true,
   trackDevelopment = false,
 } = {}) {
@@ -46,19 +55,20 @@ export function createNexoTracker({
   }
 
   const localHost = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
-  const active = enabled && !window.__nexoAnalyticsDisabled && window.navigator.doNotTrack !== "1" && (!localHost || trackDevelopment);
+  const active = enabled && !window.__nexoAnalyticsDisabled && !respectsDoNotTrack() && (!localHost || trackDevelopment);
   const tabSessionId = active ? sessionId() : null;
   let lastPath = "";
   let destroyed = false;
 
-  function track(eventName) {
+  function track(eventName, path = currentPath()) {
     if (!active || destroyed || typeof eventName !== "string" || !EVENT_NAME_PATTERN.test(eventName)) return;
+    const safePath = typeof path === "string" ? path.split(/[?#]/, 1)[0] || "/" : "/";
     const body = JSON.stringify({
       event_id: randomId(),
       site_id: siteId,
       session_id: tabSessionId,
       event_name: eventName,
-      path: currentPath(),
+      path: safePath,
     });
     try {
       void fetch(endpoint, {
@@ -74,35 +84,10 @@ export function createNexoTracker({
     }
   }
 
-  function page() {
-    const path = currentPath();
+  function page(path = currentPath()) {
     if (!active || path === lastPath) return;
     lastPath = path;
-    track("page_view");
-  }
-
-  function onHistoryChange() {
-    queueMicrotask(page);
-  }
-
-  const originalPushState = window.history.pushState;
-  const originalReplaceState = window.history.replaceState;
-  function pushState(...args) {
-    const result = originalPushState.apply(this, args);
-    onHistoryChange();
-    return result;
-  }
-  function replaceState(...args) {
-    const result = originalReplaceState.apply(this, args);
-    onHistoryChange();
-    return result;
-  }
-
-  if (active && autoPageViews) {
-    window.history.pushState = pushState;
-    window.history.replaceState = replaceState;
-    window.addEventListener("popstate", onHistoryChange);
-    page();
+    track("page_view", path);
   }
 
   return {
@@ -110,9 +95,6 @@ export function createNexoTracker({
     page,
     destroy() {
       destroyed = true;
-      if (window.history.pushState === pushState) window.history.pushState = originalPushState;
-      if (window.history.replaceState === replaceState) window.history.replaceState = originalReplaceState;
-      window.removeEventListener("popstate", onHistoryChange);
     },
   };
 }

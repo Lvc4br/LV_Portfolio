@@ -32,6 +32,7 @@ export default function Hero() {
           <a
             className="button"
             href="https://www.linkedin.com/in/luca-toniolo/"
+            onClick={() => tracker.track("contact_click")}
             target="_blank"
             rel="noreferrer"
           >

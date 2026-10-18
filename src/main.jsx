@@ -2,8 +2,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
-import "./lib/analytics.js";
 import App from "./App.jsx";
+import NexoPageViews from "./components/NexoPageViews.jsx";
 import "./styles/global.css";
 import "./styles/style.css";
 import "./styles/responsive.css";
@@ -11,6 +11,7 @@ import "./styles/responsive.css";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+      <NexoPageViews />
       <App />
       <Analytics />
     </BrowserRouter>

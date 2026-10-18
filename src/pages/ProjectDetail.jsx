@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { getProjectById, projects } from "../data/projects.js";
 import tracker from "../lib/analytics.js";
@@ -77,9 +77,18 @@ export default function ProjectDetail({ area }) {
   const { id } = useParams();
   const project = getProjectById(id);
   const projectId = project?.area === area ? project.id : null;
+  const lastTrackedProjectId = useRef(null);
 
   useEffect(() => {
-    if (projectId) tracker.track("project_open");
+    if (!projectId) {
+      lastTrackedProjectId.current = null;
+      return;
+    }
+
+    if (lastTrackedProjectId.current !== projectId) {
+      tracker.track("project_open");
+      lastTrackedProjectId.current = projectId;
+    }
   }, [projectId]);
 
   if (!projectId) {

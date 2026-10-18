@@ -67,6 +67,20 @@ npm install
 npm run dev
 ```
 
+The portfolio runs at http://localhost:4173. Vite keeps this port fixed so the
+browser origin matches the Nexo API's local CORS allow-list. The API must allow
+`http://localhost:4173` in `PORTFOLIO_ALLOWED_ORIGINS`.
+
+The ignored `.env.local` file configures the Nexo collector for local development.
+It must not be committed. Start the Nexo backend on the same computer at
+http://127.0.0.1:8000 and confirm its local `.env` allows the portfolio origin
+`http://localhost:4173` in `PORTFOLIO_ALLOWED_ORIGINS`:
+
+```env
+VITE_NEXO_COLLECT_URL=http://127.0.0.1:8000/api/v1/collect
+VITE_NEXO_SITE_ID=lvc4br-lv-portfolio
+```
+
 Vite prints the local development URL in the terminal. Run the automated tests
 and linter with:
 
@@ -107,9 +121,9 @@ The project deploys from the repository root. `vercel.json` rewrites client-side
 routes to `index.html`, allowing direct visits to project pages.
 
 Set `VITE_SITE_URL` in the Vercel project environment variables to the public
-HTTPS origin without a trailing slash. For local builds, copy `.env.example` to
-`.env` and set the URL there. Redeploy after changing the domain so canonical
-and social sharing metadata use the updated URL.
+HTTPS origin without a trailing slash. For local builds, set it in the ignored
+`.env.local` file alongside the Nexo variables. Redeploy after changing the
+domain so canonical and social sharing metadata use the updated URL.
 
 Vercel Web Analytics is integrated and enabled in the Vercel project. Its data
 is available in the Vercel dashboard; it does not require an additional
@@ -117,15 +131,43 @@ environment variable.
 
 ## Nexo Analytics
 
-The portfolio keeps Vercel Web Analytics and can also send first-party events to
-the Nexo Analytics API. The tracker records page views, project opens, resume
-opens, successful contact form submissions, prototype opens, and source link
-clicks. It sends the event name, page path, and a temporary random tab session
-ID; it does not send contact form contents.
+The Nexo tracker sends `POST /api/v1/collect` JSON events for SPA page views,
+project opens, contact clicks, resume opens, successful contact form
+submissions, prototype opens, and source link clicks. Its payload contains
+`event_id`, `site_id`, a random per-tab `session_id` required by the Nexo API,
+a short `event_name`, and the current pathname. The session ID is kept in
+`sessionStorage` to group events in one tab; it is not derived from visitor
+details. The payload omits query strings, URL fragments, referrers, form
+values, IP fields, and free-form properties. Collection is disabled when Do
+Not Track is enabled or either required environment variable is missing.
+Request failures are ignored so the portfolio continues to work.
 
-For local collection, run the Nexo API at http://localhost:8000 and start this
-portfolio with npm run dev -- --port 4173. The ignored .env.local file points to
-that local API. Set the same collector URL and site ID as VITE_NEXO_COLLECT_URL
-and VITE_NEXO_SITE_ID in the Vercel project after the Nexo API has a public
-HTTPS URL. Keep the Vercel API token and dashboard credentials in the Nexo
-backend environment only, never in this frontend project.
+For local development, run the Nexo API at http://127.0.0.1:8000 and the
+portfolio at http://localhost:4173. Set `VITE_NEXO_COLLECT_URL` to
+`http://127.0.0.1:8000/api/v1/collect` and `VITE_NEXO_SITE_ID` to
+`lvc4br-lv-portfolio` in `.env.local`. The API must include
+`http://localhost:4173` in `PORTFOLIO_ALLOWED_ORIGINS`. This local test only
+works while the Nexo backend is running on the same computer; it does not make
+the published site call a local address.
+
+The published portfolio currently has no Nexo production variables configured,
+so its Nexo tracker remains inactive. Do not add local URLs to Vercel. No Vercel
+environment variables or deployments are part of the local integration setup.
+
+After the Nexo API is published over HTTPS, configure these public variables in
+the **LV_Portfolio** project's Vercel **Settings > Environment Variables** and
+make a new portfolio deployment:
+
+```text
+VITE_NEXO_COLLECT_URL=https://URL-PUBLICA-DA-API-NEXO/api/v1/collect
+VITE_NEXO_SITE_ID=lvc4br-lv-portfolio
+```
+
+Replace `URL-PUBLICA-DA-API-NEXO` with the Nexo API's public HTTPS host, and
+allow `https://luca-toniolo.vercel.app` in the backend's
+`PORTFOLIO_ALLOWED_ORIGINS`. These variables are included in the frontend
+bundle. Never put `VERCEL_ACCESS_TOKEN`, the Nexo password, or `SESSION_SECRET`
+in a `VITE_` variable or this repository; the Vercel API token belongs only in
+the Nexo backend. If the portfolio changes domain or hosting, update the
+allowed origin in Nexo. Collection continues to work as long as the tracker
+points to the public Nexo API.

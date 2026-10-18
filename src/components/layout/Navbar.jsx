@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import tracker from "../../lib/analytics.js";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const closeMenu = () => {
     setOpen(false);
+  };
+
+  const goToContact = () => {
+    tracker.track("contact_click");
+    closeMenu();
   };
 
   return (
@@ -17,7 +23,7 @@ export default function Navbar() {
           <NavLink to="/work/3d" onClick={closeMenu}>3D</NavLink>
           <NavLink to="/work/code" onClick={closeMenu}>Code</NavLink>
           <NavLink to="/" state={{ scrollTo: "about" }} onClick={closeMenu}>About</NavLink>
-          <NavLink to="/" state={{ scrollTo: "contact" }} onClick={closeMenu}>Contact</NavLink>
+          <NavLink to="/" state={{ scrollTo: "contact" }} onClick={goToContact}>Contact</NavLink>
         </nav>
         <button
           className="nav__menu"
