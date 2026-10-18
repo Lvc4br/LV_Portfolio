@@ -1,8 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
+import { afterEach, vi } from "vitest";
 import App from "./App.jsx";
 import Contact from "./components/sections/Contact.jsx";
+import tracker from "./lib/analytics.js";
+
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
+});
 
 describe("portfolio navigation", () => {
   it("renders the home page at the root path", () => {
@@ -165,7 +172,8 @@ describe("portfolio navigation", () => {
 describe("contact form", () => {
   it("submits successfully and shows a confirmation message", async () => {
     const user = userEvent.setup();
-    global.fetch = vi.fn().mockResolvedValue({ ok: true });
+    const trackSpy = vi.spyOn(tracker, "track");
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true }));
 
     render(<Contact />);
 
@@ -175,11 +183,13 @@ describe("contact form", () => {
     await user.click(screen.getByRole("button", { name: /send message/i }));
 
     expect(await screen.findByRole("status")).toHaveTextContent(/your message was sent successfully/i);
+    expect(trackSpy.mock.calls).toEqual([["contact_submit"]]);
   });
 
   it("shows an error message when the request fails", async () => {
     const user = userEvent.setup();
-    global.fetch = vi.fn().mockRejectedValue(new Error("Network error"));
+    const trackSpy = vi.spyOn(tracker, "track");
+    vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("Network error")));
 
     render(<Contact />);
 
@@ -189,11 +199,13 @@ describe("contact form", () => {
     await user.click(screen.getByRole("button", { name: /send message/i }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent(/could not be sent/i);
+    expect(trackSpy).not.toHaveBeenCalled();
   });
 
   it("shows an error when the server responds with a non-success status", async () => {
     const user = userEvent.setup();
-    global.fetch = vi.fn().mockResolvedValue({ ok: false, status: 503 });
+    const trackSpy = vi.spyOn(tracker, "track");
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 503 }));
     render(<Contact />);
 
     await user.type(screen.getByLabelText(/name/i), "Luca");
@@ -202,12 +214,13 @@ describe("contact form", () => {
     await user.click(screen.getByRole("button", { name: /send message/i }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent(/could not be sent/i);
+    expect(trackSpy).not.toHaveBeenCalled();
   });
 
   it("disables submission while the request is pending", async () => {
     const user = userEvent.setup();
     let resolveRequest;
-    global.fetch = vi.fn(() => new Promise((resolve) => { resolveRequest = resolve; }));
+    vi.stubGlobal("fetch", vi.fn(() => new Promise((resolve) => { resolveRequest = resolve; })));
     render(<Contact />);
 
     await user.type(screen.getByLabelText(/name/i), "Luca");
@@ -223,24 +236,25 @@ describe("contact form", () => {
 
   it("uses native required and email validation before sending", async () => {
     const user = userEvent.setup();
-    global.fetch = vi.fn();
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
     render(<Contact />);
     const form = screen.getByRole("button", { name: /send message/i }).closest("form");
 
     await user.click(screen.getByRole("button", { name: /send message/i }));
     expect(form).not.toBeValid();
-    expect(global.fetch).not.toHaveBeenCalled();
+    expect(fetchMock).not.toHaveBeenCalled();
 
     await user.type(screen.getByLabelText(/name/i), "Luca");
     await user.type(screen.getByLabelText(/email/i), "not-an-email");
     await user.type(screen.getByLabelText(/message/i), "Hello");
     expect(form).not.toBeValid();
-    expect(global.fetch).not.toHaveBeenCalled();
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it("clears the form fields after a successful submission", async () => {
     const user = userEvent.setup();
-    global.fetch = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true }));
     render(<Contact />);
 
     await user.type(screen.getByLabelText(/name/i), "Luca");

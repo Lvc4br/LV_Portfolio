@@ -133,13 +133,17 @@ environment variable.
 
 The Nexo tracker sends `POST /api/v1/collect` JSON events for SPA page views,
 project opens, contact clicks, resume opens, successful contact form
-submissions, prototype opens, and source link clicks. Its payload contains
+submissions, prototype opens, source link clicks, and social clicks using
+fixed names such as `github_click` and `linkedin_click`. Its payload contains
 `event_id`, `site_id`, a random per-tab `session_id` required by the Nexo API,
 a short `event_name`, and the current pathname. The session ID is kept in
 `sessionStorage` to group events in one tab; it is not derived from visitor
-details. The payload omits query strings, URL fragments, referrers, form
-values, IP fields, and free-form properties. Collection is disabled when Do
-Not Track is enabled or either required environment variable is missing.
+details. Only known portfolio routes and project slugs are sent; legacy routes
+are mapped to their destinations and unknown paths become `/404`. The payload
+omits query strings, URL fragments, referrers, form values, IP fields, and
+free-form properties. Collection is disabled when Do Not Track is enabled or
+either required environment variable is missing. Outside development, the
+tracker also requires an HTTPS collector URL and rejects loopback hosts.
 Request failures are ignored so the portfolio continues to work.
 
 For local development, run the Nexo API at http://127.0.0.1:8000 and the

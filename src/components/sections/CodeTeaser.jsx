@@ -1,4 +1,5 @@
 import { useTypewriter } from "../../data/useTypewriter";
+import tracker from "../../lib/analytics.js";
 
 const CODE_SNIPPETS = [
 `export function getProjectById(id) {
@@ -73,7 +74,7 @@ export default function Code() {
                         <strong>HTML / CSS / JavaScript</strong>
                         <p>Responsive web interfaces, including a website for an ice cream shop.</p>
                     </div>
-                    <a className="button" href="https://github.com/Lvc4br" target="_blank" rel="noreferrer">View GitHub ↗</a>
+                    <a className="button" href="https://github.com/Lvc4br" onClick={() => tracker.track("github_click")} target="_blank" rel="noreferrer">View GitHub ↗</a>
                 </div>
             </div>
         </div>

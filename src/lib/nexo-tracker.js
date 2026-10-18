@@ -1,5 +1,8 @@
+import { normalizeAnalyticsPath } from "./analytics-path.js";
+
 const EVENT_NAME_PATTERN = /^[a-zA-Z][a-zA-Z0-9_.:-]{0,79}$/;
 const SESSION_STORAGE_KEY = "nexo:session-id";
+const RESERVED_EVENT_NAMES = new Set(["page_view", "page_duration"]);
 
 function randomId() {
   if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
@@ -34,6 +37,27 @@ function currentPath() {
   return window.location.pathname || "/";
 }
 
+function isLocalHostname(hostname) {
+  const normalizedHostname = String(hostname).replace(/^\[|\]$/g, "").toLowerCase();
+  return normalizedHostname === "localhost"
+    || normalizedHostname.endsWith(".localhost")
+    || normalizedHostname === "::1"
+    || normalizedHostname.startsWith("127.")
+    || normalizedHostname === "0.0.0.0";
+}
+
+function canUseEndpoint(endpoint, trackDevelopment) {
+  let endpointUrl;
+  try {
+    endpointUrl = new URL(endpoint);
+  } catch {
+    return false;
+  }
+
+  if (trackDevelopment) return true;
+  return endpointUrl.protocol === "https:" && !isLocalHostname(endpointUrl.hostname);
+}
+
 function respectsDoNotTrack() {
   const signals = [
     window.navigator?.doNotTrack,
@@ -50,19 +74,24 @@ export function createNexoTracker({
   enabled = true,
   trackDevelopment = false,
 } = {}) {
-  if (!endpoint || !siteId || typeof window === "undefined") {
+  if (
+    !endpoint
+    || !siteId
+    || typeof window === "undefined"
+    || !canUseEndpoint(endpoint, trackDevelopment)
+  ) {
     return { track() {}, page() {}, destroy() {} };
   }
 
-  const localHost = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
+  const localHost = isLocalHostname(window.location.hostname);
   const active = enabled && !window.__nexoAnalyticsDisabled && !respectsDoNotTrack() && (!localHost || trackDevelopment);
   const tabSessionId = active ? sessionId() : null;
   let lastPath = "";
   let destroyed = false;
 
-  function track(eventName, path = currentPath()) {
-    if (!active || destroyed || typeof eventName !== "string" || !EVENT_NAME_PATTERN.test(eventName)) return;
-    const safePath = typeof path === "string" ? path.split(/[?#]/, 1)[0] || "/" : "/";
+  function send(eventName, path) {
+    if (!active || destroyed) return;
+    const safePath = normalizeAnalyticsPath(path);
     const body = JSON.stringify({
       event_id: randomId(),
       site_id: siteId,
@@ -84,10 +113,22 @@ export function createNexoTracker({
     }
   }
 
+  function track(eventName, path = lastPath || currentPath()) {
+    if (
+      !active
+      || destroyed
+      || typeof eventName !== "string"
+      || !EVENT_NAME_PATTERN.test(eventName)
+      || RESERVED_EVENT_NAMES.has(eventName)
+    ) return;
+    send(eventName, path);
+  }
+
   function page(path = currentPath()) {
-    if (!active || path === lastPath) return;
-    lastPath = path;
-    track("page_view", path);
+    const safePath = normalizeAnalyticsPath(path);
+    if (!active || safePath === lastPath) return;
+    lastPath = safePath;
+    send("page_view", safePath);
   }
 
   return {

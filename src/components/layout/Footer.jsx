@@ -20,22 +20,22 @@ export default function Footer() {
           <p>3D × CODE</p>
         </div>
         <div className="footer__links">
-          <a href="https://github.com/Lvc4br" target="_blank" rel="noreferrer">
+          <a href="https://github.com/Lvc4br" onClick={() => tracker.track("github_click")} target="_blank" rel="noreferrer">
             GitHub ↗
           </a>
           <a href="#contact" onClick={goToContact}>
             Contact ↗
           </a>
-          <a href="https://www.linkedin.com/in/luca-toniolo/" target="_blank" rel="noreferrer">
+          <a href="https://www.linkedin.com/in/luca-toniolo/" onClick={() => tracker.track("linkedin_click")} target="_blank" rel="noreferrer">
             LinkedIn ↗
           </a>
-          <a href="https://www.artstation.com/lvc4br" target="_blank" rel="noreferrer">
+          <a href="https://www.artstation.com/lvc4br" onClick={() => tracker.track("artstation_click")} target="_blank" rel="noreferrer">
             ArtStation ↗
           </a>
-          <a href="https://www.behance.net/Toniolo_Luca" target="_blank" rel="noreferrer">
+          <a href="https://www.behance.net/Toniolo_Luca" onClick={() => tracker.track("behance_click")} target="_blank" rel="noreferrer">
             Behance ↗
           </a>
-          <a href="https://www.therookies.co/u/Lvc4br" target="_blank" rel="noreferrer">
+          <a href="https://www.therookies.co/u/Lvc4br" onClick={() => tracker.track("therookies_click")} target="_blank" rel="noreferrer">
             The Rookies ↗
           </a>
         </div>
