@@ -114,3 +114,18 @@ and social sharing metadata use the updated URL.
 Vercel Web Analytics is integrated and enabled in the Vercel project. Its data
 is available in the Vercel dashboard; it does not require an additional
 environment variable.
+
+## Nexo Analytics
+
+The portfolio keeps Vercel Web Analytics and can also send first-party events to
+the Nexo Analytics API. The tracker records page views, project opens, resume
+opens, successful contact form submissions, prototype opens, and source link
+clicks. It sends the event name, page path, and a temporary random tab session
+ID; it does not send contact form contents.
+
+For local collection, run the Nexo API at http://localhost:8000 and start this
+portfolio with npm run dev -- --port 4173. The ignored .env.local file points to
+that local API. Set the same collector URL and site ID as VITE_NEXO_COLLECT_URL
+and VITE_NEXO_SITE_ID in the Vercel project after the Nexo API has a public
+HTTPS URL. Keep the Vercel API token and dashboard credentials in the Nexo
+backend environment only, never in this frontend project.

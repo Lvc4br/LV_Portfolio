@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { getProjectById, projects } from "../data/projects.js";
+import tracker from "../lib/analytics.js";
 
 function ProjectGallery({ title, images, imageLabel }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -75,8 +76,13 @@ function ProjectVideo({ title, video, poster }) {
 export default function ProjectDetail({ area }) {
   const { id } = useParams();
   const project = getProjectById(id);
+  const projectId = project?.area === area ? project.id : null;
 
-  if (!project || project.area !== area) {
+  useEffect(() => {
+    if (projectId) tracker.track("project_open");
+  }, [projectId]);
+
+  if (!projectId) {
     const routeByArea = {
       "3d": "/work/3d",
       code: "/work/code",
@@ -120,6 +126,7 @@ export default function ProjectDetail({ area }) {
                 <a
                   className="button button--solid"
                   href={`${import.meta.env.BASE_URL}${project.prototypeFile}`}
+                  onClick={() => tracker.track("prototype_open")}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -130,6 +137,7 @@ export default function ProjectDetail({ area }) {
                 <a
                   className="button"
                   href={project.repositoryUrl}
+                  onClick={() => tracker.track("source_click")}
                   target="_blank"
                   rel="noreferrer"
                 >

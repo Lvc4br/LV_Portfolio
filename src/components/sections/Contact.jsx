@@ -1,4 +1,5 @@
 import { useState } from "react";
+import tracker from "../../lib/analytics.js";
 
 const MAX_CHARS = 280;
 
@@ -31,6 +32,7 @@ export default function Contact() {
       form.reset();
       setMessage("");
       setSent(true);
+      tracker.track("contact_submit");
     } catch {
       setError("The message could not be sent. Please try again or contact me via LinkedIn.");
     } finally {

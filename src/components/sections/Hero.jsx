@@ -1,3 +1,5 @@
+import tracker from "../../lib/analytics.js";
+
 export default function Hero() {
   return (
     <section id="home" className="hero">
@@ -21,6 +23,7 @@ export default function Hero() {
           <a
             className="button"
             href={`${import.meta.env.BASE_URL}curriculo-luca-toniolo.pdf`}
+            onClick={() => tracker.track("resume_open")}
             target="_blank"
             rel="noreferrer"
           >
