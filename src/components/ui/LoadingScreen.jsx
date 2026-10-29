@@ -37,7 +37,7 @@ export default function LoadingScreen({ onComplete }) {
   }, [onComplete]);
 
   return (
-    <div className="loader" role="status" aria-live="polite" aria-label="Loading portfolio">
+    <div className="loader" role="progressbar" aria-label="Loading portfolio" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress}>
       <div className="loader__top">
         <span>LT / 2026</span>
         <span>{progress}%</span>
