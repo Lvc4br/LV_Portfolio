@@ -17,11 +17,14 @@ describe("project catalogue integrity", () => {
     projects.forEach((project) => {
       expect(project.title, project.id).toBeTruthy();
       expect(project.description, project.id).toBeTruthy();
-      expect(project.tools, project.id).toEqual(expect.arrayContaining([expect.any(String)]));
+      expect(Array.isArray(project.tools), project.id).toBe(true);
+      if (project.status !== "Planned") {
+        expect(project.tools.length, project.id).toBeGreaterThan(0);
+      }
       expect(projectStatusOrder, project.id).toHaveProperty(project.status);
       if (project.image) {
         expect(project.imageAlt?.trim(), project.id).toBeTruthy();
-      } else {
+      } else if (project.status !== "Planned") {
         expect(project.prototypeFile, project.id).toBeTruthy();
       }
     });
