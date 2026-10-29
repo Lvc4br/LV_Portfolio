@@ -19,8 +19,11 @@ describe("project catalogue integrity", () => {
       expect(project.description, project.id).toBeTruthy();
       expect(project.tools, project.id).toEqual(expect.arrayContaining([expect.any(String)]));
       expect(projectStatusOrder, project.id).toHaveProperty(project.status);
-      expect(project.image, project.id).toBeTruthy();
-      expect(project.imageAlt?.trim(), project.id).toBeTruthy();
+      if (project.image) {
+        expect(project.imageAlt?.trim(), project.id).toBeTruthy();
+      } else {
+        expect(project.prototypeFile, project.id).toBeTruthy();
+      }
     });
   });
 
