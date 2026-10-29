@@ -5,6 +5,12 @@ export default function LoadingScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      setProgress(100);
+      onComplete();
+      return undefined;
+    }
+
     const start = performance.now();
     let frame;
     let completionTimer;
@@ -23,8 +29,8 @@ export default function LoadingScreen({ onComplete }) {
     frame = requestAnimationFrame(tick);
 
     return () => {
-      cancelAnimationFrame(frame);
-      window.clearTimeout(completionTimer);
+      if (frame !== undefined) cancelAnimationFrame(frame);
+      if (completionTimer !== undefined) window.clearTimeout(completionTimer);
     };
   }, [onComplete]);
 
