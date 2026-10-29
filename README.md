@@ -4,6 +4,10 @@ Portfólio web responsivo para apresentar projetos selecionados de modelagem 3D,
 
 **Site:** https://luca-toniolo.vercel.app/
 
+[![CI](https://github.com/Lvc4br/LV_Portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Lvc4br/LV_Portfolio/actions/workflows/ci.yml)
+[![React](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+
 ## Arquitetura
 
 A aplicação é uma SPA em React/Vite. O React Router organiza a navegação; o catálogo de projetos e os assets são mantidos no próprio repositório, sem CMS ou banco de dados para o conteúdo.
@@ -72,7 +76,9 @@ npm run preview
 npm run optimize:images
 ```
 
-O servidor Vite usa a porta `4173` e exige que ela esteja disponível. A otimização de imagens regenera assets WebP e a imagem social.
+O servidor Vite usa a porta `4173` e exige que ela esteja disponível. A otimização de imagens regenera assets WebP e a imagem social. O workflow de CI executa lint, testes e build em cada push para `main` e pull request.
+
+Os testes incluem navegação por rotas, componentes, normalização de caminhos de analytics, comportamento do loader com movimento reduzido e integridade do catálogo (IDs únicos, metadados mínimos, texto alternativo e ordenação). Eles não substituem uma verificação visual em navegadores reais, dispositivos móveis ou o teste do formulário publicado.
 
 ## Analytics
 
