@@ -7,7 +7,6 @@ Portfólio web responsivo para apresentar projetos selecionados de modelagem 3D,
 ## Arquitetura
 
 A aplicação é uma SPA em React/Vite. O React Router organiza a navegação; o catálogo de projetos e os assets são mantidos no próprio repositório, sem CMS ou banco de dados para o conteúdo.
-A aplicação é uma SPA em React/Vite. O React Router organiza a navegação; o catálogo de projetos e os assets são mantidos no próprio repositório, sem CMS ou banco de dados para o conteúdo.
 
 ```mermaid
 flowchart TD
