@@ -17,6 +17,7 @@ describe("LoadingScreen accessibility and lifecycle", () => {
     render(<LoadingScreen onComplete={onComplete} />);
 
     expect(screen.getByText("100%")).toBeInTheDocument();
+    expect(screen.getByRole("progressbar", { name: /loading portfolio/i })).toHaveAttribute("aria-valuenow", "100");
     expect(onComplete).toHaveBeenCalledTimes(1);
     expect(globalThis.matchMedia).toHaveBeenCalledWith("(prefers-reduced-motion: reduce)");
   });
