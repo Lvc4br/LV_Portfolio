@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import "../../styles/components/LoadingScreen.css";
 
+const prefersReducedMotion = () =>
+  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+
 export default function LoadingScreen({ onComplete }) {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(() => (prefersReducedMotion() ? 100 : 0));
 
   useEffect(() => {
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-      setProgress(100);
+    if (prefersReducedMotion()) {
       onComplete();
       return undefined;
     }
