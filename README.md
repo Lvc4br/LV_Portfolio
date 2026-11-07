@@ -107,3 +107,6 @@ Preparado para Vercel a partir da raiz do repositório. O roteamento do lado do 
 Variáveis prefixadas com `VITE_` ficam disponíveis no bundle do navegador; não coloque nelas valores privados. Para detalhes do tracker, veja o README do [Nexo Analytics](https://github.com/Lvc4br/nexo-analytics).
 
 **Autor:** Luca Toniolo — [GitHub](https://github.com/Lvc4br) · [LinkedIn](https://linkedin.com/in/luca-toniolo)
+## Uso de IA
+
+Este projeto foi desenvolvido com apoio de IA.
