@@ -111,3 +111,4 @@ Variáveis prefixadas com `VITE_` ficam disponíveis no bundle do navegador; nã
 ## Uso de IA
 
 Este projeto foi desenvolvido com apoio de IA.
+O autor revisa e testa o código incorporado.
