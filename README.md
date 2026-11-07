@@ -1,8 +1,12 @@
 # Luca Toniolo — 3D × Code Portfolio
 
-Portfólio web responsivo para apresentar projetos selecionados de modelagem 3D, desenvolvimento web, programação e design digital.
+> Portfólio pessoal que reúne desenvolvimento de software, experiências web e trabalhos de 3D/arte digital.
 
-**Site:** https://luca-toniolo.vercel.app/
+<sub>React 19 · Vite 8 · JavaScript · CSS · Vitest · Vercel</sub>
+
+**Acessar o portfólio:** https://luca-toniolo.vercel.app/ · **Perfil:** https://github.com/Lvc4br
+
+Este projeto apresenta estudos e projetos selecionados em duas frentes — **Software Development** e **Creative Technology**. As páginas de projeto identificam o escopo e o estágio de cada trabalho; galerias e protótipos não representam, por si só, sistemas comerciais completos.
 
 [![CI](https://github.com/Lvc4br/LV_Portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Lvc4br/LV_Portfolio/actions/workflows/ci.yml)
 [![React](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://react.dev/)
