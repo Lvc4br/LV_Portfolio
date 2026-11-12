@@ -1,0 +1,54 @@
+/* Multipage portfolio foundation */
+.journey-hero { padding-top: 160px; }
+.journey-hero .section-title { margin-top: 28px; }
+.journey-hero .section-copy { margin-top: 26px; }
+.journey-section { border-top: 1px solid var(--line); }
+.journey-section--compact { padding-top: 88px; }
+.journey-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.journey-card { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; min-height: 360px; padding: clamp(24px, 4vw, 48px); border: 1px solid var(--line); background: var(--surface); }
+.journey-card h2, .experience-entry h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1; letter-spacing: -.055em; }
+.journey-card p:not(.eyebrow):not(.journey-status) { color: var(--muted); line-height: 1.75; }
+.journey-card .button { margin-top: auto; }
+.journey-card--muted { background: linear-gradient(145deg, rgba(215,25,50,.09), transparent 65%), var(--surface); }
+.journey-status { color: var(--accent); font: 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.journey-links { border-top: 1px solid var(--line); }
+.journey-links a { display: flex; justify-content: space-between; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); font: 13px var(--mono); }
+.journey-links a:hover { color: var(--accent); }
+.journey-back { display: inline-block; margin-bottom: 42px; color: var(--muted); font: 11px var(--mono); text-transform: uppercase; }
+.tcc-page { max-width: 920px; }
+.tcc-page .journey-status { margin-top: 36px; }
+.tcc-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 58px; border: 1px solid var(--line); background: var(--line); }
+.tcc-facts div { display: grid; gap: 12px; padding: 22px; background: var(--bg); }
+.tcc-facts span, .experience-entry__date > span:first-child { color: var(--accent); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .1em; }
+.tcc-facts strong { font-size: 15px; }
+.journey-note { margin-top: 34px; padding: 22px; border-left: 2px solid var(--accent); background: var(--surface); }
+.journey-note strong { display: block; margin-bottom: 10px; font-size: 14px; }
+.journey-note p, .journey-footnote { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.tcc-page > .button { margin-top: 30px; }
+.experience-entry { display: grid; grid-template-columns: minmax(180px, .55fr) minmax(0, 1.45fr); gap: 48px; }
+.experience-entry__date { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.experience-entry__line { width: 100%; height: 1px; background: var(--line); }
+.experience-entry h2 { margin: 18px 0 24px; }
+.experience-entry .section-copy { font-size: 16px; }
+.journey-footnote { margin: 42px 0 22px; }
+.playground { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr); border: 1px solid var(--line); background: var(--surface); }
+.playground__preview { position: relative; display: grid; place-items: center; min-height: 420px; overflow: hidden; background: radial-gradient(circle at center, rgba(215,25,50,.11), transparent 48%), #090909; }
+.playground__preview > span { position: absolute; bottom: 18px; left: 20px; color: var(--muted); font: 10px var(--mono); letter-spacing: .12em; }
+.playground__orb { border: 1px solid rgba(255,255,255,.75); border-radius: 32% 68% 61% 39% / 39% 36% 64% 61%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.45), rgba(215,25,50,.3) 28%, rgba(30,10,14,.95) 72%); transition: width .18s ease, height .18s ease, transform .18s ease, box-shadow .18s ease; }
+.playground__controls { display: flex; flex-direction: column; gap: 24px; padding: 28px; }
+.playground__controls label { display: grid; grid-template-columns: 1fr auto; gap: 14px; color: var(--muted); font: 12px var(--mono); }
+.playground__controls output { color: var(--text); }
+.playground__controls input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+.playground__controls pre { overflow-x: auto; padding: 16px; border: 1px solid var(--line); color: var(--text); font: 11px/1.8 var(--mono); white-space: pre-wrap; }
+@media (max-width: 760px) {
+  .journey-hero { padding-top: 128px; }
+  .journey-grid, .experience-entry, .playground { grid-template-columns: minmax(0, 1fr); }
+  .journey-card { min-height: 0; }
+  .journey-card .button { margin-top: 8px; }
+  .tcc-facts { grid-template-columns: minmax(0, 1fr); }
+  .experience-entry { gap: 28px; }
+  .playground__preview { min-height: 320px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .playground__orb { transition: none; }
+}
