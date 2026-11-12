@@ -7,6 +7,7 @@ import NexoPageViews from "./components/NexoPageViews.jsx";
 import "./styles/global.css";
 import "./styles/style.css";
 import "./styles/responsive.css";
+import "./styles/journey.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
