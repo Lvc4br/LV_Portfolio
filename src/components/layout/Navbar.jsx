@@ -2,14 +2,20 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import tracker from "../../lib/analytics.js";
 
+const links = [
+  { to: "/work", label: "Work" },
+  { to: "/lab", label: "Interactive Lab" },
+  { to: "/academic", label: "Academic" },
+  { to: "/experience", label: "Experience" },
+  { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" },
+];
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const closeMenu = () => setOpen(false);
 
-  const closeMenu = () => {
-    setOpen(false);
-  };
-
-  const goToContact = () => {
+  const handleContact = () => {
     tracker.track("contact_click");
     closeMenu();
   };
@@ -17,16 +23,24 @@ export default function Navbar() {
   return (
     <header className="nav">
       <div className="container nav__inner">
-        <NavLink className="nav__brand" to="/" end onClick={closeMenu} aria-label="LT. — Home">LT<span>.</span></NavLink>
-        <nav id="primary-navigation" className={open ? "nav__links is-open" : "nav__links"}>
-          <NavLink to="/work" end onClick={closeMenu}>Work</NavLink>
-          <NavLink to="/work/3d" onClick={closeMenu}>3D</NavLink>
-          <NavLink to="/work/code" onClick={closeMenu}>Code</NavLink>
-          <NavLink to="/" state={{ scrollTo: "about" }} onClick={closeMenu}>About</NavLink>
-          <NavLink to="/" state={{ scrollTo: "contact" }} onClick={goToContact}>Contact</NavLink>
+        <NavLink className="nav__brand" to="/" end onClick={closeMenu} aria-label="LT. — Home">
+          LT<span>.</span>
+        </NavLink>
+        <nav id="primary-navigation" className={open ? "nav__links is-open" : "nav__links"} aria-label="Main navigation">
+          {links.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.to === "/work"}
+              onClick={link.to === "/contact" ? handleContact : closeMenu}
+            >
+              {link.label}
+            </NavLink>
+          ))}
         </nav>
         <button
           className="nav__menu"
+          type="button"
           onClick={() => setOpen((isOpen) => !isOpen)}
           aria-expanded={open}
           aria-controls="primary-navigation"
