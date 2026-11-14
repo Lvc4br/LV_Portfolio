@@ -30,3 +30,11 @@ This log records meaningful implementation problems, their causes, fixes, and th
 
 - A previous GitHub Actions CI run for commit `2b7cfbf25c3453a9c4ef5996fb22bcbdbbcf9cb5` completed successfully, including lint, tests, and production build.
 - That successful run predates the changes above. Do not treat it as validation of the latest branch head.
+
+## 2026-11-14 — Accessible heading names in route tests
+
+- **Symptom:** Five new route tests failed even though the pages rendered correctly.
+- **Cause:** The headings contain explicit line breaks (`<br>`), and Testing Library computes accessible names without inserting the spaces assumed by the original regular expressions.
+- **Fix:** Updated the test patterns to tolerate optional whitespace around line-break boundaries. The page content and markup were not changed.
+- **Verification:** A new CI run is required after this test correction.
+- **Prevention rule:** Assert against the accessible name actually exposed by the rendered DOM; account for line breaks and semantic text normalization instead of assuming visual spacing.
