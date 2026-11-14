@@ -71,3 +71,11 @@ This log records meaningful implementation problems, their causes, fixes, and pr
 - **Important limitation:** The preview is non-mutating. The lockfile and current audit findings remain unchanged. The dry-run output did not explicitly show a Vite or Zod update, so those two high-severity findings need a separate verified remediation path.
 - **Verification:** CI #77 passed install, audit reporting, dry-run preview, lint, all 49 tests, and production build.
 - **Next action:** Apply reviewed dependency updates in a dedicated change, regenerate the lockfile using npm, and rerun the full pipeline plus `npm audit`.
+
+## 2026-11-14 — Contact form timeout and data disclosure
+
+- **Symptom:** The form could wait indefinitely on a stalled network request, and visitors were not told that the submitted data is processed by Getform.
+- **Cause:** The fetch request had no abort timeout and the form had no visible data-flow disclosure.
+- **Fix:** Added a 15-second AbortController timeout, timeout-specific feedback, a duplicate-submit guard, and a disclosure that name/email/message are sent to Getform. Added automated tests for the disclosure and timeout state.
+- **Verification:** Pending the next CI run. Provider-side spam controls and real delivery still require manual verification.
+- **Prevention:** External form integrations must have bounded request time, clear failure feedback, and a plain-language disclosure of third-party data processing.
