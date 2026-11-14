@@ -79,3 +79,11 @@ This log records meaningful implementation problems, their causes, fixes, and pr
 - **Fix:** Added a 15-second AbortController timeout, timeout-specific feedback, a duplicate-submit guard, and a disclosure that name/email/message are sent to Getform. Added automated tests for the disclosure and timeout state.
 - **Verification:** Pending the next CI run. Provider-side spam controls and real delivery still require manual verification.
 - **Prevention:** External form integrations must have bounded request time, clear failure feedback, and a plain-language disclosure of third-party data processing.
+
+## 2026-11-14 — Contact textarea accessible-name test
+
+- **Symptom:** The new timeout test could not locate the textarea using an exact accessible-name match.
+- **Cause:** The character counter is nested inside the same label, so it contributes to the textarea's computed accessible name.
+- **Fix:** Changed the test query to a regular expression matching the stable "Message" portion of the accessible name.
+- **Verification:** Awaiting the next CI run.
+- **Prevention:** Keep dynamic helper text outside labels where practical, or write queries that account for the complete accessible name.
