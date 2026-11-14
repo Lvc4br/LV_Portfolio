@@ -31,6 +31,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Report dependency vulnerabilities
+        continue-on-error: true
+        run: |
+          npm audit --json > npm-audit.json || true
+          node -e "const a=require('./npm-audit.json'); const v=Object.entries(a.vulnerabilities || {}).map(([name, item]) => ({name, severity:item.severity, direct:item.isDirect, range:item.range, fixAvailable:item.fixAvailable, advisories:(item.via || []).map(entry => typeof entry === 'string' ? entry : {title:entry.title, url:entry.url, range:entry.range})})); console.log(JSON.stringify({summary:a.metadata?.vulnerabilities, vulnerabilities:v}, null, 2));"
+
       - name: Run lint
         run: npm run lint
 
