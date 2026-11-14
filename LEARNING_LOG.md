@@ -47,3 +47,12 @@ This log records meaningful implementation problems, their causes, fixes, and pr
 - **Validated commit at the time of the run:** `7551b09fa3ad9d271973d41aae5a94931a32a9de`.
 - **Passed steps:** `npm ci`, ESLint, Vitest, and production build.
 - **Important:** Later documentation-only commits trigger a new CI run; this record does not claim those later commits have already been validated.
+
+## 2026-11-14 — Dependency audit results
+
+- **Observation:** CI #72 reported five vulnerable packages: `vite` 8.3.1 (high, direct), `zod` 4.6.5 (high, via `eslint-plugin-react-hooks`), `minimatch` (moderate, transitive), `eslint` 10.11.0 (moderate, direct), and `@eslint/config-array` (moderate, transitive).
+- **Scope:** All five packages are marked as development dependencies in the current lockfile; this lowers direct production exposure but does not remove developer/CI risk.
+- **Advisories:** minimatch GHSA-g3hv-75wg-m249; Zod GHSA-mrhx-c7xc-m3w5; Vite/launch-editor GHSA-698v-4r3x-3vcv, GHSA-r825-w8mm-5pxw, GHSA-587h-7wmj-h5pm, GHSA-9jrq-w75r-8gcw, GHSA-rq7h-c2jc-7f22, GHSA-vfpm-58rq-9qcg.
+- **Fix availability:** npm reports a compatible fix available for all five entries.
+- **Action:** Added a non-mutating `npm audit fix --dry-run --json` preview to CI so the proposed dependency changes can be inspected before changing the lockfile.
+- **Prevention:** Review proposed version changes and run the full test/build suite after lockfile remediation. Never force major updates merely to obtain a zero-audit count.
