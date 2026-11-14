@@ -2,6 +2,7 @@ import { useState } from "react";
 import tracker from "../../lib/analytics.js";
 
 const MAX_CHARS = 280;
+const REQUEST_TIMEOUT_MS = 15_000;
 
 export default function Contact() {
   const [sending, setSending] = useState(false);
@@ -12,7 +13,14 @@ export default function Contact() {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    if (sending) return;
+
     const form = event.currentTarget;
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(
+      () => controller.abort(),
+      REQUEST_TIMEOUT_MS,
+    );
 
     setSending(true);
     setSent(false);
@@ -23,6 +31,7 @@ export default function Contact() {
         method: "POST",
         body: new FormData(form),
         headers: { Accept: "application/json" },
+        signal: controller.signal,
       });
 
       if (!response.ok) {
@@ -33,9 +42,14 @@ export default function Contact() {
       setMessage("");
       setSent(true);
       tracker.track("contact_submit");
-    } catch {
-      setError("The message could not be sent. Please try again or contact me via LinkedIn.");
+    } catch (requestError) {
+      if (requestError.name === "AbortError") {
+        setError("The request timed out. Please try again or contact me via LinkedIn.");
+      } else {
+        setError("The message could not be sent. Please try again or contact me via LinkedIn.");
+      }
     } finally {
+      window.clearTimeout(timeoutId);
       setSending(false);
     }
   }
@@ -54,7 +68,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <form className="contact__form" onSubmit={handleSubmit}>
+        <form className="contact__form" onSubmit={handleSubmit} aria-describedby="contact-privacy">
           <label>
             Name
             <input required name="name" autoComplete="name" placeholder="Your name" />
@@ -81,10 +95,16 @@ export default function Contact() {
               maxLength={MAX_CHARS}
               rows={3}
             />
-            <span className="char-count">
+            <span className="char-count" aria-live="polite">
               {message.length} / {MAX_CHARS}
             </span>
           </label>
+
+          <p className="contact__privacy" id="contact-privacy">
+            When you submit this form, your name, email address, and message are sent to Getform,
+            a third-party form-processing service, so I can receive and respond to your message.
+            Please do not include sensitive personal information.
+          </p>
 
           <button className="button button--solid" type="submit" disabled={sending}>
             {sending ? "Sending..." : "Send message →"}
