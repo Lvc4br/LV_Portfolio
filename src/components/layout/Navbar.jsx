@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import tracker from "../../lib/analytics.js";
 
@@ -14,6 +14,17 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") closeMenu();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
 
   const handleContact = () => {
     tracker.track("contact_click");
@@ -42,6 +53,7 @@ export default function Navbar() {
           className="nav__menu"
           type="button"
           onClick={() => setOpen((isOpen) => !isOpen)}
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={open}
           aria-controls="primary-navigation"
         >
