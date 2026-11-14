@@ -56,3 +56,11 @@ This log records meaningful implementation problems, their causes, fixes, and pr
 - **Fix availability:** npm reports a compatible fix available for all five entries.
 - **Action:** Added a non-mutating `npm audit fix --dry-run --json` preview to CI so the proposed dependency changes can be inspected before changing the lockfile.
 - **Prevention:** Review proposed version changes and run the full test/build suite after lockfile remediation. Never force major updates merely to obtain a zero-audit count.
+
+## 2026-11-14 — npm audit dry-run output format
+
+- **Symptom:** The first CI preview step attempted to parse `npm audit fix --dry-run --json` as JSON, but npm emitted human-readable text beginning with package operations.
+- **Cause:** The dry-run command does not guarantee JSON output in this npm version, despite the flag.
+- **Fix:** Changed the CI preview to display the final 50 lines of the dry-run text output; the preview remains non-mutating and cannot alter the lockfile.
+- **Verification:** A follow-up CI run is required for the corrected workflow.
+- **Prevention:** Validate the actual output format of CLI flags in the pinned runtime before parsing command output as structured data.
