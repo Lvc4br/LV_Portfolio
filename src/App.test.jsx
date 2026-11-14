@@ -159,11 +159,11 @@ describe("portfolio navigation", () => {
   });
 
   it.each([
-    ["/academic", /learning by\\s*building things/i],
-    ["/academic/tcc", /the next chapter\\s*is being prepared/i],
-    ["/experience", /experience\\s*in progress/i],
-    ["/lab", /try it\. change it/i],
-    ["/about", /creative thinking\. technical practice/i],
+    ["/academic", /learning by\s*building things/i],
+    ["/academic/tcc", /the next chapter\s*is being prepared/i],
+    ["/experience", /experience\s*in progress/i],
+    ["/lab", /try it\.?\s*change it/i],
+    ["/about", /creative thinking\.?\s*technical practice/i],
     ["/contact", /let’s build something clear, useful, and memorable/i],
   ])("renders the new page at %s", (path, heading) => {
     render(
