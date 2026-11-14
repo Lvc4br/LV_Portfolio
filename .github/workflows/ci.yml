@@ -36,6 +36,8 @@ jobs:
         run: |
           npm audit --json > npm-audit.json || true
           node -e "const a=require('./npm-audit.json'); const v=Object.entries(a.vulnerabilities || {}).map(([name, item]) => ({name, severity:item.severity, direct:item.isDirect, range:item.range, fixAvailable:item.fixAvailable, advisories:(item.via || []).map(entry => typeof entry === 'string' ? entry : {title:entry.title, url:entry.url, range:entry.range})})); console.log(JSON.stringify({summary:a.metadata?.vulnerabilities, vulnerabilities:v}, null, 2));"
+          npm audit fix --dry-run --json > npm-audit-fix-plan.json || true
+          node -e "const p=require('./npm-audit-fix-plan.json'); console.log(JSON.stringify({added:p.added, removed:p.removed, changed:p.changed, audited:p.audit?.metadata?.vulnerabilities, fix:p.fixAvailable, error:p.error}, null, 2));"
 
       - name: Run lint
         run: npm run lint
