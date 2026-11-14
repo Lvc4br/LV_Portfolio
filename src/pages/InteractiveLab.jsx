@@ -28,7 +28,7 @@ export default function InteractiveLab() {
             </div>
           </div>
           <div className="playground">
-            <div className="playground__preview" aria-label="Live visual preview">
+            <div className="playground__preview" role="img" aria-label={`Live visual preview: radius ${radius}px, glow ${glow}%, rotation ${rotation} degrees`}>
               <div
                 className="playground__orb"
                 style={{
@@ -41,14 +41,14 @@ export default function InteractiveLab() {
               <span>LIVE PREVIEW</span>
             </div>
             <div className="playground__controls">
-              <label>Radius <output>{radius}px</output>
-                <input type="range" min="24" max="90" value={radius} onChange={(event) => setRadius(Number(event.target.value))} />
+              <label htmlFor="lab-radius">Radius <output htmlFor="lab-radius">{radius}px</output>
+                <input id="lab-radius" type="range" min="24" max="90" value={radius} onChange={(event) => setRadius(Number(event.target.value))} />
               </label>
-              <label>Glow <output>{glow}%</output>
-                <input type="range" min="0" max="100" value={glow} onChange={(event) => setGlow(Number(event.target.value))} />
+              <label htmlFor="lab-glow">Glow <output htmlFor="lab-glow">{glow}%</output>
+                <input id="lab-glow" type="range" min="0" max="100" value={glow} onChange={(event) => setGlow(Number(event.target.value))} />
               </label>
-              <label>Rotation <output>{rotation}°</output>
-                <input type="range" min="0" max="360" value={rotation} onChange={(event) => setRotation(Number(event.target.value))} />
+              <label htmlFor="lab-rotation">Rotation <output htmlFor="lab-rotation">{rotation}°</output>
+                <input id="lab-rotation" type="range" min="0" max="360" value={rotation} onChange={(event) => setRotation(Number(event.target.value))} />
               </label>
               <button className="button" type="button" onClick={() => { setRadius(42); setGlow(55); setRotation(18); }}>Reset parameters</button>
               <pre><code>{`const visual = {
