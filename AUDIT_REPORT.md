@@ -19,7 +19,7 @@ The dependency installation reported **5 vulnerabilities (3 moderate, 2 high)**.
 | P1 | Mobile navigation | The mobile menu had no explicit Escape behavior. | Fixed: Escape closes the menu and restores focus to the menu button. |
 | P2 | Interactive Lab | Preview lacked a semantic name and sliders relied on implicit labels. | Fixed: preview exposes a dynamic accessible description; sliders have explicit IDs and labels. |
 | P2 | Automated tests | New pages and keyboard behavior lacked route-level coverage. | Added route tests for Academic, TCC, Experience, Lab, About, Contact, Escape dismissal, and footer navigation. CI #68 passed. |
-| P1 | Dependency security | CI #72 identified five vulnerable development dependencies: `vite` 8.3.1 (high, direct), `zod` 4.6.5 (high, via `eslint-plugin-react-hooks`), `minimatch` (moderate, transitive), `eslint` 10.11.0 (moderate, direct), and `@eslint/config-array` (moderate, transitive). All five report `fixAvailable: true`. | In progress: CI prints the audit summary and now previews `npm audit fix --dry-run --json`. Review the proposed package changes before applying any lockfile updates. No automatic fix has been applied. |
+| P1 | Dependency security | CI #72 identified five vulnerable development dependencies: `vite` 8.3.1 (high, direct), `zod` 4.6.5 (high, via `eslint-plugin-react-hooks`), `minimatch` (moderate, transitive), `eslint` 10.11.0 (moderate, direct), and `@eslint/config-array` (moderate, transitive). All five report `fixAvailable: true`. | In progress: CI #77 passed and the non-mutating `npm audit fix --dry-run` preview proposed `eslint` 10.15.0, `minimatch` 11.0.8, and `@eslint/config-array` 0.23.6, plus supporting dependency updates. The preview did not modify the lockfile; the five audit findings remain until a real update is applied and re-audited. The Vite and Zod fixes still need explicit confirmation in the updated dependency graph. |
 | P1 | Contact form | The Getform request has no explicit timeout or cancellation path. There is no visible privacy disclosure explaining the data submitted to the external provider. Provider-side spam controls have not been verified. | Open: verify provider configuration, add resilient timeout/error handling, and add a concise data-use disclosure before production. |
 | P2 | Language | The HTML document declares `lang="en"`, while some content is Portuguese and other content is English. | Open: decide the site's primary language and make the document language, copy, and metadata consistent. |
 | P2 | Metadata | The app uses build-time site URL metadata. Production Vercel environment values and rendered social preview have not been verified. | Open: verify production environment, canonical URL, Open Graph, and Twitter preview. |
@@ -30,8 +30,8 @@ The dependency installation reported **5 vulnerabilities (3 moderate, 2 high)**.
 ## Verified implementation details
 
 - Stack: React 19, Vite 8, React Router 7, Vitest, Testing Library, and ESLint.
-- CI workflow runs `npm ci`, a non-blocking dependency advisory report (`npm audit --json`), a non-mutating remediation preview (`npm audit fix --dry-run --json`), `npm run lint`, `npm test`, and `npm run build`.
-- CI #68 passed for the current recorded PR head.
+- CI workflow runs `npm ci`, a non-blocking dependency advisory report (`npm audit --json`), a non-mutating remediation preview (`npm audit fix --dry-run`), `npm run lint`, `npm test`, and `npm run build`.
+- CI #68 and corrected CI #77 passed install, lint, Vitest, and production build. CI #77 also completed the audit and dry-run preview steps.
 - The Interactive Lab is a CSS parameter playground. It is not a real 3D model viewer or visitor code editor.
 - No real-time 3D viewer is published yet; GLB/glTF support remains future work.
 - TCC is accurately described as not started, with topic and scope undefined.
