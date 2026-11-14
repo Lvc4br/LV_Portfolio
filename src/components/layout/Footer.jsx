@@ -1,15 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import tracker from "../../lib/analytics.js";
 
 export default function Footer() {
-  const navigate = useNavigate();
-
-  const goToContact = (event) => {
-    event.preventDefault();
-    tracker.track("contact_click");
-    navigate("/", { state: { scrollTo: "contact" } });
-  };
-
   return (
     <footer className="footer">
       <div className="container footer__grid">
@@ -23,9 +15,9 @@ export default function Footer() {
           <a href="https://github.com/Lvc4br" onClick={() => tracker.track("github_click")} target="_blank" rel="noreferrer">
             GitHub ↗
           </a>
-          <a href="#contact" onClick={goToContact}>
+          <Link to="/contact" onClick={() => tracker.track("contact_click")}>
             Contact ↗
-          </a>
+          </Link>
           <a href="https://www.linkedin.com/in/luca-toniolo/" onClick={() => tracker.track("linkedin_click")} target="_blank" rel="noreferrer">
             LinkedIn ↗
           </a>

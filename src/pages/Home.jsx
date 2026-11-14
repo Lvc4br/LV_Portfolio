@@ -1,29 +1,11 @@
+import { Link } from "react-router-dom";
 import Hero from "../components/sections/Hero.jsx";
 import Highlights from "../components/sections/Highlights.jsx";
 import ThreeDTeaser from "../components/sections/ThreeDTeaser.jsx";
 import CodeTeaser from "../components/sections/CodeTeaser.jsx";
 import ThreeDCode from "../components/sections/ThreeDCode.jsx";
-import Skills from "../components/sections/Skills.jsx";
-import About from "../components/sections/About.jsx";
-import Contact from "../components/sections/Contact.jsx";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
 export default function Home() {
-  const location = useLocation();
-
-  useEffect(() => {
-    const id = location.state?.scrollTo;
-    if (!id) return;
-
-    const timer = window.setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }, 50);
-
-    return () => window.clearTimeout(timer);
-  }, [location.state]);
-
   return (
     <>
       <Hero />
@@ -31,9 +13,22 @@ export default function Home() {
       <ThreeDTeaser />
       <CodeTeaser />
       <ThreeDCode />
-      <Skills />
-      <About />
-      <Contact />
+      <section className="section journey-section journey-section--compact">
+        <div className="container journey-grid">
+          <Link className="journey-card" to="/academic">
+            <span className="eyebrow">Academic journey</span>
+            <h2>Learning beyond the screen.</h2>
+            <p>Projetos técnicos, colaboração e documentação desenvolvidos durante a formação na ETEC.</p>
+            <span className="button">Explore academic work ↗</span>
+          </Link>
+          <Link className="journey-card" to="/experience">
+            <span className="eyebrow">Professional journey</span>
+            <h2>From learning to practice.</h2>
+            <p>Acompanhe minha trajetória profissional e as experiências que serão construídas ao longo do caminho.</p>
+            <span className="button">Explore experience ↗</span>
+          </Link>
+        </div>
+      </section>
     </>
   );
 }
