@@ -64,3 +64,10 @@ This log records meaningful implementation problems, their causes, fixes, and pr
 - **Fix:** Changed the CI preview to display the final 50 lines of the dry-run text output; the preview remains non-mutating and cannot alter the lockfile.
 - **Verification:** A follow-up CI run is required for the corrected workflow.
 - **Prevention:** Validate the actual output format of CLI flags in the pinned runtime before parsing command output as structured data.
+
+## 2026-11-14 — Dependency remediation preview
+
+- **Observation:** The corrected CI #77 dry-run preview proposed compatible updates including `eslint` 10.11.0 → 10.15.0, `minimatch` 10.2.6 → 11.0.8, and `@eslint/config-array` 0.23.5 → 0.23.6, plus supporting package changes.
+- **Important limitation:** The preview is non-mutating. The lockfile and current audit findings remain unchanged. The dry-run output did not explicitly show a Vite or Zod update, so those two high-severity findings need a separate verified remediation path.
+- **Verification:** CI #77 passed install, audit reporting, dry-run preview, lint, all 49 tests, and production build.
+- **Next action:** Apply reviewed dependency updates in a dedicated change, regenerate the lockfile using npm, and rerun the full pipeline plus `npm audit`.
