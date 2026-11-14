@@ -37,4 +37,10 @@ This log records meaningful implementation problems, their causes, fixes, and th
 - **Cause:** The headings contain explicit line breaks (`<br>`), and Testing Library computes accessible names without inserting the spaces assumed by the original regular expressions.
 - **Fix:** Updated the test patterns to tolerate optional whitespace around line-break boundaries. The page content and markup were not changed.
 - **Verification:** A new CI run is required after this test correction.
+### Follow-up correction
+
+- The first regex adjustment was over-escaped and matched the literal characters `\\s` instead of whitespace. The next CI run exposed this immediately.
+- Corrected the regex literals to use the actual whitespace token and made the patterns tolerant of both line-break and punctuation boundaries.
+- The next CI run is the verification gate for this correction.
+
 - **Prevention rule:** Assert against the accessible name actually exposed by the rendered DOM; account for line breaks and semantic text normalization instead of assuming visual spacing.
