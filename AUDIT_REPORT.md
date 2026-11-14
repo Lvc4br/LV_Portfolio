@@ -9,7 +9,7 @@
 
 The multipage foundation is present and preserves the existing React/Vite application, project galleries, project detail pages, and primary content. The repository already has a CI workflow that runs dependency installation, ESLint, Vitest, and a production build.
 
-A previous CI run for commit `2b7cfbf25c3453a9c4ef5996fb22bcbdbbcf9cb5` completed successfully. That result applies to that commit only; the fixes described below require a new CI run before they can be considered verified.
+CI run #67 completed successfully for the updated pull-request revision: dependency installation, ESLint, Vitest, and production build all passed. The install log also reported 5 dependency vulnerabilities (3 moderate, 2 high), which remain an open security investigation.
 
 ## Findings and actions
 
@@ -20,6 +20,7 @@ A previous CI run for commit `2b7cfbf25c3453a9c4ef5996fb22bcbdbbcf9cb5` complete
 | P2 | Interactive Lab | Preview lacked an exposed semantic role/name and range controls relied on implicit label association. | Fixed: preview has an image role and dynamic description; sliders have explicit IDs and labels. |
 | P2 | Automated tests | New pages and mobile-menu behavior were not covered by route-level tests. | Added tests for Academic, TCC, Experience, Lab, About, Contact, Escape behavior, and footer Contact navigation. CI pending. |
 | P2 | Contact form | Provider-side spam protection, timeout behavior, privacy disclosure, and operational configuration need review. | Open: verify Getform configuration and document what data is sent before production. |
+| P1 | Dependency security | The successful CI install reported 5 dependency vulnerabilities: 3 moderate and 2 high. The install itself completed, but the advisory details were not included in the CI summary. | Open: run and inspect `npm audit`, identify direct/transitive paths, assess reachability and fixes, then update dependencies deliberately. Do not apply a blind `npm audit fix`. |
 | P2 | Language | The document is English while some page copy is Portuguese. | Open: decide the primary editorial language, then align copy and metadata consistently. |
 | P2 | Metadata | CI defines `VITE_SITE_URL`; production hosting configuration still needs verification. | Open: verify Vercel environment values, canonical URL, and social preview. The `public/og-image.jpg` asset exists. |
 | P2 | Loading experience | The loading screen runs a timed progress animation rather than reflecting actual asset readiness. | Open: assess whether the branded delay is worth delaying content; remove or shorten if it does not improve the experience. |
