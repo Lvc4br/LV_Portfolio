@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import tracker from "../../lib/analytics.js";
 
@@ -13,13 +13,17 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef(null);
   const closeMenu = () => setOpen(false);
 
   useEffect(() => {
     if (!open) return undefined;
 
     const handleKeyDown = (event) => {
-      if (event.key === "Escape") closeMenu();
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -50,6 +54,7 @@ export default function Navbar() {
           ))}
         </nav>
         <button
+          ref={menuButtonRef}
           className="nav__menu"
           type="button"
           onClick={() => setOpen((isOpen) => !isOpen)}
