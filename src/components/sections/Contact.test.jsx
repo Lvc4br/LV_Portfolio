@@ -28,7 +28,7 @@ describe("Contact form", () => {
 
     await user.type(screen.getByLabelText("Name"), "Test User");
     await user.type(screen.getByLabelText("Email"), "test@example.com");
-    await user.type(screen.getByLabelText("Message"), "Hello");
+    await user.type(screen.getByLabelText(/Message/), "Hello");
     await user.click(screen.getByRole("button", { name: /send message/i }));
 
     expect(
