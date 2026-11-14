@@ -19,7 +19,7 @@ The dependency installation reported **5 vulnerabilities (3 moderate, 2 high)**.
 | P1 | Mobile navigation | The mobile menu had no explicit Escape behavior. | Fixed: Escape closes the menu and restores focus to the menu button. |
 | P2 | Interactive Lab | Preview lacked a semantic name and sliders relied on implicit labels. | Fixed: preview exposes a dynamic accessible description; sliders have explicit IDs and labels. |
 | P2 | Automated tests | New pages and keyboard behavior lacked route-level coverage. | Added route tests for Academic, TCC, Experience, Lab, About, Contact, Escape dismissal, and footer navigation. CI #68 passed. |
-| P1 | Dependency security | `npm ci` reported 5 vulnerabilities: 3 moderate and 2 high. Advisory identifiers, affected paths, and exploitability are not yet known. | Open: obtain full `npm audit --json` output, identify direct/transitive paths, assess runtime exposure, and select compatible fixes. Do not run blind `npm audit fix`. |
+| P1 | Dependency security | `npm ci` reported 5 vulnerabilities: 3 moderate and 2 high. Advisory identifiers, affected paths, and exploitability are not yet known. | In progress: CI now runs `npm audit --json` and prints a compact advisory/dependency-path summary without failing the lint/test/build pipeline. Review that output before selecting compatible fixes. Do not run blind `npm audit fix`. |
 | P1 | Contact form | The Getform request has no explicit timeout or cancellation path. There is no visible privacy disclosure explaining the data submitted to the external provider. Provider-side spam controls have not been verified. | Open: verify provider configuration, add resilient timeout/error handling, and add a concise data-use disclosure before production. |
 | P2 | Language | The HTML document declares `lang="en"`, while some content is Portuguese and other content is English. | Open: decide the site's primary language and make the document language, copy, and metadata consistent. |
 | P2 | Metadata | The app uses build-time site URL metadata. Production Vercel environment values and rendered social preview have not been verified. | Open: verify production environment, canonical URL, Open Graph, and Twitter preview. |
@@ -30,7 +30,7 @@ The dependency installation reported **5 vulnerabilities (3 moderate, 2 high)**.
 ## Verified implementation details
 
 - Stack: React 19, Vite 8, React Router 7, Vitest, Testing Library, and ESLint.
-- CI workflow runs `npm ci`, `npm run lint`, `npm test`, and `npm run build`.
+- CI workflow runs `npm ci`, a non-blocking dependency advisory report (`npm audit --json`), `npm run lint`, `npm test`, and `npm run build`.
 - CI #68 passed for the current recorded PR head.
 - The Interactive Lab is a CSS parameter playground. It is not a real 3D model viewer or visitor code editor.
 - No real-time 3D viewer is published yet; GLB/glTF support remains future work.
