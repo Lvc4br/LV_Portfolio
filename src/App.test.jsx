@@ -189,6 +189,7 @@ describe("portfolio navigation", () => {
 
     await user.keyboard("{Escape}");
     expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    expect(menuButton).toHaveFocus();
   });
 
   it("navigates to the dedicated contact page from the footer", async () => {
