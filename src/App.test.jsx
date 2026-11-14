@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { afterEach, vi } from "vitest";
@@ -156,6 +156,55 @@ describe("portfolio navigation", () => {
 
     expect(screen.getByRole("button", { name: /show image 2: ice cream panda project modal design/i }))
       .toBeInTheDocument();
+  });
+
+  it.each([
+    ["/academic", /learning by building things/i],
+    ["/academic/tcc", /the next chapter is being prepared/i],
+    ["/experience", /experience in progress/i],
+    ["/lab", /try it\. change it/i],
+    ["/about", /creative thinking\. technical practice/i],
+    ["/contact", /let’s build something clear, useful, and memorable/i],
+  ])("renders the new page at %s", (path, heading) => {
+    render(
+      <MemoryRouter initialEntries={[path]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: heading })).toBeInTheDocument();
+  });
+
+  it("closes the mobile navigation when Escape is pressed", async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    const menuButton = screen.getByRole("button", { name: /open navigation menu/i });
+    await user.click(menuButton);
+    expect(menuButton).toHaveAttribute("aria-expanded", "true");
+
+    await user.keyboard("{Escape}");
+    expect(menuButton).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("navigates to the dedicated contact page from the footer", async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    const footer = screen.getByRole("contentinfo");
+    await user.click(within(footer).getByRole("link", { name: /contact/i }));
+
+    expect(screen.getByRole("heading", {
+      name: /let’s build something clear, useful, and memorable/i,
+    })).toBeInTheDocument();
   });
 
   it("renders a 404 page for invalid routes", () => {
